@@ -2,7 +2,7 @@
 Group 9 CAS_FEE final project with angular.js
 
 
-# Get Started
+## Get Started
 
 First install all npm dependencies:
 
