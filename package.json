@@ -4,6 +4,8 @@
   "dependencies": {
     "gulp": "^3.9.0",
     "gulp-bower": "0.0.10",
-    "bower": "^1.5.3"
+    "bower": "^1.5.3",
+    "body-parser": "^1.12.4",
+    "express": "^4.12.4"
   }
 }
