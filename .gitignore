@@ -3,5 +3,8 @@
 node_modules
 bower_components
 public/lib
-public/tmp
+public/tmp-scipts
+public/tmp-css
+public/css
 public/dist
+.idea
