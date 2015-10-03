@@ -4,6 +4,7 @@ var typescript = require('gulp-typescript');
 var watch = require('gulp-watch');
 var typescriptAngular = require('gulp-typescript-angular');
 var concat = require('gulp-concat');
+var clean = require('gulp-clean');
 var p = require('./package.json');
 
 gulp.task('bower', function() {
@@ -11,8 +12,12 @@ gulp.task('bower', function() {
 		.pipe(gulp.dest('public/lib/'))
 });
 
+gulp.task('clean', function () {
+	return gulp.src('./public/tmp', {read: false})
+		.pipe(clean());
+});
 
-gulp.task('compile', function () {
+gulp.task('compile', ['clean'], function () {
 	return gulp.src(
 		[
 			'./app/**/*.ts'

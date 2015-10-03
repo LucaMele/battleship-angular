@@ -18,5 +18,4 @@ module app {
         args.push(function() { return new clazz(arguments) });
         angularModule.directive(clazz.$componentName, args);
     }
-
 }
