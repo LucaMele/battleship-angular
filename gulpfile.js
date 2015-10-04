@@ -23,10 +23,12 @@ gulp.task('compile', ['clean'], function () {
 			'./app/**/*.ts'
 		])
 		.pipe(typescript({
-			target:'es5'
+			target:'es5',
+			experimentalDecorators: 'true'
 		}))
 		.pipe(typescriptAngular({
-			decoratorModuleName:'app'
+			decoratorModuleName:'app',
+			experimentalDecorators: 'true'
 		}))
 		.pipe(gulp.dest('./public/tmp-scripts'));
 });
@@ -54,4 +56,5 @@ gulp.task('default', ['bower', 'unify-scripts', 'sass'], function() {
 gulp.task('dev', ['unify-scripts', 'sass'], function() {
 	gulp.watch('./app/**/*.ts', ['unify-scripts']);
 	gulp.watch('./resources/styles/**/*.scss', ['sass']);
+	gulp.watch('./app/modules/**/*.scss', ['sass']);
 });
