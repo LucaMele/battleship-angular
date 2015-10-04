@@ -11,7 +11,7 @@ var templateCache = require('gulp-angular-templatecache');
 gulp.task('templates', function () {
 	return gulp.src('app/modules/**/*.html')
 		.pipe(templateCache({
-			moduleName: 'app'
+			module: 'app'
 		}))
 		.pipe(gulp.dest('public'));
 });

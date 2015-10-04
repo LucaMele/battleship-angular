@@ -6,25 +6,26 @@ module appRouter
     class AppRouterConfig implements AngularConfig
     {
         public dependencies = [];
+        public templateCache: angular.ITemplateCacheService;
 
-        constructor(){
+        constructor($templateCache: angular.ITemplateCacheService){
             this.dependencies = ["$stateProvider", "$urlRouterProvider", this.callback];
+            this.templateCache = $templateCache;
         }
-        static createStateObject(identifier: string) {
+        createStateObject = (identifier: string) => {
             return {
                 url: '/' + identifier,
-                templateUrl: './app/modules/' + identifier + '/templates/index.html',
+                templateUrl: this.templateCache.get('./app/modules/' + identifier + '/templates/index.html'),
                 controller: function() {
 
                 },
                 clearHistory: true
             }
-        }
-        public callback(
+        };
+        callback = (
             $stateProvider: angular.ui.IStateProvider,
             $urlRouterProvider: angular.ui.IUrlRouterProvider
-        ) {
-
+        ) => {
             $stateProvider
                 .state("menu", <angular.ui.IState>
                 {
@@ -32,13 +33,11 @@ module appRouter
                     abstract: true
                 })
                 // home module
-                .state('menu.' + home.identifier, AppRouterConfig.createStateObject(home.identifier));
+                .state('menu.' + home.identifier, this.createStateObject(home.identifier));
 
 
             $urlRouterProvider.otherwise('/menu/home');
 
         }
     }
-
-
 }
