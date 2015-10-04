@@ -6,6 +6,15 @@ var concat = require('gulp-concat');
 var sass = require('gulp-sass');
 var clean = require('gulp-clean');
 var p = require('./package.json');
+var templateCache = require('gulp-angular-templatecache');
+
+gulp.task('templates', function () {
+	return gulp.src('app/modules/**/*.html')
+		.pipe(templateCache({
+			moduleName: 'app'
+		}))
+		.pipe(gulp.dest('public'));
+});
 
 gulp.task('bower', function() {
 	return bower()
@@ -17,7 +26,7 @@ gulp.task('clean', function () {
 		.pipe(clean());
 });
 
-gulp.task('compile', ['clean'], function () {
+gulp.task('compile', function () {
 	return gulp.src(
 		[
 			'./app/**/*.ts'
@@ -27,8 +36,7 @@ gulp.task('compile', ['clean'], function () {
 			experimentalDecorators: 'true'
 		}))
 		.pipe(typescriptAngular({
-			decoratorModuleName:'app',
-			experimentalDecorators: 'true'
+			decoratorModuleName:'app'
 		}))
 		.pipe(gulp.dest('./public/tmp-scripts'));
 });
@@ -37,7 +45,6 @@ gulp.task('unify-scripts', ['compile'], function() {
 	var bk = gulp.src('./public/tmp-scripts/**/*.js')
 		.pipe(concat(p.name + '_' + p.version + '.js'))
 		.pipe(gulp.dest('./public/dist'));
-	gulp.start('clean');
 	return bk;
 });
 
@@ -48,13 +55,14 @@ gulp.task('sass', function () {
 		.pipe(gulp.dest('./public/dist'));
 });
 
-gulp.task('default', ['bower', 'unify-scripts', 'sass'], function() {
-	gulp.watch('./app/**/*.ts', ['unify-scripts']);
-	gulp.watch('./resources/styles/**/*.scss', ['sass']);
+gulp.task('default', ['bower', 'unify-scripts', 'sass', 'templates'], function() {
+	gulp.start('clean');
 });
 
-gulp.task('dev', ['unify-scripts', 'sass'], function() {
+gulp.task('dev', ['bower', 'unify-scripts', 'sass', 'templates'], function() {
+	gulp.start('clean');
 	gulp.watch('./app/**/*.ts', ['unify-scripts']);
+	gulp.watch('./app/modules/**/*.ts', ['templates']);
 	gulp.watch('./resources/styles/**/*.scss', ['sass']);
 	gulp.watch('./app/modules/**/*.scss', ['sass']);
 });

@@ -1,3 +1,5 @@
+/// <reference path="app.ts" />
+
 module appRouter
 {
     @app.Config
@@ -11,7 +13,10 @@ module appRouter
         static createStateObject(identifier: string) {
             return {
                 url: '/' + identifier,
-                templateUrl: 'app/modules' + identifier + 'templates/index.html',
+                templateUrl: './app/modules/' + identifier + '/templates/index.html',
+                controller: function() {
+
+                },
                 clearHistory: true
             }
         }
@@ -21,7 +26,7 @@ module appRouter
         ) {
 
             $stateProvider
-                .state("app", <angular.ui.IState>
+                .state("menu", <angular.ui.IState>
                 {
                     url: "/menu",
                     abstract: true
@@ -30,6 +35,7 @@ module appRouter
                 .state('menu.' + home.identifier, AppRouterConfig.createStateObject(home.identifier));
 
 
+            $urlRouterProvider.otherwise('/menu/home');
 
         }
     }

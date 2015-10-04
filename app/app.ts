@@ -1,7 +1,5 @@
 module app {
-
     let angularModule = angular.module('app', ['ui.router']);
-
     export function Config(clazz: any) {
         angularModule.config(new clazz().dependencies);
     }

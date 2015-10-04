@@ -12,10 +12,6 @@ First install all npm dependencies:
 
 `npm install -g bower`
 
-Link global gulp locally
-
-`npm link gulp`
-
 and then start the application with:
 
 `gulp`
