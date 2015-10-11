@@ -13,7 +13,7 @@ gulp.task('templates', function () {
 		.pipe(templateCache({
 			module: 'app'
 		}))
-		.pipe(gulp.dest('public'));
+		.pipe(gulp.dest('public/tmp-scripts'));
 });
 
 gulp.task('bower', function() {
@@ -26,7 +26,7 @@ gulp.task('clean', function () {
 		.pipe(clean());
 });
 
-gulp.task('compile', function () {
+gulp.task('compile', ['templates'], function () {
 	return gulp.src(
 		[
 			'./app/**/*.ts'

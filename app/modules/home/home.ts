@@ -1,5 +1,5 @@
 /// <reference path="../../router.ts" />
-module home{
+module app.home{
     export var identifier:string = 'home';
 
     @app.Controller

@@ -1,31 +1,19 @@
-/// <reference path="app.ts" />
-
-module appRouter
+module app.appRouter
 {
     @app.Config
-    class AppRouterConfig implements AngularConfig
+    class AppRouterConfig
     {
-        public dependencies = [];
-        public templateCache: angular.ITemplateCacheService;
+        static $inject = [
+            "$stateProvider",
+            "$urlRouterProvider",
+            "$templateCacheProvider",
+        ];
 
-        constructor($templateCache: angular.ITemplateCacheService){
-            this.dependencies = ["$stateProvider", "$urlRouterProvider", this.callback];
-            this.templateCache = $templateCache;
-        }
-        createStateObject = (identifier: string) => {
-            return {
-                url: '/' + identifier,
-                templateUrl: this.templateCache.get('./app/modules/' + identifier + '/templates/index.html'),
-                controller: function() {
-
-                },
-                clearHistory: true
-            }
-        };
-        callback = (
+        constructor(
             $stateProvider: angular.ui.IStateProvider,
             $urlRouterProvider: angular.ui.IUrlRouterProvider
-        ) => {
+        ){
+            console.log('menu.' + home.identifier)
             $stateProvider
                 .state("menu", <angular.ui.IState>
                 {
@@ -33,11 +21,22 @@ module appRouter
                     abstract: true
                 })
                 // home module
-                .state('menu.' + home.identifier, this.createStateObject(home.identifier));
+                .state('menu.' + home.identifier, {
+                    url: '/' + home.identifier,
+                    templateProvider: function($templateCache){
+                        console.log($templateCache.get(home.identifier + '/templates/index.html'));
+                        // simplified, expecting that the cache is filled
+                        // there should be some checking... and async $http loading if not found
+                        return $templateCache.get(home.identifier + '/templates/index.html');
+                    },
+                    controller: function() {
+
+                    }
+                });
 
 
             $urlRouterProvider.otherwise('/menu/home');
-
         }
+
     }
 }

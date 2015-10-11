@@ -1,7 +1,14 @@
+/// <reference path="router.ts" />
+
 module app {
-    let angularModule = angular.module('app', ['ui.router']);
+    let angularModule = angular.module('app', ['ui.router'], function() {
+
+    });
     export function Config(clazz: any) {
-        angularModule.config(new clazz().dependencies);
+        angularModule.config(clazz);
+    }
+    export function Run(clazz: any) {
+        angularModule.run(clazz);
     }
     export function Controller(clazz: any) {
         angularModule.controller(clazz.$componentName, clazz);
@@ -16,9 +23,13 @@ module app {
         angularModule.factory(clazz.$componentName, clazz);
     }
     export function Directive(clazz: any) {
-        var args = [];
-        args.push.apply(args, clazz.$inject);
-        args.push(function() { return new clazz(arguments) });
-        angularModule.directive(clazz.$componentName, args);
+        angularModule.directive(clazz.$componentName, createArgs(clazz, arguments));
     }
+    var createArgs = (clazz, classArgs) => {
+        var args : any = [];
+        args.push.apply(args, clazz.$inject);
+        args.push(clazz);
+        console.log(args);
+        return args;
+    };
 }
