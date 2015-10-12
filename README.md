@@ -12,6 +12,8 @@ First install all npm dependencies:
 
 `npm install -g bower`
 
+`bower install`
+
 and then start the application with:
 
 `gulp`
