@@ -2,6 +2,9 @@
 .app{
   @import "framework/helpers";
 
+  .login{
+    @import "../../app/modules/login/styles/main";
+  }
 
   // Modules import START
   .home{
