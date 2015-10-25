@@ -7,14 +7,18 @@ module app.userFactory
     class UserFactory
     {
         static $inject = [
-            '$q', '$http', '$timeout'
+            '$q', '$timeout', 'dbConnector'
         ];
 
         static $componentName = 'user';
 
-        constructor($q, $http, $timeout){
+        private $resource;
+
+        constructor($q, $timeout, dbConnector){
+            console.log(dbConnector);
             return this;
         }
+
         getIdentity = function() {
             return {
                 id: 1,

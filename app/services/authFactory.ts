@@ -49,7 +49,7 @@ module app.authFactory
 
         isUnathorized = function() {
 
-            this.$state.go('site.accessdenied');
+            this.$state.go('site.login');
 
         };
     }

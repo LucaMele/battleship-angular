@@ -14,27 +14,19 @@ module app.appRouter
         ){
             $stateProvider
                 .state('site', {
-
                     'abstract': true
-                    /*resolve: {
-                        authorize: ['auth',
-                            function(authorization) {
-                                return authorization.authorize();
-                            }
-                        ]
-                    }*/
                 })
-                .state('site.' + accessdenied.identifier , {
-                    url: '/denied',
+                .state('site.' + login.identifier , {
+                    url: '/login',
                     data: {
                         roles: []
                     },
                     views:{
                         "content@":{
                             templateProvider: function($templateCache: angular.ITemplateCacheService){
-                                return $templateCache.get(accessdenied.identifier + '/templates/index.html');
+                                return $templateCache.get(login.identifier + '/templates/index.html');
                             },
-                            controller: accessdenied.AccessdeniedStateController
+                            controller: login.LoginStateController
                         }
                     },
                     clearHistory: true
