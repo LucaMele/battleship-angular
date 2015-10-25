@@ -4,7 +4,9 @@
 var config = {
     availableModules: ['login'],
     db: {
-        name: 'gZ3-m__battleship'
+        name: 'gZ3-m__battleship',
+        host: 'localhost',
+        port: 27017
     }
 };
 
