@@ -13,7 +13,14 @@ module app.userFactory
         static $componentName = 'user';
 
         constructor($q, $http, $timeout){
-
+            return this;
+        }
+        getIdentity = function() {
+            return {
+                id: 1,
+                roles: ['guest'],
+                username: 'giovanni'
+            }
         }
     }
 }
