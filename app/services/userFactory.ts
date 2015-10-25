@@ -18,7 +18,7 @@ module app.userFactory
         getIdentity = function() {
             return {
                 id: 1,
-                roles: ['guest'],
+                roles: ['user'],
                 username: 'giovanni'
             }
         }

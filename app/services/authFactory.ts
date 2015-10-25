@@ -7,18 +7,20 @@ module app.authFactory
     class AuthFactory
     {
         static $inject = [
-            '$rootScope', '$state', 'user'
+            '$rootScope', '$state', '$location', 'user'
         ];
 
         static $componentName = 'auth';
 
         private $rootScope;
         private $state;
+        private $location;
         private user;
 
-        constructor($rootScope, $state, user){
+        constructor($rootScope, $state, $location, user){
             this.$rootScope = $rootScope;
             this.$state = $state;
+            this.$location = $location;
             this.user = user;
             return this;
         }
@@ -27,7 +29,6 @@ module app.authFactory
             var neededRoles = toState.data.roles,
                 userRoles = user.roles,
                 i, l, ii, ll;
-            console.log(toState);
             if (!neededRoles || !neededRoles.length) {
                 return true;
             }
@@ -35,7 +36,6 @@ module app.authFactory
                 for (ii = 0, ll = userRoles.length; ii < ll; ii++) {
 
                     if (userRoles[ii] === neededRoles[i]) {
-                        console.log(userRoles[ii], neededRoles[i])
                         return true;
                     }
                 }
@@ -43,13 +43,14 @@ module app.authFactory
             return false;
         };
 
-        authorize = function(user) {
-            console.log(user);
+        authorize = function(user, toState) {
+
         };
 
         isUnathorized = function() {
-            console.log(this.$state);
-            this.$state.go('accessdenied');
+
+            this.$state.go('site.accessdenied');
+
         };
     }
 }

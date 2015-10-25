@@ -14,7 +14,7 @@ module app.accessdenied{
 
     export class AccessdeniedStateController{
         constructor(public $scope: angular.IScope) {
-            console.log('dddddddd');
+
         }
     }
 }

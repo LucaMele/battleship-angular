@@ -14,6 +14,7 @@ module app.appRouter
         ){
             $stateProvider
                 .state('site', {
+
                     'abstract': true
                     /*resolve: {
                         authorize: ['auth',
@@ -23,25 +24,35 @@ module app.appRouter
                         ]
                     }*/
                 })
-                .state(accessdenied.identifier , {
-                    url: '/' + accessdenied.identifier,
+                .state('site.' + accessdenied.identifier , {
+                    url: '/denied',
                     data: {
                         roles: []
                     },
-                    templateProvider: function($templateCache: angular.ITemplateCacheService){
-                        return $templateCache.get(accessdenied.identifier + '/templates/index.html');
+                    views:{
+                        "content@":{
+                            templateProvider: function($templateCache: angular.ITemplateCacheService){
+                                return $templateCache.get(accessdenied.identifier + '/templates/index.html');
+                            },
+                            controller: accessdenied.AccessdeniedStateController
+                        }
                     },
-                    controller: accessdenied.AccessdeniedStateController
+                    clearHistory: true
                 })
-                .state(home.identifier , {
-                    url: '/' + home.identifier,
+                .state('site.' + home.identifier , {
+                    url: '/home',
                     data: {
                         roles: ['user']
                     },
-                    templateProvider: function($templateCache: angular.ITemplateCacheService){
-                        return $templateCache.get(home.identifier + '/templates/index.html');
+                    views:{
+                        "content@":{
+                            templateProvider: function($templateCache: angular.ITemplateCacheService){
+                                return $templateCache.get(home.identifier + '/templates/index.html');
+                            },
+                            controller: home.HomeStateController
+                        }
                     },
-                    controller: home.HomeStateController
+                    clearHistory: true
                 });
 
 

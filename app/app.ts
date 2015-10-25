@@ -29,7 +29,6 @@ module app {
         var args : any = [];
         args.push.apply(args, clazz.$inject);
         args.push(clazz);
-        console.log(args);
         return args;
     };
 }
