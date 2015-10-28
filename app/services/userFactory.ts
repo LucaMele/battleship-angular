@@ -13,13 +13,15 @@ module app.userFactory
         static $componentName = 'user';
 
         private $resource;
+        private dbConnector;
 
         constructor($q, $timeout, dbConnector){
-            console.log(dbConnector);
+            this.dbConnector= dbConnector;
             return this;
         }
 
         getIdentity = function() {
+
             return {
                 id: 1,
                 roles: ['guest'], // ['user']

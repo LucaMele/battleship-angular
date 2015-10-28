@@ -10,6 +10,10 @@ module app.login{
             this.componentName = 'login';
         }
 
+        submit  = function() {
+            console.log(arguments);
+        }
+
     }
 
     export class LoginStateController{

@@ -62,7 +62,7 @@ gulp.task('default', ['bower', 'unify-scripts', 'sass', 'templates'], function()
 gulp.task('dev', ['bower', 'unify-scripts', 'sass', 'templates'], function() {
 	gulp.start('clean');
 	gulp.watch('./app/**/*.ts', ['unify-scripts']);
-	gulp.watch('./app/modules/**/*.ts', ['templates']);
+	gulp.watch('./app/modules/**/*.html', ['compile', 'unify-scripts']);
 	gulp.watch('./resources/styles/**/*.scss', ['sass']);
 	gulp.watch('./app/modules/**/*.scss', ['sass']);
 });
