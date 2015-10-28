@@ -22,7 +22,7 @@ module app.userFactory
         getIdentity = function() {
             return {
                 id: 1,
-                roles: ['user'],
+                roles: ['guest'], // ['user']
                 username: 'giovanni'
             }
         }

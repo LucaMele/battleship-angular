@@ -1,10 +1,10 @@
 /**
  * Created by Luca on 25.10.2015.
  */
-module app.authFactory
+module app.authService
 {
-    @app.Factory
-    class AuthFactory
+    @app.Service
+    class AuthService
     {
         static $inject = [
             '$rootScope', '$state', '$location', 'user'
