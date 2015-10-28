@@ -28,8 +28,7 @@ module app.appRouter
                             },
                             controller: login.LoginStateController
                         }
-                    },
-                    clearHistory: true
+                    }
                 })
                 .state('site.' + home.identifier , {
                     url: '/home',
@@ -43,8 +42,7 @@ module app.appRouter
                             },
                             controller: home.HomeStateController
                         }
-                    },
-                    clearHistory: true
+                    }
                 });
 
 
