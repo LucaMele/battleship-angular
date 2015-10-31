@@ -1,4 +1,6 @@
-@import "../../bower_components/foundation/scss/foundation";
+$ionicons-font-path: "../lib/ionic/fonts" !default;
+
+@import "../../battleship/www/lib/ionic/scss/ionic";
 
 @import "framework/page";
 .app{

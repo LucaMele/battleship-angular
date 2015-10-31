@@ -4,8 +4,32 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="dist/battleship-angular_1.0.0.css">
     <title>Battleship</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
 </head>
 <body ng-app="app">
+
+<!-- todo, make a service for the menu -->
+<ion-side-menus>
+
+    <!-- Center content -->
+    <ion-side-menu-content>
+        <ion-header-bar class="bar-dark">
+            <h1 class="title">Todo</h1>
+        </ion-header-bar>
+        <ion-content>
+        </ion-content>
+    </ion-side-menu-content>
+
+    <!-- Left menu -->
+    <ion-side-menu side="left">
+        <ion-header-bar class="bar-dark">
+            <h1 class="title">Projects</h1>
+        </ion-header-bar>
+    </ion-side-menu>
+
+</ion-side-menus>
 
 
     <!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
@@ -13,9 +37,12 @@
 
     <a ui-sref="site.home">Home</a>
 
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
     <script src="lib/angular/angular.js"></script>
     <script src="lib/angular-resource/angular-resource.js"></script>
     <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="dist/battleship-angular_1.0.0.js"></script>
+    <script src="lib/cordova/cordova.test.js"></script>
 </body>
 </html>
