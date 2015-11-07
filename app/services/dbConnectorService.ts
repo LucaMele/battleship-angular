@@ -10,17 +10,22 @@ module app.dbConnectorService
     class DbConnectorService
     {
 
+        static $inject = [
+            '$http'
+        ];
         /**
          *
          * @type {string}
          */
         static $componentName = 'dbConnectorService';
         private config;
+        private $http;
 
-        constructor(){
+        constructor($http){
             this.config = {
                 headers:  { }
             };
+            this.$http = $http;
             return this;
         }
 
@@ -32,6 +37,7 @@ module app.dbConnectorService
             this.config = {
                 headers:  header
             };
+            this.$http.defaults.headers.common = header;
         };
 
         /**
@@ -43,7 +49,7 @@ module app.dbConnectorService
         public connect = function(resource, data, callback) {
             switch (resource.method) {
                 case 'get':
-                    resource.$resource.get(null, this.config).$promise.then(callback);
+                    resource.$resource.get().$promise.then(callback);
                     break;
                 default:
                     console.error('unknown method in db connector service');

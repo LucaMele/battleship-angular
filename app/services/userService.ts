@@ -84,12 +84,13 @@ module app.userService
             var identity = sessionStorage.getItem('identity'),
                 self = this;
             if (typeof identity === 'string') {
+                identity = JSON.parse(identity);
                 if (identity['auth']) {
                     self.dbConnectorService.setHeader({
                         'Authorization': identity['auth']
                     });
                 }
-                return JSON.parse(identity);
+                return identity;
             }
             if (typeof identity === 'undefined' || identity === null) {
                 this.identity = {
