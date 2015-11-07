@@ -1,7 +1,7 @@
 /// <reference path="router.ts" />
 var app;
 (function (app) {
-    var angularModule = angular.module('app', ['ionic', 'ui.router', 'ngResource'], function () {
+    var angularModule = angular.module('app', ['ui.router', 'ngResource'], function () {
     });
     function Config(clazz) {
         angularModule.config(clazz);

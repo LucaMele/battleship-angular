@@ -26,7 +26,7 @@ module app.appRouter
                             templateProvider: function($templateCache: angular.ITemplateCacheService){
                                 return $templateCache.get(login.identifier + '/templates/index.html');
                             },
-                            controller: login.LoginStateController
+                            controller: login.LoginController
                         }
                     }
                 })

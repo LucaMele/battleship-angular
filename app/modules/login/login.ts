@@ -3,23 +3,28 @@ module app.login{
     export var identifier:string = 'login';
 
     @app.Controller
-    class LoginController implements appComponent{
+    export class LoginController implements appComponent{
+
+        static $inject = [
+            "userService", "loginDbFactory"
+        ];
+
         public componentName;
+        private userService;
+        private loginDbFactory;
 
-        constructor(public $scope: angular.IScope) {
+        constructor(userService, loginDbFactory) {
+            this.userService = userService;
             this.componentName = 'login';
+            this.loginDbFactory = loginDbFactory;
         }
 
-        submit  = function() {
-            console.log(arguments);
-        }
-
-    }
-
-    export class LoginStateController{
-
-        constructor(public $scope: angular.IScope) {
-            $scope['date'] = new Date();
-        }
+        /**
+         *
+         * @param data
+         */
+        submit = function(data) {
+            this.userService.authenticateUser(data, this.loginDbFactory.postLogin());
+        };
     }
 }

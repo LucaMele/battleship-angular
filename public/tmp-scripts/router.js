@@ -26,7 +26,7 @@ var app;
                             templateProvider: function ($templateCache) {
                                 return $templateCache.get(app.login.identifier + '/templates/index.html');
                             },
-                            controller: app.login.LoginStateController
+                            controller: app.login.LoginController
                         }
                     }
                 })

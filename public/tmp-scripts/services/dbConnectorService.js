@@ -17,16 +17,24 @@ var app;
     var dbConnectorService;
     (function (dbConnectorService) {
         var DbConnectorService = (function () {
-            function DbConnectorService($resource) {
-                this.post = function () {
-                    // $resource
+            function DbConnectorService() {
+                /**
+                 *
+                 * @param $resource
+                 * @param data
+                 * @param callback
+                 */
+                this.save = function ($resource, data, callback) {
+                    if (typeof $resource.save === 'function' && typeof data === 'object') {
+                        $resource.save(data, callback);
+                        return true;
+                    }
+                    console.error('Invalid arguments passed at the method save in the DB donnector');
+                    return false;
                 };
                 return this;
-            }/*<auto_generate>*/DbConnectorService.$inject = ['$resource'];DbConnectorService.$componentName = 'dbConnectorService'/*</auto_generate>*/
-            DbConnectorService.$inject = [
-                '$resource'
-            ];
-            DbConnectorService.$componentName = 'dbConnector';
+            }/*<auto_generate>*/DbConnectorService.$inject = [];DbConnectorService.$componentName = 'dbConnectorService'/*</auto_generate>*/
+            DbConnectorService.$componentName = 'dbConnectorService';
             DbConnectorService = __decorate([
                 app.Service
             ], DbConnectorService);

@@ -11,16 +11,16 @@ var app;
     var bootstrap;
     (function (bootstrap) {
         var AppBootstrap = (function () {
-            function AppBootstrap($rootScope, $state, $stateParams, auth, user) {
+            function AppBootstrap($rootScope, $state, $stateParams, authService, userService) {
                 $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams) {
                     $rootScope.toState = toState;
                     $rootScope.toStateParams = toStateParams;
-                    if (auth.canAccess(user.getIdentity(), toState)) {
-                        auth.authorize(user, toState);
+                    if (authService.canAccess(userService.getIdentity(), toState)) {
+                        authService.authorize(userService, toState);
                     }
                     else {
                         event.preventDefault();
-                        auth.isUnathorized();
+                        authService.isUnathorized();
                     }
                 });
             }
@@ -28,8 +28,8 @@ var app;
                 '$rootScope',
                 '$state',
                 '$stateParams',
-                'auth',
-                'user'
+                'authService',
+                'userService'
             ];
             AppBootstrap = __decorate([
                 app.Run

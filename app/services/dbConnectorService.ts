@@ -9,18 +9,26 @@ module app.dbConnectorService
     @app.Service
     class DbConnectorService
     {
-        static $inject = [
-            '$resource'
-        ];
 
-        static $componentName = 'dbConnector';
+        static $componentName = 'dbConnectorService';
 
-        constructor($resource){
+        constructor(){
             return this;
         }
 
-        post = function() {
-            // $resource
+        /**
+         *
+         * @param $resource
+         * @param data
+         * @param callback
+         */
+        save = function($resource, data, callback) {
+            if (typeof $resource.save === 'function' && typeof data === 'object') {
+                $resource.save(data, callback);
+                return true;
+            }
+            console.error('Invalid arguments passed at the method save in the DB donnector');
+            return false;
         }
     }
 }

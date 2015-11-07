@@ -7,21 +7,21 @@ module app.bootstrap
             '$rootScope',
             '$state',
             '$stateParams',
-            'auth',
-            'user'
+            'authService',
+            'userService'
         ];
 
         constructor(
-            $rootScope, $state, $stateParams, auth, user
+            $rootScope, $state, $stateParams, authService, userService
         ){
             $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams) {
                 $rootScope.toState = toState;
                 $rootScope.toStateParams = toStateParams;
-                if (auth.canAccess(user.getIdentity(), toState)) {
-                    auth.authorize(user, toState);
+                if (authService.canAccess(userService.getIdentity(), toState)) {
+                    authService.authorize(userService, toState);
                 } else {
                     event.preventDefault();
-                    auth.isUnathorized();
+                    authService.isUnathorized();
                 }
             });
         }

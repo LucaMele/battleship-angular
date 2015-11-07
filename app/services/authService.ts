@@ -7,10 +7,10 @@ module app.authService
     class AuthService
     {
         static $inject = [
-            '$rootScope', '$state', '$location', 'user'
+            '$rootScope', '$state', '$location', 'userService'
         ];
 
-        static $componentName = 'auth';
+        static $componentName = 'authService';
 
         private $rootScope;
         private $state;
@@ -48,9 +48,7 @@ module app.authService
         };
 
         isUnathorized = function() {
-
             this.$state.go('site.login');
-
         };
     }
 }

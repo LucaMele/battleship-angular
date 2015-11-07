@@ -13,25 +13,26 @@ var app;
     (function (login) {
         login.identifier = 'login';
         var LoginController = (function () {
-            function LoginController($scope) {
-                this.$scope = $scope;
-                this.submit = function () {
-                    console.log(arguments);
+            function LoginController(userService, loginDbFactory) {
+                /**
+                 *
+                 * @param data
+                 */
+                this.submit = function (data) {
+                    this.userService.authenticateUser(data, this.loginDbFactory.postLogin());
                 };
+                this.userService = userService;
                 this.componentName = 'login';
-            }/*<auto_generate>*/LoginController.$inject = ['$scope'];LoginController.$componentName = 'LoginController'/*</auto_generate>*/
+                this.loginDbFactory = loginDbFactory;
+            }/*<auto_generate>*/LoginController.$inject = ['userService','loginDbFactory'];LoginController.$componentName = 'LoginController'/*</auto_generate>*/
+            LoginController.$inject = [
+                "userService", "loginDbFactory"
+            ];
             LoginController = __decorate([
                 app.Controller
             ], LoginController);
             return LoginController;
         })();
-        var LoginStateController = (function () {
-            function LoginStateController($scope) {
-                this.$scope = $scope;
-                $scope['date'] = new Date();
-            }/*<auto_generate>*/LoginStateController.$inject = ['$scope'];LoginStateController.$componentName = 'LoginStateController'/*</auto_generate>*/
-            return LoginStateController;
-        })();
-        login.LoginStateController = LoginStateController;
+        login.LoginController = LoginController;
     })(login = app.login || (app.login = {}));
 })(app || (app = {}));
