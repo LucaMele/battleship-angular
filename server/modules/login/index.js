@@ -20,7 +20,7 @@ function LoginModule(db, assert){
                 res.status(401).send({ error: 'unauthorized!' });
             } else {
                 cursor.forEach(function(doc){
-                    var auth = md5(doc._id.toString()) + ''+ md5(Date.now() + 'gdjnxhzw');
+                    var auth = md5(doc._id.toString() + ''+ md5(Date.now() + 'gdjnxhzw')) + md5(Date.now() + '12fgh');
                     var date = new Date();
                     date.setDate(date.getDate() + 1);
                     db.collection('users').updateOne({ _id: doc._id },
