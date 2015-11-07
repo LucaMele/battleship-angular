@@ -21,11 +21,6 @@ gulp.task('bower', function() {
 		.pipe(gulp.dest('public/lib/'))
 });
 
-gulp.task('ionic', function() {
-	gulp.src('./battleship/www/lib/**/*', {base: './battleship/www/lib'})
-		.pipe(gulp.dest('./public/lib/'));
-});
-
 gulp.task('clean', function () {
 	return gulp.src('./public/tmp-scripts', {read: false})
 		.pipe(clean());
@@ -60,11 +55,11 @@ gulp.task('sass', function () {
 		.pipe(gulp.dest('./public/dist'));
 });
 
-gulp.task('default', ['bower', 'ionic', 'unify-scripts', 'sass', 'templates'], function() {
+gulp.task('default', ['bower', 'unify-scripts', 'sass', 'templates'], function() {
 	gulp.start('clean');
 });
 
-gulp.task('dev', ['bower', 'ionic', 'unify-scripts', 'sass', 'templates'], function() {
+gulp.task('dev', ['bower', 'unify-scripts', 'sass', 'templates'], function() {
 	gulp.start('clean');
 	gulp.watch('./app/**/*.ts', ['unify-scripts']);
 	gulp.watch('./app/modules/**/*.html', ['compile', 'unify-scripts']);
