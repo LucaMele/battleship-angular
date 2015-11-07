@@ -3,20 +3,27 @@ module app.home{
     export var identifier:string = 'home';
 
     @app.Controller
-    class HomeController implements appComponent{
+    export class HomeController implements appComponent{
         public componentName;
 
-        constructor(public $scope: angular.IScope) {
+        static $inject = [
+            "dbConnectorService", "homeDbFactory"
+        ];
+
+        private dbConnectorService;
+        private homeDbFactory;
+
+        constructor(dbConnectorService, homeDbFactory) {
             this.componentName = 'home';
+            this.dbConnectorService = dbConnectorService;
+            this.homeDbFactory = homeDbFactory;
+
+            // test
+            var self = this;
+            dbConnectorService.connect(this.homeDbFactory.getHome(), {}, function() {
+
+            });
         }
 
-    }
-
-    export class HomeStateController{
-
-        constructor(public $scope: angular.IScope) {
-
-            $scope['test'] = 'i come from the angular controller!!';
-        }
     }
 }

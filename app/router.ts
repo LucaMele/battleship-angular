@@ -40,7 +40,7 @@ module app.appRouter
                             templateProvider: function($templateCache: angular.ITemplateCacheService){
                                 return $templateCache.get(home.identifier + '/templates/index.html');
                             },
-                            controller: home.HomeStateController
+                            controller: home.HomeController
                         }
                     }
                 });

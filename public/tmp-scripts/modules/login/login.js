@@ -13,20 +13,25 @@ var app;
     (function (login) {
         login.identifier = 'login';
         var LoginController = (function () {
-            function LoginController(userService, loginDbFactory) {
+            function LoginController(userService, loginDbFactory, authService) {
                 /**
                  *
                  * @param data
                  */
                 this.submit = function (data) {
-                    this.userService.authenticateUser(data, this.loginDbFactory.postLogin());
+                    var self = this;
+                    this.userService.authenticateUser(data, this.loginDbFactory.postLogin(), function () {
+                        self.authService.navigateTo('site.home');
+                    });
                 };
                 this.userService = userService;
                 this.componentName = 'login';
                 this.loginDbFactory = loginDbFactory;
-            }/*<auto_generate>*/LoginController.$inject = ['userService','loginDbFactory'];LoginController.$componentName = 'LoginController'/*</auto_generate>*/
+                this.authService = authService;
+                this.userService.resetIdentity();
+            }/*<auto_generate>*/LoginController.$inject = ['userService','loginDbFactory','authService'];LoginController.$componentName = 'LoginController'/*</auto_generate>*/
             LoginController.$inject = [
-                "userService", "loginDbFactory"
+                "userService", "loginDbFactory", "authService"
             ];
             LoginController = __decorate([
                 app.Controller

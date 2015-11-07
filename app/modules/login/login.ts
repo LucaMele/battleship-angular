@@ -6,25 +6,31 @@ module app.login{
     export class LoginController implements appComponent{
 
         static $inject = [
-            "userService", "loginDbFactory"
+            "userService", "loginDbFactory", "authService"
         ];
 
         public componentName;
         private userService;
         private loginDbFactory;
+        private authService;
 
-        constructor(userService, loginDbFactory) {
+        constructor(userService, loginDbFactory, authService) {
             this.userService = userService;
             this.componentName = 'login';
             this.loginDbFactory = loginDbFactory;
+            this.authService = authService;
+            this.userService.resetIdentity();
         }
 
         /**
          *
          * @param data
          */
-        submit = function(data) {
-            this.userService.authenticateUser(data, this.loginDbFactory.postLogin());
+        public submit = function(data) {
+            var self = this;
+            this.userService.authenticateUser(data, this.loginDbFactory.postLogin(), function() {
+                self.authService.navigateTo('site.home');
+            });
         };
     }
 }

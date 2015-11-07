@@ -15,19 +15,25 @@ module app.authService
         private $rootScope;
         private $state;
         private $location;
-        private user;
+        private userService;
 
-        constructor($rootScope, $state, $location, user){
+        constructor($rootScope, $state, $location, userService){
             this.$rootScope = $rootScope;
             this.$state = $state;
             this.$location = $location;
-            this.user = user;
+            this.userService = userService;
             return this;
         }
 
-        canAccess = function(user, toState){
+        /**
+         *
+         * @param user
+         * @param toState
+         * @returns {boolean}
+         */
+        private canAccess = function(user, toState){
             var neededRoles = toState.data.roles,
-                userRoles = user.roles,
+                userRoles = user.roles ? user.roles : [],
                 i, l, ii, ll;
             if (!neededRoles || !neededRoles.length) {
                 return true;
@@ -43,11 +49,28 @@ module app.authService
             return false;
         };
 
-        authorize = function(user, toState) {
-
+        /**
+         *
+         * @param toState
+         */
+        public navigateTo = function(toState) {
+            this.$state.go(toState);
         };
 
-        isUnathorized = function() {
+        /**
+         *
+         * @param toState
+         * @returns {boolean}
+         */
+        public isAuthorized = function(toState) {
+            var user = this.userService.getIdentity();
+            return this.canAccess(user, toState);
+        };
+
+        /**
+         *
+         */
+        public isUnathorized = function() {
             this.$state.go('site.login');
         };
     }

@@ -1,12 +1,12 @@
 /**
  * Created by Luca on 25.10.2015.
  */
-module app.loginDbFactory
+module app.homeDbFactory
 {
     @app.Factory
-    class LoginDbFactory
+    class HomeDbFactory
     {
-        static $componentName = 'loginDbFactory';
+        static $componentName = 'homeDbFactory';
 
         static $inject = [
             "$resource"
@@ -23,10 +23,10 @@ module app.loginDbFactory
          *
          * @returns {any}
          */
-        public postLogin = function( ){
+        public getHome = function( ){
             return {
-                $resource: this.$resource('/login'),
-                method: 'post'
+                $resource: this.$resource('/home'),
+                method: 'get'
             }
         };
     }

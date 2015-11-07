@@ -17,9 +17,7 @@ module app.bootstrap
             $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams) {
                 $rootScope.toState = toState;
                 $rootScope.toStateParams = toStateParams;
-                if (authService.canAccess(userService.getIdentity(), toState)) {
-                    authService.authorize(userService, toState);
-                } else {
+                if (!authService.isAuthorized(toState)) {
                     event.preventDefault();
                     authService.isUnathorized();
                 }

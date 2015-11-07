@@ -13,6 +13,7 @@ module app.userService
         static $componentName = 'userService';
 
         private dbConnectorService;
+        private identity: Object;
 
         constructor(dbConnectorService){
             this.dbConnectorService= dbConnectorService;
@@ -32,11 +33,18 @@ module app.userService
          *
          * @param data
          * @param $resource
+         * @param callback
          * @returns {boolean}
          */
-        private proceed = function(data, $resource) {
-            this.dbConnectorService.save($resource, data, function() {
-                console.log(arguments);
+        private proceed = function(data, $resource, callback) {
+            var self = this;
+            this.dbConnectorService.save($resource.$resource, data, function(resp) {
+                self.identity = angular.extend(data, {auth: resp.auth, roles: resp.roles});
+                self.dbConnectorService.setHeader({
+                    'Authorization': resp.auth
+                });
+                sessionStorage.setItem('identity', JSON.stringify(self.identity));
+                callback.call(self, self.identity);
             });
             return true;
         };
@@ -45,22 +53,50 @@ module app.userService
          *
          * @param data
          * @param $resource
+         * @param callback
          * @returns {boolean}
          */
-        public authenticateUser = function(data, $resource) {
+        public authenticateUser = function(data, $resource, callback) {
             if (this.validateAuthentication(data)) {
-                return this.proceed(data, $resource);
+                return this.proceed(data, $resource, callback);
             }
             return false;
         };
 
-        public getIdentity = function() {
-
-            return {
-                id: 1,
-                roles: ['guest'], // ['user']
-                username: 'giovanni'
+        /**
+         *
+         */
+        public resetIdentity = function() {
+            this.identity = {
+                roles: ['guest']
+            };
+            var identity = sessionStorage.getItem('identity');
+            if (typeof identity === 'string') {
+                sessionStorage.setItem('identity', this.identity);
             }
+        };
+
+        /**
+         *
+         * @returns {Object|function(any=): any|{roles: string[]}|any|*}
+         */
+        public getIdentity = function() {
+            var identity = sessionStorage.getItem('identity'),
+                self = this;
+            if (typeof identity === 'string') {
+                if (identity['auth']) {
+                    self.dbConnectorService.setHeader({
+                        'Authorization': identity['auth']
+                    });
+                }
+                return JSON.parse(identity);
+            }
+            if (typeof identity === 'undefined' || identity === null) {
+                this.identity = {
+                    roles: ['guest']
+                };
+            }
+            return this.identity;
         };
     }
 }

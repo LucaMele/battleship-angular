@@ -40,7 +40,7 @@ var app;
                             templateProvider: function ($templateCache) {
                                 return $templateCache.get(app.home.identifier + '/templates/index.html');
                             },
-                            controller: app.home.HomeStateController
+                            controller: app.home.HomeController
                         }
                     }
                 });
