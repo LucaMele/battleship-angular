@@ -3,7 +3,7 @@
 node_modules
 bower_components
 public/lib
-public/tmp-scipts
+public/tmp-scripts
 public/tmp-css
 public/css
 public/dist
