@@ -27,10 +27,8 @@ function LoginModule(db, assert){
                     db.collection('users').updateOne({ _id: doc._id },
                         { $set:
                             {
-                                auth: {
-                                    key: auth,
-                                    expires: date.getTime()
-                                }
+                                key: auth,
+                                key_expires: date.getTime()
                             }
                         }, function(err) {
                             assert.equal(null, err);

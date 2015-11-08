@@ -11,7 +11,7 @@ module app.dbConnectorService
     {
 
         static $inject = [
-            '$http'
+            '$http', '$state'
         ];
         /**
          *
@@ -20,12 +20,14 @@ module app.dbConnectorService
         static $componentName = 'dbConnectorService';
         private config;
         private $http;
+        private $state;
 
-        constructor($http){
+        constructor($http, $state){
             this.config = {
                 headers:  { }
             };
             this.$http = $http;
+            this.$state = $state;
             return this;
         }
 
@@ -40,6 +42,21 @@ module app.dbConnectorService
             this.$http.defaults.headers.common = header;
         };
 
+
+        private success = function() {
+
+        };
+
+        /**
+         *
+         * @param response
+         */
+        private error = function(response) {
+            if(response.status === 401 || response.status === 403) {
+                this.$state.go('site.login');
+            }
+        };
+
         /**
          *
          * @param resource
@@ -47,9 +64,12 @@ module app.dbConnectorService
          * @param callback
          */
         public connect = function(resource, data, callback) {
+            var self = this;
+            var error = function(resp){ self.error(resp) };
+            var success = function(resp){ self.error(resp) };
             switch (resource.method) {
                 case 'get':
-                    resource.$resource.get().$promise.then(callback);
+                    resource.$resource.get(null, success, error).$promise.then(callback);
                     break;
                 default:
                     console.error('unknown method in db connector service');
@@ -64,8 +84,11 @@ module app.dbConnectorService
          * @param callback
          */
         public save = function($resource, data, callback) {
+            var self = this;
+            var error = function(){ self.error(arguments) };
+            var success = function(){ self.error(arguments) };
             if (typeof $resource.save === 'function' && typeof data === 'object') {
-                $resource.save(data).$promise.then(callback);
+                $resource.save(data, success, error).$promise.then(callback);
                 return true;
             }
             console.error('Invalid arguments passed at the method save in the DB donnector');
