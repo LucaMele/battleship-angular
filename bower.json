@@ -3,11 +3,9 @@
   "version": "1.0.0",
   "dependencies": {
     "angular": "~1.4.7",
-    "angular-ui-router": "~0.2.15",
-    "cordova": "~3.4.0"
+    "angular-ui-router": "~0.2.15"
   },
   "devDependencies": {
-    "angular-resource": "~1.4.7",
-    "ionic": "driftyco/ionic-bower#1.1.0"
+    "angular-resource": "~1.4.7"
   }
 }
