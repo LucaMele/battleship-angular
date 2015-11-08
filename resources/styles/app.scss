@@ -6,6 +6,8 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .app{
   @import "framework/helpers";
 
+  @import "../../app/modules/layout/styles/main";
+
   .login{
     @import "../../app/modules/login/styles/main";
   }

@@ -32,12 +32,10 @@ module app.layout{
         public componentName;
         public $templateCache;
 
-        //public templateUrl = '/myApp/templates/eeeeeee.htm';
         public replace = true;
         public restrict = 'E';
         public template = function(jqlite, attributes){
-            console.log(attributes.ricardo)
-            return this.$templateCache.get(LayoutDirective.$componentName + '/templates/header.html');
+            return this.$templateCache.get(LayoutDirective.$componentName + '/templates/'+ attributes.type +'.html');
         };
 
         public controller;

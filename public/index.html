@@ -6,12 +6,27 @@
     <title>Battleship</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
 </head>
-<body ng-app="app">
+<body class="app" ng-app="app">
+    <div class="row">
+
+    <div class="large-9 columns" role="content">
 
     <!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
     <div ui-view="content"></div>
 
     <a ui-sref="site.home">Home</a>
+
+
+    </div>
+
+
+        <aside class="large-3 columns">
+        </aside>
+
+
+    </div>
+
+
 
     <script src="lib/foundation/js/foundation.js"></script>
 
