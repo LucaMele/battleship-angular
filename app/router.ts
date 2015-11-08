@@ -30,6 +30,20 @@ module app.appRouter
                         }
                     }
                 })
+                .state('site.' + home.identifier + '.' + admin.identifier , {
+                    url: '/admin',
+                    data: {
+                        roles: ['admin']
+                    },
+                    views:{
+                        "content@":{
+                            templateProvider: function($templateCache: angular.ITemplateCacheService){
+                                return $templateCache.get(admin.identifier + '/templates/index.html');
+                            },
+                            controller: admin.AdminController
+                        }
+                    }
+                })
                 .state('site.' + home.identifier , {
                     url: '/home',
                     data: {

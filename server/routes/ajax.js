@@ -13,5 +13,8 @@ router.post("/login", function(req, res) {
 router.get("/home", function(req, res) {
     modules.exec('home', 'get', req, res);
 });
+router.get("/users/list", function(req, res) {
+    modules.exec('usersList', 'get', req, res);
+});
 
 module.exports = router;

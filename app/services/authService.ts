@@ -40,7 +40,6 @@ module app.authService
             }
             for (i = 0, l = neededRoles.length; i < l; i++) {
                 for (ii = 0, ll = userRoles.length; ii < ll; ii++) {
-
                     if (userRoles[ii] === neededRoles[i]) {
                         return true;
                     }

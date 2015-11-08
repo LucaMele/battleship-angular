@@ -72,7 +72,7 @@ module app.userService
             };
             var identity = sessionStorage.getItem('identity');
             if (typeof identity === 'string') {
-                sessionStorage.setItem('identity', this.identity);
+                sessionStorage.setItem('identity', JSON.stringify(this.identity));
             }
         };
 
