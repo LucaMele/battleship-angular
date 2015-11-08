@@ -33,6 +33,7 @@ module app.layout{
         public $templateCache;
 
         public replace = true;
+        public scope = true;
         public restrict = 'E';
         public template = function(jqlite, attributes){
             return this.$templateCache.get(LayoutDirective.$componentName + '/templates/'+ attributes.type +'.html');
@@ -43,7 +44,6 @@ module app.layout{
         constructor($templateCache) {
             this.componentName = LayoutDirective.$componentName;
             this.$templateCache = $templateCache;
-            this.controller = LayoutController;
             return this;
             /*return {
                 restrict: 'A',

@@ -7,7 +7,6 @@ module app.usersList{
 
     export var identifier:string = 'usersList';
 
-
     @app.Controller
     class UsersListController implements appComponent{
 
@@ -26,6 +25,7 @@ module app.usersList{
             this.dbConnectorService = dbConnectorService;
             this.usersListDbFactory = usersListDbFactory;
             this.getUsers();
+            console.log('dddd');
         }
 
         /**
@@ -51,6 +51,7 @@ module app.usersList{
         public $templateCache;
 
         public replace = true;
+        public scope = true;
         public restrict = 'E';
         public template = function(jqlite, attributes){
             return this.$templateCache.get('users/templates/index.html');
@@ -60,7 +61,6 @@ module app.usersList{
         constructor($templateCache) {
             this.componentName = UsersListDirective.$componentName;
             this.$templateCache = $templateCache;
-            this.controller = UsersListController;
             return this;
         }
     }
