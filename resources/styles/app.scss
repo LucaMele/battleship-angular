@@ -1,5 +1,7 @@
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
+@import "../../bower_components/foundation/scss/foundation";
+
 @import "framework/page";
 .app{
   @import "framework/helpers";
