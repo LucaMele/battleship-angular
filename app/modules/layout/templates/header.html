@@ -1,11 +1,12 @@
 <header class="header">
-    <div class="row" ng-controller="layoutController as layoutCtrl">
+    <div class="row">
         <div class="large-12 columns">
             <div class="nav-bar right">
                 <ul class="button-group">
                     <li><a ui-sref="site.home" class="button" ui-sref-active="active">Benutzer</a></li>
                     <li><a ui-sref="site.login" class="button" ui-sref-active="active">Login</a></li>
                     <li><a ui-sref="site.game" class="button" ui-sref-active="active">Game</a></li>
+                    <li ng-show="layoutCtrl.isAdmin"><a ui-sref="site.home.admin" class="button" ui-sref-active="active">Admin</a></li>
                 </ul>
             </div>
             <h1>Battleship <small>Awesome projekt from Gruppe 9</small></h1>

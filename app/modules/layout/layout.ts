@@ -5,39 +5,23 @@
 module app.layout{
     export var identifier:string = 'layout';
 
-
-    @app.Controller
     class LayoutController implements appComponent{
 
         static $inject = [
             '$scope',
-            '$rootScope'
+            '$rootScope',
+            'userService'
         ];
         static $componentName = 'layoutController';
         public componentName;
-        public actualPath;
+        public isAdmin;
 
-        constructor($scope, $rootScope) {
+        constructor($scope, $rootScope, userService) {
             this.componentName = 'layoutController';
-            console.log($scope, this);
-            var self = this;
-            $rootScope.$on('$stateChangeStart', function(event, toState) {
-                console.log(toState);
-                self.actualPath = toState;
-            });
-            self.actualPath = "";
-        }
-
-        public getClass = function(path){
-            console.log(path + ' ' +this.actualPath)
-            if(path===this.actualPath){
-                return 'active';
-            }
-            return '';
+            this.isAdmin = !! ~ userService.getIdentity().roles.indexOf("admin");
         }
 
     }
-
 
 
     @app.Directive
@@ -57,7 +41,8 @@ module app.layout{
             return this.$templateCache.get(LayoutDirective.$componentName + '/templates/'+ attributes.type +'.html');
         };
 
-        public controller;
+        public controller = LayoutController;
+        public controllerAs = "layoutCtrl";
 
         constructor($templateCache) {
             this.componentName = LayoutDirective.$componentName;
