@@ -16,5 +16,8 @@ router.get("/home", function(req, res) {
 router.get("/users/list", function(req, res) {
     modules.exec('usersList', 'get', req, res);
 });
+router.get("/game", function(req, res) {
+    modules.exec('game', 'get', req, res);
+});
 
 module.exports = router;

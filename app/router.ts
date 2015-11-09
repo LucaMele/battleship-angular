@@ -30,17 +30,17 @@ module app.appRouter
                         }
                     }
                 })
-                .state('site.' + home.identifier + '.' + admin.identifier , {
-                    url: '/admin',
+                .state('site.' + game.identifier , {
+                    url: '/game',
                     data: {
-                        roles: ['admin']
+                        roles: ['user']
                     },
                     views:{
                         "content@":{
                             templateProvider: function($templateCache: angular.ITemplateCacheService){
-                                return $templateCache.get(admin.identifier + '/templates/index.html');
+                                return $templateCache.get(game.identifier + '/templates/index.html');
                             },
-                            controller: admin.AdminController
+                            controller: game.GameController
                         }
                     }
                 })

@@ -10,17 +10,35 @@ module app.layout{
     class LayoutController implements appComponent{
 
         static $inject = [
-            '$scope'
+            '$scope',
+            '$rootScope'
         ];
         static $componentName = 'layoutController';
         public componentName;
+        public actualPath;
 
-        constructor($scope) {
+        constructor($scope, $rootScope) {
             this.componentName = 'layoutController';
             console.log($scope, this);
-
+            var self = this;
+            $rootScope.$on('$stateChangeStart', function(event, toState) {
+                console.log(toState);
+                self.actualPath = toState;
+            });
+            self.actualPath = "";
         }
+
+        public getClass = function(path){
+            console.log(path + ' ' +this.actualPath)
+            if(path===this.actualPath){
+                return 'active';
+            }
+            return '';
+        }
+
     }
+
+
 
     @app.Directive
     export class LayoutDirective implements appComponent{
