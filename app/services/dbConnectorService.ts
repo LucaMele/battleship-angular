@@ -71,6 +71,9 @@ module app.dbConnectorService
                 case 'get':
                     resource.$resource.get(null, success, error).$promise.then(callback);
                     break;
+                case 'post':
+                    resource.$resource.save(data, success, error).$promise.then(callback);
+                    break;
                 default:
                     console.error('unknown method in db connector service');
                     break;

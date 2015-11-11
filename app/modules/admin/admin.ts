@@ -6,18 +6,25 @@ module app.admin{
     export class AdminController implements appComponent{
 
         static $inject = [
-
+            'adminDbFactory', 'dbConnectorService'
         ];
 
+
         public componentName;
+        public adminDbFactory;
+        public dbConnectorService;
 
-        constructor() {
-
+        constructor(adminDbFactory, dbConnectorService) {
+            this.adminDbFactory = adminDbFactory;
+            this.dbConnectorService = dbConnectorService;
             this.componentName = 'admin';
         }
 
         submit = function(data) {
-            console.log(data);
+            var self = this;
+            this.dbConnectorService.connect(this.adminDbFactory.postNewUser(), data, function() {
+                console.log('wwww');
+            });
         }
     }
 }
