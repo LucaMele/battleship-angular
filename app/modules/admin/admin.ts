@@ -15,5 +15,9 @@ module app.admin{
 
             this.componentName = 'admin';
         }
+
+        submit = function(data) {
+            console.log(data);
+        }
     }
 }
