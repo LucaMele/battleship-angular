@@ -15,10 +15,12 @@ module app.layout{
         static $componentName = 'layoutController';
         public componentName;
         public isAdmin;
+        public isUser;
 
         constructor($scope, $rootScope, userService) {
             this.componentName = 'layoutController';
             this.isAdmin = !! ~ userService.getIdentity().roles.indexOf("admin");
+            this.isUser = !! ~ userService.getIdentity().roles.indexOf("user");
         }
 
     }
