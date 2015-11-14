@@ -48,7 +48,7 @@ function UserModule(db, assert){
             } else {
                 user.password = utility.md5(user.password);
                 user.roles = [user.role];
-                user.role  = undefined;
+                delete user.role;
                 db.collection('users').insertOne( user , function() {
                     res.format({
                         'application/json': function(){
