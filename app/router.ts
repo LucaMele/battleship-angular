@@ -47,7 +47,7 @@ module app.appRouter
                 .state('site.' + game.identifier , {
                     url: '/game',
                     data: {
-                        roles: ['user']
+                        roles: ['user', 'admin']
                     },
                     views:{
                         "content@":{
@@ -61,7 +61,7 @@ module app.appRouter
                 .state('site.' + home.identifier , {
                     url: '/home',
                     data: {
-                        roles: ['user']
+                        roles: ['user', 'admin']
                     },
                     views:{
                         "content@":{
