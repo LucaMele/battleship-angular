@@ -16,6 +16,9 @@ router.get("/home", function(req, res) {
 router.get("/users/list", function(req, res) {
     modules.exec('usersList', 'get', req, res);
 });
+router.delete("/user/delete/:id", function(req, res) {
+    modules.exec('user', 'delete', req, res);
+});
 router.post("/user", function(req, res) {
     modules.exec('user', 'post', req, res);
 });

@@ -1,3 +1,4 @@
+var mongo = require('mongodb');
 
 /**
  * Created by Luca on 25.10.2015.
@@ -26,6 +27,25 @@ function UserModule(db, assert){
         return !(user.password.length < 3 ||
         user.role.length < 3 ||
         user.username.length < 3);
+    };
+
+    /**
+     * @param req
+     * @param res
+     */
+    this.delete = function(req, res) {
+        var oId = new mongo.ObjectID(req.params.id);
+        db.collection('users').removeOne( { _id: oId } , function(err, doc) {
+            if (err !== null) {
+                res.status(418).send({ error: 'Error while deleting a user' });
+                return;
+            }
+            res.format({
+                'application/json': function(){
+                    res.send({ deleted: true });
+                }
+            });
+        });
     };
 
     /**

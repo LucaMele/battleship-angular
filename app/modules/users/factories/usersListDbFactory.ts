@@ -29,5 +29,16 @@ module app.usersListDbFactory
                 method: 'get'
             }
         };
+
+        /**
+         *
+         * @returns {any}
+         */
+        public deleteUser = function( id ){
+            return {
+                $resource: this.$resource('/user/delete/' + id),
+                method: 'delete'
+            }
+        };
     }
 }

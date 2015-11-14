@@ -50,7 +50,20 @@ module app.usersList{
          * @param id
          */
         public deleteUser = function(id){
-            console.log('delete', id);
+            var self = this;
+            this.dbConnectorService.connect(this.usersListDbFactory.deleteUser(id), {}, function(res) {
+                var i, l;
+                if (res.deleted) {
+                    for (i = 0, l = self.data.length; i < l; i++) {
+                        if (self.data[i].id === id) {
+                            self.data.splice(i, 1);
+                            break;
+                        }
+                    }
+                } else {
+                    console.error('error while deleting user');
+                }
+            });
         }
     }
 
