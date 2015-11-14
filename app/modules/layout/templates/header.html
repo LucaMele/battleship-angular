@@ -3,7 +3,7 @@
         <div class="large-12 columns">
             <div class="nav-bar right">
                 <ul class="button-group">
-                    <li><a ui-sref="site.home" class="button" ui-sref-active="active">Benutzer</a></li>
+                    <li><a ui-sref="site.home" class="button" ui-sref-active="active">Home</a></li>
                     <li><a ui-sref="site.login" class="button" ui-sref-active="active">{{ layoutCtrl.isAdmin || layoutCtrl.isUser ? 'Logout' : 'Login' }}</a></li>
                     <li><a ui-sref="site.game" class="button" ui-sref-active="active">Game</a></li>
                     <li ng-show="layoutCtrl.isAdmin"><a ui-sref="site.home.admin" class="button" ui-sref-active="active">Admin</a></li>
