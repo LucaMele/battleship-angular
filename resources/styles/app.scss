@@ -12,6 +12,10 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
     @import "../../app/modules/login/styles/main";
   }
 
+  .user-box{
+    @import "../../app/modules/users/styles/main";
+  }
+
   // Modules import START
   .home{
     @import "../../app/modules/home/styles/main";

@@ -1,5 +1,14 @@
-<div>
-    <ul ng-repeat="(key, obj) in usrListCtrl.data  | orderBy:'name' ">
-        <li><p ng-class="obj.isNew ? 'is-new': ''">{{obj.name}}</p></li>
-    </ul>
+<div class="user-box">
+    <div ng-repeat="(key, obj) in usrListCtrl.data  | orderBy:'name' ">
+        <div class="row" ng-class="obj.isNew ? 'is-new': ''">
+            <div  class="columns small-9">
+                <p>User</p>
+                <p>{{obj.name}} <span>Roles: <span>{{obj.roles.join(', ')}}</span></span></p>
+            </div>
+            <div class="columns small-3">
+                <button ng-click="usrListCtrl.deleteUser(obj.id)" class="small red button">Delete</button>
+            </div>
+        </div>
+    </div>
 </div>
+

@@ -43,6 +43,14 @@ module app.usersList{
                     }
                 });
             });
+        };
+
+        /**
+         * 
+         * @param id
+         */
+        public deleteUser = function(id){
+            console.log('delete', id);
         }
     }
 
