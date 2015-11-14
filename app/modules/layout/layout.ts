@@ -23,10 +23,11 @@ module app.layout{
             this.isAdmin = !! ~ userService.getIdentity().roles.indexOf("admin");
             this.isUser = !! ~ userService.getIdentity().roles.indexOf("user");
             this.isGuest = !! ~ userService.getIdentity().roles.indexOf("guest");
-            $rootScope.$on('$stateChangeStart', function() {
-                self.isAdmin = !! ~ userService.getIdentity().roles.indexOf("admin");
-                self.isUser = !! ~ userService.getIdentity().roles.indexOf("user");
-                self.isGuest = !! ~ userService.getIdentity().roles.indexOf("guest");
+            $scope.$on('$stateChangeSuccess', function() {
+                var roles = userService.getIdentity().roles;
+                self.isAdmin = !! ~ roles.indexOf("admin");
+                self.isUser = !! ~ roles.indexOf("user");
+                self.isGuest = !! ~ roles.indexOf("guest");
             });
         }
 
