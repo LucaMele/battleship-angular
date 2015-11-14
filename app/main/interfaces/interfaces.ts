@@ -6,6 +6,13 @@ interface appComponent {
     componentName: string;
 }
 
+interface appDirective {
+    componentName: string;
+    restrict: string;
+    replace: boolean;
+    template: any;
+}
+
 interface IStateProvider extends angular.ui.IStateProvider {
     state(config: any): IStateProvider;
     state(name: string, config: any): IStateProvider;

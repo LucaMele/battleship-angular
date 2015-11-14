@@ -1,25 +1,27 @@
-<h1 class="subheader">Users:</h1>
-<div class="usersList">
-    <users-list></users-list>
+<div  ng-controller="AdminController as adminCtrl">
+    <h1 class="subheader">Users:</h1>
+    <div class="usersList">
+        <users-list newdata="{{adminCtrl.data}}"></users-list>
+    </div>
+    <br>
+    <hr>
+    <form ng-submit="adminCtrl.submit(data)">
+        <div class="row">
+            <div class="medium-6 columns"><label for="username">Username:</label></div>
+            <div class="medium-6 columns"><input ng-model="data.username" id="username" placeholder="username"/></div>
+        </div>
+
+        <div class="row">
+            <div class="medium-6 columns"><label for="username">Password:</label></div>
+            <div class="medium-6 columns"><input ng-model="data.password" id="password" type="password" placeholder="password"/></div>
+        </div>
+
+        <div class="row">
+            <div class="medium-6 columns"><label for="username">Rol:</label></div>
+            <div class="medium-6 columns"><select ng-model="data.role"><option value="user" selected>User</option><option value="admin">Admin</option></select></div>
+        </div>
+        <div class="row">
+            <div class="medium-3 columns"><button type="submit">Create</button></div>
+        </div>
+    </form>
 </div>
-<br>
-<hr>
-<form ng-submit="adminCtrl.submit(data)" ng-controller="AdminController as adminCtrl">
-    <div class="row">
-        <div class="medium-6 columns"><label for="username">Username:</label></div>
-        <div class="medium-6 columns"><input ng-model="data.username" id="username" placeholder="username"/></div>
-    </div>
-
-    <div class="row">
-        <div class="medium-6 columns"><label for="username">Password:</label></div>
-        <div class="medium-6 columns"><input ng-model="data.password" id="password" type="password" placeholder="password"/></div>
-    </div>
-
-    <div class="row">
-        <div class="medium-6 columns"><label for="username">Rol:</label></div>
-        <div class="medium-6 columns"><select ng-model="data.role"><option value="user" selected>User</option><option value="admin">Admin</option></select></div>
-    </div>
-    <div class="row">
-        <div class="medium-3 columns"><button type="submit">Create</button></div>
-    </div>
-</form>

@@ -27,7 +27,7 @@ module app.layout{
 
 
     @app.Directive
-    export class LayoutDirective implements appComponent{
+    export class LayoutDirective implements appDirective{
 
         static $inject = [
             '$templateCache'
@@ -37,38 +37,33 @@ module app.layout{
         public $templateCache;
 
         public replace = true;
-        public scope = true;
-        public restrict = 'E';
-        public template = function(jqlite, attributes){
-            return this.$templateCache.get(LayoutDirective.$componentName + '/templates/'+ attributes.type +'.html');
-        };
+        public scope;
+        public restrict;
 
-        public controller = LayoutController;
-        public controllerAs = "layoutCtrl";
+        public controller;
+        public controllerAs;
 
         constructor($templateCache) {
             this.componentName = LayoutDirective.$componentName;
             this.$templateCache = $templateCache;
+            this.replace = true;
+            this.scope = {};
+            this.restrict = 'E';
+            this.controller = LayoutController;
+            this.controllerAs = "layoutCtrl";
             return this;
-            /*return {
-                restrict: 'A',
-                replace: true,
-                require:'ngModel',
-                scope: {
-                    ssn: '=ngModel',
-                    disabled:'=ngDisabled'
-                },
-                //templateUrl points to an external html template.
-                templateUrl: '/myApp/templates/ssnControl.htm'
-            }*/
         }
-
-
 
         /**
          *
-         * @param data
+         * @param jqlite
+         * @param attributes
+         * @returns {any}
          */
-
+        template = function(jqlite, attributes) {
+            return this.$templateCache.get(LayoutDirective.$componentName + '/templates/'+ attributes.type +'.html');
+        };
     }
+
+    angular.module(identifier, []);
 }

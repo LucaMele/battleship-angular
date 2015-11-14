@@ -48,10 +48,10 @@ function UserModule(db, assert){
                 user.password = utility.md5(user.password);
                 user.roles = [user.role];
                 delete user.role;
-                db.collection('users').insertOne( user , function() {
+                db.collection('users').insertOne( user , function(err, success) {
                     res.format({
                         'application/json': function(){
-                            res.send({ usercreated: true });
+                            res.send({ usercreated: true, id: success.insertedId });
                         }
                     });
                 });

@@ -17,13 +17,7 @@ module app.home{
             this.componentName = 'home';
             this.dbConnectorService = dbConnectorService;
             this.homeDbFactory = homeDbFactory;
-
-            // test
-            var self = this;
-            dbConnectorService.connect(this.homeDbFactory.getHome(), {}, function() {
-
-            });
         }
-
     }
+    angular.module(identifier, []);
 }

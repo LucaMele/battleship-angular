@@ -33,4 +33,5 @@ module app.login{
             });
         };
     }
+    angular.module(identifier, []);
 }

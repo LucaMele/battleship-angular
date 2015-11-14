@@ -13,18 +13,26 @@ module app.admin{
         public componentName;
         public adminDbFactory;
         public dbConnectorService;
+        public data;
 
         constructor(adminDbFactory, dbConnectorService) {
             this.adminDbFactory = adminDbFactory;
             this.dbConnectorService = dbConnectorService;
             this.componentName = 'admin';
+            this.data = {};
         }
 
         submit = function(data) {
             var self = this;
-            this.dbConnectorService.connect(this.adminDbFactory.postNewUser(), data, function() {
-                console.log('wwww');
+            this.dbConnectorService.connect(this.adminDbFactory.postNewUser(), data, function(resp) {
+                self.data = {
+                    name: data.username,
+                    id: resp.id,
+                    roles: [data.role]
+                };
             });
         }
     }
+
+    angular.module(identifier, []);
 }

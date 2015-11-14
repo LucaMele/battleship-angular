@@ -7,25 +7,25 @@ module app.usersList{
 
     export var identifier:string = 'usersList';
 
-    @app.Controller
     class UsersListController implements appComponent{
 
         static $inject = [
-            'dbConnectorService', 'usersListDbFactory'
+            'dbConnectorService', 'usersListDbFactory', '$scope'
         ];
         static $componentName = 'usersListController';
         public componentName;
         public dbConnectorService;
         public usersListDbFactory;
         public data;
+        public $scope;
 
-        constructor(dbConnectorService, usersListDbFactory) {
+        constructor(dbConnectorService, usersListDbFactory, $scope) {
             this.componentName = 'usersListController';
             this.data = {};
+            this.$scope = $scope;
             this.dbConnectorService = dbConnectorService;
             this.usersListDbFactory = usersListDbFactory;
             this.getUsers();
-            console.log('dddd');
         }
 
         /**
@@ -35,33 +35,51 @@ module app.usersList{
             var self = this;
             this.dbConnectorService.connect(this.usersListDbFactory.getUsers(), {}, function(data) {
                 self.data = data.list;
+                self.$scope.$watch("newdata", function(newData) {
+                    newData = JSON.parse(newData);
+                    if (typeof newData.name === 'string') {
+                        newData.isNew = true;
+                        self.data.push(newData);
+                    }
+                });
             });
         }
     }
 
     @app.Directive
-    export class UsersListDirective implements appComponent{
+    export class UsersListDirective implements appDirective{
 
         static $inject = [
             '$templateCache'
         ];
 
         static $componentName = 'usersList';
+
         public componentName;
         public $templateCache;
 
-        public replace = true;
-        public scope = true;
-        public restrict = 'E';
-        public template = function(jqlite, attributes){
-            return this.$templateCache.get('users/templates/index.html');
-        };
-        public controller;
+        public replace;
+        public scope;
+        public restrict;
 
-        constructor($templateCache) {
+        public controller;
+        public controllerAs;
+        public bindToController;
+
+        constructor($templateCache: angular.ITemplateCacheService) {
             this.componentName = UsersListDirective.$componentName;
             this.$templateCache = $templateCache;
+            this.replace = true;
+            this.scope = { newdata: "@newdata" };
+            this.restrict = 'E';
+            this.controller = UsersListController;
+            this.controllerAs = 'usrListCtrl';
             return this;
         }
+
+        template = function(jqlite, attributes){
+            return this.$templateCache.get('users/templates/index.html');
+        }
     }
+    angular.module(identifier, []);
 }

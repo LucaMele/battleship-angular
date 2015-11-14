@@ -1,5 +1,5 @@
-<div ng-controller="usersListController as usrListCtrl">
-    <ul ng-repeat="(key, obj) in usrListCtrl.data">
-        <li>{{obj.name}}</li>
+<div>
+    <ul ng-repeat="(key, obj) in usrListCtrl.data  | orderBy:'name' ">
+        <li><p ng-class="obj.isNew ? 'is-new': ''">{{obj.name}}</p></li>
     </ul>
 </div>
