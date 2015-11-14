@@ -6,7 +6,6 @@ module app.layout{
     export var identifier:string = 'layout';
 
     class LayoutController implements appComponent{
-
         static $inject = [
             '$scope',
             '$rootScope',
@@ -16,12 +15,39 @@ module app.layout{
         public componentName;
         public isAdmin;
         public isUser;
+        public isGuest;
 
         constructor($scope, $rootScope, userService) {
+            var self = this;
             this.componentName = 'layoutController';
             this.isAdmin = !! ~ userService.getIdentity().roles.indexOf("admin");
             this.isUser = !! ~ userService.getIdentity().roles.indexOf("user");
+            this.isGuest = !! ~ userService.getIdentity().roles.indexOf("guest");
+            $rootScope.$on('$stateChangeStart', function() {
+                self.isAdmin = !! ~ userService.getIdentity().roles.indexOf("admin");
+                self.isUser = !! ~ userService.getIdentity().roles.indexOf("user");
+                self.isGuest = !! ~ userService.getIdentity().roles.indexOf("guest");
+            });
         }
+
+        /**
+         *
+         * @param roles
+         * @returns {boolean}
+         */
+        isToShowAs = function(roles) {
+            var isVisible = false;
+            if (this.isAdmin && !! ~ roles.indexOf('admin')) {
+                return true;
+            }
+            if (this.isUser && !! ~ roles.indexOf('user')) {
+                isVisible = true;
+            }
+            if (this.isGuest && !! ~ roles.indexOf('guest')) {
+                isVisible = true;
+            }
+            return isVisible;
+        };
 
     }
 
