@@ -35,7 +35,6 @@ function UserModule(db, assert){
      */
     this.post = function(req, res) {
         var user = req.body;
-
         if(!validation(user)) {
             res.status(418).send({ error: 'form validation falied' });
             return;

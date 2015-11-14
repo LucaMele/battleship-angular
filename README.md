@@ -25,3 +25,11 @@ So now you can start the server by executing the `index.js` as npm server (in we
 Now you sould see the app under http://localhost:3000
 
 Keep aware that python (https://www.python.org) is required on your system before running npm install!
+
+
+## First access, temp admin
+
+If there are no user yet in the db, first user is allowed to access with the user `admin` and password `admin`. 
+
+As soon as a new created users exists, admin:admin will never be allowed again in the system. So please be
+careful when creating the first user and give him admin rights, otherwise the user administration section is never accessible!
