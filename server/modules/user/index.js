@@ -54,7 +54,7 @@ function UserModule(db, assert){
                             res.send({ usercreated: true });
                         }
                     });
-                })
+                });
             }
         });
     };
