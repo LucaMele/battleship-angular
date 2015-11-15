@@ -41,7 +41,7 @@ module app.game{
                 }
                 self.boardWidth = {
                     // * 2 because of border width
-                    width: boardCellsH * cellW
+                    width: boardCellsW * cellW
                 };
                 self.cells = tmp;
 
