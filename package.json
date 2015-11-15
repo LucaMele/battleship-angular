@@ -22,6 +22,6 @@
   "description": "Group 9 CAS_FEE final project with angular.js",
   "devDependencies": {},
   "scripts": {
-    "postinstall": "bower cache clean && bower install"
+    "postinstall": "bower cache clean && bower install && gulp"
   }
 }
