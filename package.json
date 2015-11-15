@@ -29,6 +29,6 @@
   "devDependencies": {},
   "scripts": {
     "start" : "node server.js",
-    "postinstall": "gulp"
+    "postinstall": "bower cache clean && bower install"
   }
 }
