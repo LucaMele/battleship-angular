@@ -5,7 +5,7 @@
     "angular": "~1.4.7",
     "angular-ui-router": "~0.2.15",
     "foundation": "~5.5.3",
-    "toastr": "~2.1.2"
+    "angular-toastr": "~1.6.0"
   },
   "devDependencies": {
     "angular-resource": "~1.4.7"
