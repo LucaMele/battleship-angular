@@ -5,7 +5,7 @@ var config = {
     availableModules: ['login', 'home', 'usersList', 'user', 'game'],
     db: {
         name: 'gZ3-m__battleship',
-        host: 'localhost',
+        host: 'lucamele.cloudapp.net',
         port: 27017
     }
 };
