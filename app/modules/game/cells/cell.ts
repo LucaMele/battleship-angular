@@ -17,5 +17,17 @@ module app.game.cells{
                 height: height
             };
         }
+
+        /**
+         *
+         * @returns {{width: any, height: any, cellStyle: (any|*|{width: number, height: number})}}
+         */
+        getAttributes = function(){
+            return {
+                width: this.width,
+                height: this.height,
+                cellStyle: this.cellStyle
+            }
+        }
     }
 }

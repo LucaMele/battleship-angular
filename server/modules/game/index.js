@@ -8,9 +8,15 @@ function GameModule(db, assert){
         w: 15,
         h: 15,
         cell: {
-            w: 35,
-            h: 35
-        }
+            w: 40,
+            h: 40
+        },
+        ships: [
+            {name: 'destroyer', size: 2},
+            {name: 'mian', size: 3},
+            {name: 'scoll', size: 2},
+            {name: 'ddfv', size: 1}
+        ]
     };
 
     this.get = function(req, res) {

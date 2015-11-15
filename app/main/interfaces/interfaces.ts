@@ -10,7 +10,8 @@ interface cell {
     width: number;
     height: number;
     cellStyle: any;
-    cellClassName: string
+    cellClassName: string;
+    getAttributes();
 }
 
 interface appDirective {

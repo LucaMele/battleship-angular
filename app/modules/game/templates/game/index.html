@@ -1,3 +1,19 @@
-<div class="board" ng-style="gameBoardCtrl.boardWidth">
-    <div ng-repeat="cell in gameBoardCtrl.cells" class="board-cell" ng-class="cell.cellClassName" ng-style="cell.cellStyle"></div>
+<div>
+    <div class="board" ng-style="gameBoardCtrl.boardWidth">
+        <div
+            ng-repeat="cell in gameBoardCtrl.cells"
+            class="board-cell"
+            ng-click="gameBoardCtrl.putShipOnCell(cell, $index)"
+            ng-class="cell.cellClassName"
+            ng-style="cell.cellStyle" >
+        </div>
+    </div>
+    <div class="ships" ng-repeat="ship in gameBoardCtrl.ships">
+        <div class="ship"
+             ng-class="ship.active ? 'active': ''"
+             ng-style="ship.style"
+             ng-click="gameBoardCtrl.selectShip($index)">
+                {{ship.name}}
+        </div>
+    </div>
 </div>

@@ -1,14 +1,47 @@
+@mixin transitionAll($duration){
+  -webkit-transition: all $duration ease-in-out;
+  -moz-transition: all $duration ease-in-out;
+  -o-transition: all $duration ease-in-out;
+  transition: all $duration ease-in-out;
+}
+
+$shipBg: #959595;
+$water: #6282ff;
+
 .board{
-  float:left;
+  float: left;
+}
+.ships{
+  float: right;
 }
 .board-cell{
-  border: 1px solid #000066;
   float: left;
   cursor: pointer;
 }
 .water-cell{
-  background-color: #9ed7ff;
+  @include transitionAll(0.1s);
+  background-color: $water;
+  &:hover{
+    background-color: scale-color($water, $lightness: 30%);
+  }
 }
 .ship-cell{
-  background-color: #959595;
+  background-color: $shipBg;
+}
+.ship{
+  background-color: $shipBg;
+  margin: 10px;
+  display: block;
+  overflow: hidden;
+  padding-left: 2px;
+  cursor: pointer;
+  color: #FFF;
+  font-weight: bold;
+  &:hover{
+    background-color: scale-color($shipBg, $lightness: 30%);
+  }
+  &.active{
+    background-color: dimgrey;
+    border: 2px solid darkgreen;
+  }
 }
