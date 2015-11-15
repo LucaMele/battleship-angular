@@ -35,7 +35,11 @@ module app.usersList{
             var self = this;
             this.dbConnectorService.connect(this.usersListDbFactory.getUsers(), {}, function(data) {
                 self.data = data.list;
-                self.$scope.$watch("newdata", function(newData) {
+                var unbind = self.$scope.$watch("newdata", function(newData) {
+                    if (!newData) {
+                        unbind();
+                        return;
+                    }
                     newData = JSON.parse(newData);
                     if (typeof newData.name === 'string') {
                         newData.isNew = true;
