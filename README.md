@@ -33,3 +33,13 @@ If there are no user yet in the db, first user is allowed to access with the use
 
 As soon as a new created users exists, admin:admin will never be allowed again in the system. So please be
 careful when creating the first user. Give him admin rights, otherwise the administration section is not accessible!
+
+Database configuartion is found under server/config.js
+
+default database setting is: 
+
+`db: {
+    name: 'gZ3-m__battleship', // Database name
+    host: 'localhost',
+    port: 27017
+}`
