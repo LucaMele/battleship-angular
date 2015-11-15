@@ -1,7 +1,7 @@
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 @import "../../bower_components/foundation/scss/foundation";
-@import "../../bower_components/toastr/toastr.scss";
+@import "/lib/angular-toastr/dist/angular-toastr.min.css";
 
 @import "framework/page";
 .app{
