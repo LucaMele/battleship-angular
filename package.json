@@ -1,7 +1,6 @@
 {
   "name": "battleship-angular",
   "version": "1.0.0",
-  "main": "server.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/LucaMele/battleship-angular.git"
@@ -28,9 +27,6 @@
   },
   "devDependencies": {},
   "scripts": {
-    "install": "npm install",
-    "start" : "node server.js",
     "postinstall": "bower cache clean && bower install"
-  },
-  "engines" : { "npm" : "~2.7.4" }
+  }
 }
