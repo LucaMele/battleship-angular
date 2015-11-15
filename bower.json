@@ -4,7 +4,8 @@
   "dependencies": {
     "angular": "~1.4.7",
     "angular-ui-router": "~0.2.15",
-    "foundation": "~5.5.3"
+    "foundation": "~5.5.3",
+    "toastr": "~2.1.2"
   },
   "devDependencies": {
     "angular-resource": "~1.4.7"

@@ -1,12 +1,14 @@
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 @import "../../bower_components/foundation/scss/foundation";
+@import "../../bower_components/toastr/toastr.scss";
 
 @import "framework/page";
 .app{
   @import "framework/helpers";
 
   @import "../../app/modules/layout/styles/main";
+  @import "../../app/modules/admin/styles/main";
 
   .login{
     @import "../../app/modules/login/styles/main";

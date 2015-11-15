@@ -24,6 +24,7 @@ module app.admin{
 
         submit = function(data) {
             var self = this;
+            console.log(this.data.role);
             this.dbConnectorService.connect(this.adminDbFactory.postNewUser(), data, function(resp) {
                 self.data = {
                     name: data.username,
