@@ -1,7 +1,8 @@
 .board{
   float:left;
 }
-.side{
-  float:right;
-  margin-left:20px;
+.board-cell{
+  border: 1px solid #000066;
+  float: left;
+  cursor: pointer;
 }

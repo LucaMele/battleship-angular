@@ -4,15 +4,19 @@
  */
 function GameModule(db, assert){
 
-    var gameMenu = [
-        { 'game': 'start the game' },
-        { 'logout': 'Logout' }
-    ];
+    var gameMap = {
+        w: 15,
+        h: 15,
+        cell: {
+            w: 35,
+            h: 35
+        }
+    };
 
     this.get = function(req, res) {
         res.format({
             'application/json': function(){
-                res.send({ gameMenu: gameMenu });
+                res.send(gameMap);
             }
         });
     };

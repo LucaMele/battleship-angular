@@ -53,8 +53,7 @@ module app.appRouter
                         "content@":{
                             templateProvider: function($templateCache: angular.ITemplateCacheService){
                                 return $templateCache.get(game.identifier + '/templates/index.html');
-                            },
-                            controller: game.GameController
+                            }
                         }
                     }
                 })

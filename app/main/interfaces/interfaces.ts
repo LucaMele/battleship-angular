@@ -6,6 +6,12 @@ interface appComponent {
     componentName: string;
 }
 
+interface cell {
+    width: number;
+    height: number;
+    cellStyle: any;
+}
+
 interface appDirective {
     componentName: string;
     restrict: string;
