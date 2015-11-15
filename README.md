@@ -38,10 +38,10 @@ Database configuartion is found under server/config.js
 
 default database setting is: 
 
-`db: {
-    name: 'gZ3-m__battleship',
-    
-    host: 'localhost',
-    
+```javascript
+db: {
+    name: 'gZ3-m__battleship',    
+    host: 'localhost',    
     port: 27017
-}`
+}
+```
