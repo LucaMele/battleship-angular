@@ -4,7 +4,7 @@ module app.game.cells{
         constructor(width : number, height : number) {
             super(height, width);
             this.cellName = 'water';
-            this.cellStyle['background-color'] = '#89A4FF';
+            this.cellClassName = 'water-cell';
         }
     }
 }

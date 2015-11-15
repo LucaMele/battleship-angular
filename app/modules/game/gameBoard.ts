@@ -33,11 +33,15 @@ module app.game{
                 var tmp = [];
                 var i;
                 for (i = 0; i < (boardCellsH * boardCellsW); i++) {
-                    tmp.push(new cells.Water(cellW, cellH));
+                    if (i === 10 || i === 11) {
+                        tmp.push(new cells.Ship(cellW, cellH));
+                    } else {
+                        tmp.push(new cells.Water(cellW, cellH));
+                    }
                 }
                 self.boardWidth = {
                     // * 2 because of border width
-                    width: boardCellsW * cellW
+                    width: boardCellsH * cellW
                 };
                 self.cells = tmp;
 
