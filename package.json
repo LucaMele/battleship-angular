@@ -1,7 +1,7 @@
 {
   "name": "battleship-angular",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/LucaMele/battleship-angular.git"
