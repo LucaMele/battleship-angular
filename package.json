@@ -23,5 +23,9 @@
   "devDependencies": {},
   "scripts": {
     "postinstall": "bower cache clean && bower install && gulp"
+  },
+  "engines" : { 
+    "npm": "3.3.9",
+    "node": "0.10.26"
   }
 }
