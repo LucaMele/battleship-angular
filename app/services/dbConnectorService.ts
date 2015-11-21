@@ -53,7 +53,7 @@ module app.dbConnectorService
          */
         private error = function(response) {
             if(response.status === 401 || response.status === 403) {
-                this.$state.go('site.login');
+                this.$state.go('login');
             }
         };
 

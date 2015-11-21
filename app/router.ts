@@ -13,11 +13,9 @@ module app.appRouter
             $urlRouterProvider: angular.ui.IUrlRouterProvider
         ){
             $stateProvider
-                .state('site', {
-                    'abstract': true
-                })
-                .state('site.' + admin.identifier , {
+                .state(admin.identifier , {
                     url: '/admin',
+                    parent: 'home',
                     data: {
                         roles: ['admin']
                     },
@@ -28,8 +26,9 @@ module app.appRouter
                         }
                     }
                 })
-                .state('site.' + login.identifier , {
+                .state(login.identifier , {
                     url: '/login',
+                    parent: 'home',
                     data: {
                         roles: []
                     },
@@ -40,8 +39,9 @@ module app.appRouter
                         }
                     }
                 })
-                .state('site.' + game.identifier , {
+                .state(game.identifier , {
                     url: '/game',
+                    parent: 'home',
                     data: {
                         roles: ['user', 'admin']
                     },
@@ -51,7 +51,7 @@ module app.appRouter
                         }
                     }
                 })
-                .state('site.' + home.identifier , {
+                .state(home.identifier , {
                     url: '/home',
                     data: {
                         roles: ['user', 'admin']

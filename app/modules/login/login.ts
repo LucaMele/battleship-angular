@@ -29,7 +29,7 @@ module app.login{
         public submit = function(data) {
             var self = this;
             this.userService.authenticateUser(data, this.loginDbFactory.postLogin(), function() {
-                self.authService.navigateTo('site.home');
+                self.authService.navigateTo('home');
             });
         };
     }
