@@ -29,20 +29,21 @@ module app.admin{
         submit = function(data) {
             var self = this;
             if (!data.role) {
-                this.toastr.warning('Error', 'Please select a role');
+                this.toastr.warning('Please select a role', 'Warning');
             }else {
                 this.dbConnectorService.connect(this.adminDbFactory.postNewUser(), data, function (resp) {
-                    console.log(resp);
-                    console.log(self.errorFactory.getError(resp.data.error));
-                    // @todo if no error, procede
-                    self.data = {
-                        name: data.username,
-                        id: resp.id,
-                        roles: [data.role]
+                    if(self.errorFactory.getError(resp.data.error)){
+                        self.toastr.warning(self.errorFactory.getError(resp.data.error),' Warning');
+                    } else {
+                        // if no error, procede
+                        self.data = {
+                            name: data.username,
+                            id: resp.id,
+                            roles: [data.role]
+                        };
                     };
                 });
             }
-
         }
     }
 
