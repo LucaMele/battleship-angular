@@ -16,16 +16,14 @@ module app.appRouter
                 .state('site', {
                     'abstract': true
                 })
-                .state('site.' + home.identifier + '.' + admin.identifier , {
+                .state('site.' + admin.identifier , {
                     url: '/admin',
                     data: {
                         roles: ['admin']
                     },
                     views:{
                         "content@":{
-                            templateProvider: function($templateCache: angular.ITemplateCacheService){
-                                return $templateCache.get(admin.identifier + '/templates/index.html');
-                            },
+                            templateUrl: admin.identifier + '/templates/index.html',
                             controller: admin.AdminController
                         }
                     }
@@ -37,9 +35,7 @@ module app.appRouter
                     },
                     views:{
                         "content@":{
-                            templateProvider: function($templateCache: angular.ITemplateCacheService){
-                                return $templateCache.get(login.identifier + '/templates/index.html');
-                            },
+                            templateUrl: login.identifier + '/templates/index.html',
                             controller: login.LoginController
                         }
                     }
@@ -51,9 +47,7 @@ module app.appRouter
                     },
                     views:{
                         "content@":{
-                            templateProvider: function($templateCache: angular.ITemplateCacheService){
-                                return $templateCache.get(game.identifier + '/templates/index.html');
-                            }
+                            templateUrl: game.identifier + '/templates/index.html',
                         }
                     }
                 })
@@ -64,9 +58,7 @@ module app.appRouter
                     },
                     views:{
                         "content@":{
-                            templateProvider: function($templateCache: angular.ITemplateCacheService){
-                                return $templateCache.get(home.identifier + '/templates/index.html');
-                            },
+                            templateUrl: home.identifier + '/templates/index.html',
                             controller: home.HomeController
                         }
                     }

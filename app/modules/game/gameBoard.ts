@@ -130,6 +130,7 @@ module app.game{
             this.$templateCache = $templateCache;
             this.replace = true;
             this.scope = {};
+            this.bindToController = true;
             this.restrict = 'E';
             this.controller = GameBoardController;
             this.controllerAs = 'gameBoardCtrl';

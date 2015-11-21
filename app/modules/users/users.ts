@@ -89,6 +89,7 @@ module app.usersList{
 
         public controller;
         public controllerAs;
+        public transclude;
         public bindToController;
 
         constructor($templateCache: angular.ITemplateCacheService) {
@@ -97,6 +98,8 @@ module app.usersList{
             this.replace = true;
             this.scope = { newdata: "@newdata" };
             this.restrict = 'E';
+            this.transclude = true;
+            this.bindToController = true;
             this.controller = UsersListController;
             this.controllerAs = 'usrListCtrl';
             return this;
