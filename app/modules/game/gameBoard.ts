@@ -96,12 +96,12 @@ module app.game{
                 if (this.isHorizontal) {
                     if (!((index + i) % this.columns)) {
                         this.toastr.warning(ERROR_MEX2,' Warning');
-                        return;
+                        return false;
                     }
                 } else {
                     if (((index + i * this.columns) > tmpCells.length)) {
                         this.toastr.warning(ERROR_MEX2,' Warning');
-                        return;
+                        return false;
                     }
                 }
             }
@@ -165,6 +165,9 @@ module app.game{
                         return;
                     }
                     tempShip = this._putOnMap(tempShip, attr, tmpCells, index);
+                    if (!tempShip) {
+                        return;
+                    }
                 }
                 this.ships[this.selectedShip] = tempShip;
             }

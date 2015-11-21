@@ -29,7 +29,7 @@ $water: #6282ff;
   background-color: $shipBg;
 }
 .buttons{
-  width: 30%;
+  width: 35%;
   float: right;
   button{
     &.active{
@@ -39,6 +39,7 @@ $water: #6282ff;
 }
 
 .ship{
+
   background-color: $shipBg;
   margin: 10px;
   display: block;
