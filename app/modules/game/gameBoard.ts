@@ -16,8 +16,10 @@ module app.game{
         private gameDbFactory;
         public cells;
         public boardWidth;
+        public isHorizontal;
         public ships;
         public columns : number;
+        public rows : number;
         public selectedShip;
         public toastr;
 
@@ -28,8 +30,11 @@ module app.game{
             this.cells = [];
             this.boardWidth = {};
             this.ships = [];
+            this.selectedShip = false;
+            this.isHorizontal = true;
             this.toastr = toastr;
             this.columns = 0;
+            this.rows = 0;
             this._getMap();
         }
 
@@ -58,6 +63,7 @@ module app.game{
                 }, data.ships[i].name));
             }
             this.columns = boardCellsW;
+            this.rows = boardCellsH;
             this.boardWidth = {
                 width: boardCellsW * cellW
             };
@@ -73,6 +79,42 @@ module app.game{
             this.dbConnectorService.connect(this.gameDbFactory.getGame(), {}, function(data) {
                 self._handleMap.call(self, data);
             });
+        };
+
+        /**
+         *
+         * @param tempShip
+         * @param attr
+         * @param tmpCells
+         * @param index
+         * @returns {any}
+         * @private
+         */
+        private _putOnMap = function(tempShip, attr, tmpCells, index) {
+            var i;
+            for (i = 0; i < tempShip.size; i++) {
+                if (this.isHorizontal) {
+                    if (!((index + i) % this.columns)) {
+                        this.toastr.warning(ERROR_MEX2,' Warning');
+                        return;
+                    }
+                } else {
+                    if (((index + i * this.columns) > tmpCells.length)) {
+                        this.toastr.warning(ERROR_MEX2,' Warning');
+                        return;
+                    }
+                }
+            }
+            tempShip.set('placed', true);
+            tempShip.set('active', false);
+            for (i = 0; i < tempShip.size; i++) {
+                if (this.isHorizontal) {
+                    tmpCells[index + i] = new cells.Ship(attr.width, attr.height, attr.index);
+                } else {
+                    tmpCells[index + i * this.columns] = new cells.Ship(attr.width, attr.height, attr.index);
+                }
+            }
+            return tempShip;
         };
 
         /**
@@ -122,20 +164,14 @@ module app.game{
                         this.toastr.warning(ERROR_MEX2,' Warning');
                         return;
                     }
-                    for (i = 0; i < tempShip.size; i++) {
-                        if (!((index + i) % this.columns)) {
-                            this.toastr.warning(ERROR_MEX2,' Warning');
-                            return;
-                        }
-                    }
-                    tempShip.set('placed', true);
-                    tempShip.set('active', false);
-                    for (i = 0; i < tempShip.size; i++) {
-                        tmpCells[index + i] = new cells.Ship(attr.width, attr.height, attr.index);
-                    }
+                    tempShip = this._putOnMap(tempShip, attr, tmpCells, index);
                 }
                 this.ships[this.selectedShip] = tempShip;
             }
+        };
+
+        public changeOrientation = function(orientation) {
+            this.isHorizontal = orientation === 'horizontal';
         };
     }
 

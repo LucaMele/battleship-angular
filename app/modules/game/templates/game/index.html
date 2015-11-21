@@ -6,7 +6,12 @@
             ng-click="gameBoardCtrl.putShipOnCell(cell, $index)"
             ng-class="cell.cellClassName"
             ng-style="cell.cellStyle" >
+            {{cell.index}}
         </div>
+    </div>
+    <div class="buttons">
+        <button ng-click="gameBoardCtrl.changeOrientation('horizontal')" ng-class="gameBoardCtrl.isHorizontal ? 'active': ''">Horizontal</button>
+        <button ng-click="gameBoardCtrl.changeOrientation('vertical')" ng-class="!gameBoardCtrl.isHorizontal ? 'active': ''">Vertical</button>
     </div>
     <div class="ships" ng-repeat="ship in gameBoardCtrl.ships">
         <div class="ship"

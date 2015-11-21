@@ -28,6 +28,16 @@ $water: #6282ff;
 .ship-cell{
   background-color: $shipBg;
 }
+.buttons{
+  width: 30%;
+  float: right;
+  button{
+    &.active{
+      background-color: #970b0e;
+    }
+  }
+}
+
 .ship{
   background-color: $shipBg;
   margin: 10px;
