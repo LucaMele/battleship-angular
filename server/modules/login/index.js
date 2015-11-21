@@ -17,7 +17,7 @@ function LoginModule(db, assert){
         cursor.count(function(err, count) {
             assert.equal(null, err);
             if (count === 0) {
-                res.status(401).send({ error: 'unauthorized!' });
+                res.status(401).send({ error: 'unauthorized' });
             } else {
                 cursor.forEach(function(doc){
                     var auth = utility.md5(doc._id.toString() + ''+ utility.md5(Date.now() + 'gdjnxhzw')) + utility.md5(Date   .now() + '12fgh');

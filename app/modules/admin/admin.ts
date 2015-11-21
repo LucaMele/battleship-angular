@@ -6,19 +6,21 @@ module app.admin{
     export class AdminController implements appComponent{
 
         static $inject = [
-            'adminDbFactory', 'dbConnectorService','toastr'
+            'adminDbFactory', 'dbConnectorService','toastr', 'errorFactory'
         ];
 
 
         public componentName;
         public adminDbFactory;
         public dbConnectorService;
+        public errorFactory;
         public data;
         public toastr;
 
-        constructor(adminDbFactory, dbConnectorService, toastr) {
+        constructor(adminDbFactory, dbConnectorService, toastr, errorFactory) {
             this.adminDbFactory = adminDbFactory;
             this.dbConnectorService = dbConnectorService;
+            this.errorFactory = errorFactory;
             this.componentName = 'admin';
             this.data = {};
             this.toastr = toastr;
@@ -30,6 +32,9 @@ module app.admin{
                 this.toastr.warning('Error', 'Please select a role');
             }else {
                 this.dbConnectorService.connect(this.adminDbFactory.postNewUser(), data, function (resp) {
+                    console.log(resp);
+                    console.log(self.errorFactory.getError(resp.data.error));
+                    // @todo if no error, procede
                     self.data = {
                         name: data.username,
                         id: resp.id,

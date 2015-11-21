@@ -37,7 +37,7 @@ function UserModule(db, assert){
         var oId = new mongo.ObjectID(req.params.id);
         db.collection('users').removeOne( { _id: oId } , function(err, doc) {
             if (err !== null) {
-                res.status(418).send({ error: 'Error while deleting a user' });
+                res.status(418).send({ error: 'error_code_3' });
                 return;
             }
             res.format({
@@ -56,14 +56,14 @@ function UserModule(db, assert){
     this.post = function(req, res) {
         var user = req.body;
         if(!validation(user)) {
-            res.status(418).send({ error: 'form validation falied' });
+            res.status(418).send({ error: 'error_code_2' });
             return;
         }
         var cursor = db.collection('users').find({username: user.username}).limit(1);
         cursor.count(function(err, count) {
             assert.equal(null, err);
             if (count > 0) {
-                res.status(418).send({ error: 'User already registered' });
+                res.status(418).send({ error: 'error_code_1' });
             } else {
                 user.password = utility.md5(user.password);
                 user.roles = [user.role];

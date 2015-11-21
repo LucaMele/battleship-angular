@@ -65,8 +65,8 @@ module app.dbConnectorService
          */
         public connect = function(resource, data, callback) {
             var self = this;
-            var error = function(resp){ self.error(resp) };
-            var success = function(resp){ self.error(resp) };
+            var error = function(resp){ self.error(resp); callback(resp); };
+            var success = function(resp){ self.error(resp); };
             switch (resource.method) {
                 case 'get':
                     resource.$resource.get(null, success, error).$promise.then(callback);
@@ -91,7 +91,7 @@ module app.dbConnectorService
          */
         public save = function($resource, data, callback) {
             var self = this;
-            var error = function(){ self.error(arguments) };
+            var error = function(resp){ self.error(arguments); callback(resp); };
             var success = function(){ self.error(arguments) };
             if (typeof $resource.save === 'function' && typeof data === 'object') {
                 $resource.save(data, success, error).$promise.then(callback);
