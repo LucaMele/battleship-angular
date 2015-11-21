@@ -70,7 +70,7 @@ module app.authService
          *
          */
         public isUnathorized = function() {
-            this.$state.go('site.login');
+            this.$state.go('login');
         };
     }
 }

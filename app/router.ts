@@ -28,7 +28,6 @@ module app.appRouter
                 })
                 .state(login.identifier , {
                     url: '/login',
-                    parent: 'home',
                     data: {
                         roles: []
                     },
