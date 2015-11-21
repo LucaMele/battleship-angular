@@ -9,7 +9,7 @@ module app.appRouter
         ];
 
         constructor(
-            $stateProvider: angular.ui.IStateProvider,
+            $stateProvider,
             $urlRouterProvider: angular.ui.IUrlRouterProvider
         ){
             $stateProvider

@@ -44,4 +44,9 @@ $water: #6282ff;
     background-color: dimgrey;
     border: 2px solid darkgreen;
   }
+  &.placed{
+    background-color: lightgrey;
+    font-style: italic;
+    cursor: default;
+  }
 }

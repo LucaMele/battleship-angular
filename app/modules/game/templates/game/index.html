@@ -10,7 +10,7 @@
     </div>
     <div class="ships" ng-repeat="ship in gameBoardCtrl.ships">
         <div class="ship"
-             ng-class="ship.active ? 'active': ''"
+             ng-class="ship.active ? 'active': '' || ship.placed ? 'placed': ''"
              ng-style="ship.style"
              ng-click="gameBoardCtrl.selectShip($index)">
                 {{ship.name}}
