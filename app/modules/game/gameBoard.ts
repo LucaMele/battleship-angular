@@ -24,6 +24,7 @@ module app.game{
         public isHorizontal;
         public ships;
         public isReady;
+        public status_messages;
         public columns : number;
         public rows : number;
         public gameIsActive : boolean;
@@ -41,6 +42,7 @@ module app.game{
             this.boardWidth = {};
             this.ships = [];
             this.selectedShip = false;
+            this.status_messages = 'Game not started yet';
             this.isReady = false;
             this.isHorizontal = true;
             this.compeeter = '';
@@ -196,7 +198,7 @@ module app.game{
             switch (status) {
                 case 'NEW': return STATUS_TEXT1;
                 case 'IDLE': return STATUS_TEXT2;
-                case 'READY': return STATUS_TEXT3 + this.compeeter;
+                case 'READY': this.status_messages = 'Setting things up..'; return STATUS_TEXT3 + this.compeeter;
                 default: return 'status error';
             }
         };

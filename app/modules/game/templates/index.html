@@ -23,10 +23,14 @@
                 {{ship.name}}
             </div>
         </div>
+
         <div class="ready--start">
             <button ng-click="gameBoardCtrl.start()">Search for Free Player and start</button>
         </div>
     </div>
+    <p>
+        {{gameBoardCtrl.status_messages}}
+    </p>
 </div>
 
 

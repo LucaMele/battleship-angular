@@ -52,5 +52,19 @@ module app.GameDbFactory
                 method: 'post'
             }
         };
+
+        /**
+         *
+         * @param id
+         * @returns {{$resource: any, method: string}}
+         */
+        public setTurn = function(id){
+            return {
+                $resource: this.$resource('/game', { id: id }, {
+                    update: { method: 'PUT' }
+                }),
+                method: 'put'
+            }
+        };
     }
 }

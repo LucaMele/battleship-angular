@@ -40,10 +40,6 @@ module app.game.manager{
             this.cells = cells;
             this.dbConnectorService.connect(this.gameDbFactory.saveReady(), {username: username, cells: this.cells}, function(data) {
                 self.idGame = data.idGame;
-                self.board.gameIsActive = true;
-                self.board.isReady = false;
-                self.board.compeeter = data.compeeter;
-                self.board.status = data.status;
                 self.handleStatus(data);
             });
         };
@@ -62,17 +58,19 @@ module app.game.manager{
          * @param data
          */
         handleStatus = function(data) {
+            this.board.gameIsActive = true;
+            this.board.isReady = false;
+            this.board.compeeter = data.compeeter;
+            this.board.status = data.status;
             if (data.status === 'IDLE') {
                 this.continuesCheck();
             } else {
                 this.idGame = data.idGame;
-                this.board.gameIsActive = true;
-                this.board.isReady = false;
-                this.board.compeeter = data.compeeter;
-                this.board.status = data.status;
                 if (this.timer) {
-                    this.$timeout.cancel(self.this);
+                    this.$timeout.cancel(this.timer);
                 }
+                console.log('eeeee');
+                this.turnsHandler = new game.turns.TurnsHandler(this.$timeout, this.board, this.gameDbFactory, data);
             }
         };
 
