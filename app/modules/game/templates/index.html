@@ -1,4 +1,5 @@
 <div class="game">
+    <h2>{{gameBoardCtrl.getStatusText(gameBoardCtrl.status)}}</h2>
     <div ng-class="gameBoardCtrl.isReady ? 'ready': ''">
         <div class="board" ng-style="gameBoardCtrl.boardWidth">
             <div

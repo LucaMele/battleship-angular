@@ -1,4 +1,4 @@
-
+var extend = require('util')._extend;
 /**
  * Created by Luca on 25.10.2015.
  */
@@ -64,7 +64,13 @@ function GameModule(db, assert){
                             assert.equal(null, err);
                             res.format({
                                 'application/json': function(){
-                                    res.send({status: 'READY', idGame: doc._id, join: game.username, host: doc.host});
+                                    res.send({
+                                        status: 'READY',
+                                        idGame: doc._id,
+                                        join: game.username,
+                                        host: doc.host,
+                                        compeeter: game.username === doc.host ? doc.join : doc.host
+                                    });
                                 }
                             });
                         }
@@ -94,15 +100,18 @@ function GameModule(db, assert){
                 });
             } else {
                 cursor.forEach(function(doc){
+                    var map = extend({}, gameMap);
                     if (doc.join === username) {
-                        gameMap.cells = doc.map_join;
-                    } else {
-                        gameMap.cells = doc.map_host;
+                        map.cells = doc.map_join;
+                    } else if(doc.host === username) {
+                        map.cells = doc.map_host;
                     }
-                    gameMap.gameId = doc._id;
+                    map.gameId = doc._id;
+                    map.compeeter = username === doc.host ? doc.join : doc.host;
+                    map.status = doc.status;
                     res.format({
                         'application/json': function(){
-                            res.send(gameMap);
+                            res.send(map);
                         }
                     });
                 });

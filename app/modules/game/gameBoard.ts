@@ -5,12 +5,16 @@ module app.game{
     const ERROR_MEX1 = 'Cell already occupied';
     const ERROR_MEX2 = 'Invalid position';
 
+    const STATUS_TEXT1 = 'Start a new game!';
+    const STATUS_TEXT2 = 'Waiting for someone to join';
+    const STATUS_TEXT3 = 'Game started with ';
+
     @app.Controller
     export class GameBoardController implements appComponent{
         public componentName;
 
         static $inject = [
-            "dbConnectorService", "gameDbFactory", "toastr", "userService"
+            "dbConnectorService", "gameDbFactory", "toastr", "userService", "$timeout"
         ];
 
         private dbConnectorService;
@@ -25,9 +29,11 @@ module app.game{
         public gameIsActive : boolean;
         public selectedShip;
         public game;
+        public compeeter;
+        public status;
         public toastr;
 
-        constructor(dbConnectorService, gameDbFactory, toastr, userService) {
+        constructor(dbConnectorService, gameDbFactory, toastr, userService, $timeout) {
             this.componentName = 'gameBoardController';
             this.dbConnectorService = dbConnectorService;
             this.gameDbFactory = gameDbFactory;
@@ -37,10 +43,12 @@ module app.game{
             this.selectedShip = false;
             this.isReady = false;
             this.isHorizontal = true;
+            this.compeeter = '';
             this.gameIsActive = false;
+            this.status = 'NEW';
             this.toastr = toastr;
             this.columns = 0;
-            this.game = new game.manager.GameExecutionController(dbConnectorService, gameDbFactory, userService);
+            this.game = new game.manager.GameExecutionController(this, dbConnectorService, gameDbFactory, userService, $timeout);
             this.rows = 0;
             this._getMap();
         }
@@ -55,14 +63,17 @@ module app.game{
                 cellW = +data.cell.w,
                 newShip,
                 cellH = +data.cell.h,
-                cellsSet = false;
+                cellsSet = false,
+                tmpCells = [], tmpShips = [];
 
-            var tmpCells = [], tmpShips = [];
             var i;
-
             if (data.cells) {
                 cellsSet = true;
                 tmpCells = data.cells;
+                this.status = data.status;
+                if (data.status === 'READY') {
+                    this.compeeter = data.compeeter;
+                }
             } else {
                 for (i = 0; i < (boardCellsH * boardCellsW); i++) {
                     tmpCells.push(new cells.Water(cellW, cellH, i));
@@ -175,6 +186,15 @@ module app.game{
                     }
                 }
                 this.ships = tmpShips;
+            }
+        };
+
+        getStatusText = function(status) {
+            switch (status) {
+                case 'NEW': return STATUS_TEXT1;
+                case 'IDLE': return STATUS_TEXT2;
+                case 'READY': return STATUS_TEXT3 + this.compeeter;
+                default: return 'status error';
             }
         };
 
