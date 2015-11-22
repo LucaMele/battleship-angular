@@ -69,6 +69,7 @@ module app.game.manager{
                 if (this.timer) {
                     this.$timeout.cancel(this.timer);
                 }
+
                 this.turnsHandler = new game.turns.TurnsHandler(
                     this.$timeout, this.board, this.gameDbFactory, this.dbConnectorService, data
                 );

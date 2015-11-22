@@ -16,14 +16,23 @@ module app.game.turns{
             this.data = data;
             this.dbConnectorService = dbConnectorService;
             this.board = board;
+
             this.gameDbFactory = gameDbFactory;
 
             this.setupFirstTurn();
         }
 
+        /**
+         *
+         */
         setupFirstTurn = function() {
-            this.dbConnectorService.connect(this.gameDbFactory.setTurn(this.data.idGame), {}, function(data) {
+            var self = this;
 
+            this.dbConnectorService.connect(this.gameDbFactory.setTurn(this.data.idGame), {}, function(data) {
+                console.log(self.board.status_messages)
+                self.board.status_messages = 'Is turn of ' + data.isTurn;
+
+                console.log(self.board.status_messages)
             });
         };
     }

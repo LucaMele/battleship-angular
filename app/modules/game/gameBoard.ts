@@ -201,7 +201,7 @@ module app.game{
             switch (status) {
                 case 'NEW': return STATUS_TEXT1;
                 case 'IDLE': return STATUS_TEXT2;
-                case 'READY': this.status_messages = 'Setting things up..'; return STATUS_TEXT3 + this.compeeter;
+                case 'READY': return STATUS_TEXT3 + this.compeeter;
                 default: return 'status error';
             }
         };
