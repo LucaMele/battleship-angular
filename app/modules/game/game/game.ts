@@ -4,21 +4,28 @@ module app.game.manager{
     export var identifier:string = 'gameManager';
 
     export class GameExecutionController{
-
-
-
         private dbConnectorService;
         private gameDbFactory;
         private userService;
         private $timeout;
         private board;
+        private timer;
 
-        constructor(board, dbConnectorService, gameDbFactory, userService, $timeout) {
+        constructor($scope, board, dbConnectorService, gameDbFactory, userService, $timeout) {
+            var self = this;
             this.dbConnectorService = dbConnectorService;
             this.userService = userService;
             this.$timeout = $timeout;
             this.gameDbFactory = gameDbFactory;
             this.board = board;
+            if (this.timer) {
+                $timeout.cancel(this.timer);
+            }
+            $scope.$on("$destroy", function() {
+                if (self.timer) {
+                    $timeout.cancel(self.timer);
+                }
+            });
         }
 
         /**
@@ -63,20 +70,26 @@ module app.game.manager{
                 this.board.isReady = false;
                 this.board.compeeter = data.compeeter;
                 this.board.status = data.status;
+                if (this.timer) {
+                    this.$timeout.cancel(self.this);
+                }
             }
         };
 
 
+        /**
+         *
+         */
         continuesCheck = function () {
             var self = this;
-
+            if (self.timer) {
+                self.$timeout.cancel(self.timer);
+            }
             this.dbConnectorService.connect(this.gameDbFactory.checkGame(this.idGame), {}, function(data) {
-                console.log(data);
-                self.$timeout(function(){
+                self.timer = self.$timeout(function(){
                     self.handleStatus.call(self, data);
                 }, 1000);
             });
-
         };
     }
 }

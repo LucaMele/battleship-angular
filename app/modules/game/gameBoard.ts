@@ -14,7 +14,7 @@ module app.game{
         public componentName;
 
         static $inject = [
-            "dbConnectorService", "gameDbFactory", "toastr", "userService", "$timeout"
+            "$scope", "dbConnectorService", "gameDbFactory", "toastr", "userService", "$timeout"
         ];
 
         private dbConnectorService;
@@ -33,7 +33,7 @@ module app.game{
         public status;
         public toastr;
 
-        constructor(dbConnectorService, gameDbFactory, toastr, userService, $timeout) {
+        constructor($scope, dbConnectorService, gameDbFactory, toastr, userService, $timeout) {
             this.componentName = 'gameBoardController';
             this.dbConnectorService = dbConnectorService;
             this.gameDbFactory = gameDbFactory;
@@ -48,7 +48,7 @@ module app.game{
             this.status = 'NEW';
             this.toastr = toastr;
             this.columns = 0;
-            this.game = new game.manager.GameExecutionController(this, dbConnectorService, gameDbFactory, userService, $timeout);
+            this.game = new game.manager.GameExecutionController($scope, this, dbConnectorService, gameDbFactory, userService, $timeout);
             this.rows = 0;
             this._getMap();
         }
