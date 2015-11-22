@@ -29,6 +29,30 @@ function GameModule(db, assert){
         ]
     }());
 
+    /**
+     *
+     * @param req
+     * @param res
+     */
+    this.post = function(req, res) {
+        var cursor = db.collection('games').find();
+        cursor.forEach(function(doc){
+           console.log(doc);
+            res.format({
+                'application/json': function(){
+                    res.send(doc);
+                }
+            });
+        });
+
+
+    };
+
+    /**
+     *
+     * @param req
+     * @param res
+     */
     this.get = function(req, res) {
         res.format({
             'application/json': function(){

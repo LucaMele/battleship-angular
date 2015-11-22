@@ -25,5 +25,8 @@ router.post("/user", function(req, res) {
 router.get("/game", function(req, res) {
     modules.exec('game', 'get', req, res);
 });
+router.post("/game/ready", function(req, res) {
+    modules.exec('game', 'post', req, res);
+});
 
 module.exports = router;
