@@ -34,6 +34,15 @@ module app.game{
         public status;
         public toastr;
 
+        /**
+         *
+         * @param $scope
+         * @param dbConnectorService
+         * @param gameDbFactory
+         * @param toastr
+         * @param userService
+         * @param $timeout
+         */
         constructor($scope, dbConnectorService, gameDbFactory, toastr, userService, $timeout) {
             this.componentName = 'gameBoardController';
             this.dbConnectorService = dbConnectorService;
@@ -133,7 +142,7 @@ module app.game{
             for (i = 0; i < tempShip.size; i++) {
                 if (this.isHorizontal) {
                     // check if is space on the right
-                    if (!((index + i) % this.columns)) {
+                    if (!((index + i) % this.columns) && i !== 0) {
                         this.toastr.warning(ERROR_MEX2,' Warning');
                         return false;
                     }
@@ -197,6 +206,11 @@ module app.game{
             }
         };
 
+        /**
+         *
+         * @param status
+         * @returns {any}
+         */
         getStatusText = function(status) {
             switch (status) {
                 case 'NEW': return STATUS_TEXT1;
