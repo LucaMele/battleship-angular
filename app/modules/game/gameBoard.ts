@@ -160,9 +160,9 @@ module app.game{
                 pos = i === 0 ? 'first' : 'middle';
                 pos = i === tempShip.size-1 ? 'last' : pos;
                 if (this.isHorizontal) {
-                    tmpCells[index + i] = new cells.Ship(attr.width, attr.height, attr.index, pos, this.isHorizontal);
+                    tmpCells[index + i] = new cells.Ship(attr.width, attr.height, attr.index, pos, this.isHorizontal, tempShip.size);
                 } else {
-                    tmpCells[index + i * this.columns] = new cells.Ship(attr.width, attr.height, attr.index, pos, this.isHorizontal);
+                    tmpCells[index + i * this.columns] = new cells.Ship(attr.width, attr.height, attr.index, pos, this.isHorizontal, tempShip.size);
                 }
             }
             return tempShip;
