@@ -31,5 +31,8 @@ router.post("/game/ready", function(req, res) {
 router.get("/game/:id", function(req, res) {
     modules.exec('game', 'getGame', req, res);
 });
+router.put("/game/:id", function(req, res) {
+    modules.exec('game', 'updateGame', req, res);
+});
 
 module.exports = router;

@@ -69,8 +69,9 @@ module app.game.manager{
                 if (this.timer) {
                     this.$timeout.cancel(this.timer);
                 }
-                console.log('eeeee');
-                this.turnsHandler = new game.turns.TurnsHandler(this.$timeout, this.board, this.gameDbFactory, data);
+                this.turnsHandler = new game.turns.TurnsHandler(
+                    this.$timeout, this.board, this.gameDbFactory, this.dbConnectorService, data
+                );
             }
         };
 

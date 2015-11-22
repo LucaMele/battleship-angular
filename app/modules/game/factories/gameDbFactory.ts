@@ -60,8 +60,10 @@ module app.GameDbFactory
          */
         public setTurn = function(id){
             return {
-                $resource: this.$resource('/game', { id: id }, {
-                    update: { method: 'PUT' }
+                $resource: this.$resource('/game/' + id, { id: '@id' }, {
+                    update: {
+                        method: 'PUT'
+                    }
                 }),
                 method: 'put'
             }

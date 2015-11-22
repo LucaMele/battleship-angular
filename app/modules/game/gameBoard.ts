@@ -75,6 +75,7 @@ module app.game{
                 this.status = data.status;
                 if (data.status === 'READY') {
                     this.compeeter = data.compeeter;
+                    this.game.checkIdle(data);
                 }
                 if (data.status === 'IDLE') {
                     this.game.checkIdle(data);

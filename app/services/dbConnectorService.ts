@@ -75,7 +75,7 @@ module app.dbConnectorService
                     resource.$resource.save(data, success, error).$promise.then(callback);
                     break;
                 case 'put':
-                    resource.$resource.save(data, success, error).$promise.then(callback);
+                    resource.$resource.update(data, success, error).$promise.then(callback);
                     break;
                 case 'delete':
                     resource.$resource.delete(data, success, error).$promise.then(callback);

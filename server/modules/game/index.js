@@ -124,6 +124,29 @@ function GameModule(db, assert){
     };
 
     /**
+     * 
+     * @param req
+     * @param res
+     * @param username
+     */
+    this.updateGame = function(req, res, username) {
+        var cursor = db.collection('games').find({_id: oId}).limit(1);
+        cursor.forEach(function(doc){
+            res.format({
+                'application/json': function(){
+                    res.send({
+                        status: doc.status,
+                        idGame: doc._id,
+                        join: doc.join,
+                        host: doc.host,
+                        compeeter: username === doc.host ? doc.join : doc.host
+                    });
+                }
+            });
+        });
+    };
+
+    /**
      *
      * @param req
      * @param res

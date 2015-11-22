@@ -8,11 +8,13 @@ module app.game.turns{
         private $timeout;
         private data;
         private board;
+        private dbConnectorService;
         private gameDbFactory;
 
-        constructor($timeout, board, gameDbFactory, data) {
+        constructor($timeout, board, gameDbFactory, dbConnectorService, data) {
             this.$timeout = $timeout;
             this.data = data;
+            this.dbConnectorService = dbConnectorService;
             this.board = board;
             this.gameDbFactory = gameDbFactory;
 
@@ -20,7 +22,6 @@ module app.game.turns{
         }
 
         setupFirstTurn = function() {
-            console.log('deded');
             this.dbConnectorService.connect(this.gameDbFactory.setTurn(this.data.idGame), {}, function(data) {
 
             });
