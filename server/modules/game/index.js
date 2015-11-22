@@ -35,14 +35,27 @@ function GameModule(db, assert){
      * @param res
      */
     this.post = function(req, res) {
-        var cursor = db.collection('games').find();
-        cursor.forEach(function(doc){
-           console.log(doc);
-            res.format({
-                'application/json': function(){
-                    res.send(doc);
-                }
-            });
+        var game = req.body;
+        var cursor = db.collection('games').find({status: 'IDLE', username: { $ne: game.username }}).limit(1);
+        cursor.count(function(err, count) {
+            assert.equal(null, err);
+            if (count === 0) {
+                db.collection('games').insertOne( {
+                    username: game.username,
+                    status: 'IDLE',
+                    map: game.cells
+                }, function() {
+                    res.format({
+                        'application/json': function(){
+                            res.send({status: 'IDLE'});
+                        }
+                    });
+                });
+            } else {
+                cursor.forEach(function(doc){
+                    console.log(doc)
+                });
+            }
         });
 
 
