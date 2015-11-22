@@ -28,5 +28,8 @@ router.get("/game", function(req, res) {
 router.post("/game/ready", function(req, res) {
     modules.exec('game', 'post', req, res);
 });
+router.get("/game/:id", function(req, res) {
+    modules.exec('game', 'getGame', req, res);
+});
 
 module.exports = router;

@@ -74,6 +74,9 @@ module app.game{
                 if (data.status === 'READY') {
                     this.compeeter = data.compeeter;
                 }
+                if (data.status === 'IDLE') {
+                    this.game.checkIdle(data);
+                }
             } else {
                 for (i = 0; i < (boardCellsH * boardCellsW); i++) {
                     tmpCells.push(new cells.Water(cellW, cellH, i));

@@ -1,4 +1,5 @@
 var extend = require('util')._extend;
+var mongo = require('mongodb');
 /**
  * Created by Luca on 25.10.2015.
  */
@@ -45,10 +46,13 @@ function GameModule(db, assert){
                     status: 'IDLE',
                     map_host: game.cells
                 }, function() {
-                    res.format({
-                        'application/json': function(){
-                            res.send({status: 'IDLE'});
-                        }
+                    var cursor = db.collection('games').find({status: 'IDLE', host: game.username}).limit(1);
+                    cursor.forEach(function(doc){
+                        res.format({
+                            'application/json': function(){
+                                res.send({status: 'IDLE', idGame: doc._id});
+                            }
+                        });
                     });
                 });
             } else {
@@ -106,7 +110,7 @@ function GameModule(db, assert){
                     } else if(doc.host === username) {
                         map.cells = doc.map_host;
                     }
-                    map.gameId = doc._id;
+                    map.idGame = doc._id;
                     map.compeeter = username === doc.host ? doc.join : doc.host;
                     map.status = doc.status;
                     res.format({
@@ -116,6 +120,30 @@ function GameModule(db, assert){
                     });
                 });
             }
+        });
+    };
+
+    /**
+     *
+     * @param req
+     * @param res
+     * @param username
+     */
+    this.getGame = function (req, res, username) {
+        var oId = new mongo.ObjectID(req.params.id);
+        var cursor = db.collection('games').find({_id: oId}).limit(1);
+        cursor.forEach(function(doc){
+            res.format({
+                'application/json': function(){
+                    res.send({
+                        status: doc.status,
+                        idGame: doc._id,
+                        join: doc.join,
+                        host: doc.host,
+                        compeeter: username === doc.host ? doc.join : doc.host
+                    });
+                }
+            });
         });
     };
 }

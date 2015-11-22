@@ -32,6 +32,18 @@ module app.GameDbFactory
 
         /**
          *
+         * @param id
+         * @returns {{$resource: any, method: string}}
+         */
+        public checkGame = function( id ){
+            return {
+                $resource: this.$resource('/game/' + id),
+                method: 'get'
+            }
+        };
+
+        /**
+         *
          * @returns {any}
          */
         public saveReady = function( ){
