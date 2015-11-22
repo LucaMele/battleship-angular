@@ -1,5 +1,7 @@
+$headBg: #3E68CE;
+
 .activebutton {
-  background-color: #970b0e;
+  background-color: $headBg;
 }
 .round, .button{
   background:#333;
@@ -13,7 +15,24 @@
     font-size:18px;
     font-weight: bold;
   }
-  .top-bar{
-    background-color: #3E68CE;
+  small{
+    font-size:10px;
+    color:#fff;
   }
+  .top-bar{
+    background-color: $headBg;
+  }
+  .button{
+    background-color: $headBg;
+  }
+  li:not(:last-child){
+    border-right: 1px solid white;
+    height:45px;
+  }
+  & a{
+    background-color: $headBg;
+  }
+}
+.top-bar-section ul li{
+  background-color:$headBg;
 }
