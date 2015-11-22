@@ -1,5 +1,28 @@
 <div class="game">
-    <game-board></game-board>
+    <div>
+        <div class="board" ng-style="gameBoardCtrl.boardWidth">
+            <div
+                    ng-repeat="cell in gameBoardCtrl.cells"
+                    class="board-cell"
+                    ng-click="gameBoardCtrl.putShipOnCell(cell, $index)"
+                    ng-class="cell.cellClassName"
+                    ng-style="cell.cellStyle" >
+                {{cell.index}}
+            </div>
+        </div>
+        <div class="buttons">
+            <button ng-click="gameBoardCtrl.changeOrientation('horizontal')" ng-class="gameBoardCtrl.isHorizontal ? 'active': ''">Horizontal</button>
+            <button ng-click="gameBoardCtrl.changeOrientation('vertical')" ng-class="!gameBoardCtrl.isHorizontal ? 'active': ''">Vertical</button>
+        </div>
+        <div class="ships" ng-repeat="ship in gameBoardCtrl.ships">
+            <div class="ship"
+                 ng-class="ship.active ? 'active': '' || ship.placed ? 'placed': ''"
+                 ng-style="ship.style"
+                 ng-click="gameBoardCtrl.selectShip($index)">
+                {{ship.name}}
+            </div>
+        </div>
+    </div>
 </div>
 
 

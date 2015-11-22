@@ -2,10 +2,11 @@
 module app.game{
     export var identifier:string = 'game';
 
-    const ERROR_MEX1 = 'Ship Already placed!';
+    const ERROR_MEX1 = 'Cell already occupied';
     const ERROR_MEX2 = 'Invalid position';
 
-    class GameBoardController implements appComponent{
+    @app.Controller
+    export class GameBoardController implements appComponent{
         public componentName;
 
         static $inject = [
@@ -98,7 +99,15 @@ module app.game{
                         this.toastr.warning(ERROR_MEX2,' Warning');
                         return false;
                     }
+                    if (tmpCells[index + i].cellName !== 'water') {
+                        this.toastr.warning(ERROR_MEX1,' Warning');
+                        return false;
+                    }
                 } else {
+                    if (tmpCells[index + i * this.columns] && tmpCells[index + i * this.columns].cellName !== 'water') {
+                        this.toastr.warning(ERROR_MEX1,' Warning');
+                        return false;
+                    }
                     if (((index + i * this.columns) > tmpCells.length)) {
                         this.toastr.warning(ERROR_MEX2,' Warning');
                         return false;
@@ -173,50 +182,12 @@ module app.game{
             }
         };
 
+        /**
+         *
+         * @param orientation
+         */
         public changeOrientation = function(orientation) {
             this.isHorizontal = orientation === 'horizontal';
         };
     }
-
-    @app.Directive
-    export class GameBoardDirective implements appDirective{
-
-        static $inject = [
-            '$templateCache'
-        ];
-
-        static $componentName = 'gameBoard';
-
-        public componentName;
-        public $templateCache;
-
-        public replace;
-        public scope;
-        public restrict;
-
-        public controller;
-        public controllerAs;
-        public bindToController;
-
-        constructor($templateCache: angular.ITemplateCacheService) {
-            this.componentName = GameBoardDirective.$componentName;
-            this.$templateCache = $templateCache;
-            this.replace = true;
-            this.scope = {};
-            this.bindToController = true;
-            this.restrict = 'E';
-            this.controller = GameBoardController;
-            this.controllerAs = 'gameBoardCtrl';
-            return this;
-        }
-
-        link = function(scope, element, attrs, controller, transcludeFn){
-
-        };
-
-        template = function(jqlite, attributes){
-            return this.$templateCache.get('game/templates/game/index.html');
-        };
-    }
-    angular.module(identifier, []);
 }

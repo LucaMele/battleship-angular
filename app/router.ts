@@ -47,6 +47,8 @@ module app.appRouter
                     views:{
                         "content@":{
                             templateUrl: game.identifier + '/templates/index.html',
+                            controller: game.GameBoardController,
+                            controllerAs: 'gameBoardCtrl'
                         }
                     }
                 })
