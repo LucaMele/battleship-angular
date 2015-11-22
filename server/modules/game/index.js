@@ -124,25 +124,51 @@ function GameModule(db, assert){
     };
 
     /**
-     * 
+     *
      * @param req
      * @param res
      * @param username
      */
     this.updateGame = function(req, res, username) {
+        var oId = new mongo.ObjectID(req.params.id);
         var cursor = db.collection('games').find({_id: oId}).limit(1);
-        cursor.forEach(function(doc){
-            res.format({
-                'application/json': function(){
-                    res.send({
-                        status: doc.status,
-                        idGame: doc._id,
-                        join: doc.join,
-                        host: doc.host,
-                        compeeter: username === doc.host ? doc.join : doc.host
-                    });
-                }
+
+        /**
+         *
+         * @param turn
+         * @param doc
+         */
+        var answer = function(turn, doc) {
+            res.send({
+                status: 'READY',
+                isTurn:turn,
+                idGame: doc._id,
+                join: doc.join,
+                host: doc.host,
+                compeeter: username === doc.host ? doc.join : doc.host
             });
+        };
+
+        cursor.forEach(function(doc){
+            if (doc.turn) {
+                answer(doc.turn, doc);
+            } else {
+                var turn = (Math.floor(Math.random() * 2) + 1) === 1 ? doc.host : doc.join;
+                db.collection('games').updateOne({ _id: doc._id },
+                    { $set:
+                    {
+                        turn: turn
+                    }
+                    }, function(err) {
+                        assert.equal(null, err);
+                        res.format({
+                            'application/json': function(){
+                                answer(turn, doc);
+                            }
+                        });
+                    }
+                );
+            }
         });
     };
 
