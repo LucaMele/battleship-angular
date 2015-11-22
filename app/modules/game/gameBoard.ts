@@ -97,8 +97,6 @@ module app.game{
             var i, l;
             for (i = 0, l = data.ships.length; i < l; i++) {
                 newShip = new ships.Ship(data.ships[i].size, {
-                    'line-height': cellH + 'px',
-                    'border-radius': (cellH / 3)+ 'px',
                     height: cellH,
                     width: cellW * data.ships[i].size
                 }, data.ships[i].name);

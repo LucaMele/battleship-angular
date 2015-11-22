@@ -95,6 +95,12 @@ h2{
   }
 }
 .ship{
+  height:20px;
+  border: 1px solid $shipBorder;
+  border-top-left-radius:  40px 15px;
+  border-bottom-left-radius:  40px 15px;
+  border-top-right-radius:  10px 5px;
+  border-bottom-right-radius:  10px 5px;
   background-color: $shipBg;
   margin: 10px;
   display: block;
@@ -102,7 +108,10 @@ h2{
   padding-left: 2px;
   cursor: pointer;
   color: #FFF;
+  font-size:15px;
   font-weight: bold;
+  padding-top:  9px;
+  text-align: center;
   &:hover{
     background-color: scale-color($shipBg, $lightness: 30%);
   }
