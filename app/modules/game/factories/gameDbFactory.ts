@@ -29,5 +29,16 @@ module app.GameDbFactory
                 method: 'get'
             }
         };
+
+        /**
+         *
+         * @returns {any}
+         */
+        public saveReady = function( ){
+            return {
+                $resource: this.$resource('/game/ready'),
+                method: 'post'
+            }
+        };
     }
 }

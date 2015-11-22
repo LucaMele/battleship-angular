@@ -10,7 +10,7 @@ module app.game{
         public componentName;
 
         static $inject = [
-            "dbConnectorService", "gameDbFactory", "toastr"
+            "dbConnectorService", "gameDbFactory", "toastr", "userService"
         ];
 
         private dbConnectorService;
@@ -26,7 +26,7 @@ module app.game{
         public game;
         public toastr;
 
-        constructor(dbConnectorService, gameDbFactory, toastr) {
+        constructor(dbConnectorService, gameDbFactory, toastr, userService) {
             this.componentName = 'gameBoardController';
             this.dbConnectorService = dbConnectorService;
             this.gameDbFactory = gameDbFactory;
@@ -38,7 +38,7 @@ module app.game{
             this.isHorizontal = true;
             this.toastr = toastr;
             this.columns = 0;
-            this.game = new GameExecutionController();
+            this.game = new game.manager.GameExecutionController(dbConnectorService, gameDbFactory, userService);
             this.rows = 0;
             this._getMap();
         }
