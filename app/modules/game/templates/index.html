@@ -1,5 +1,5 @@
 <div class="game">
-    <div>
+    <div ng-class="gameBoardCtrl.isReady ? 'ready': ''">
         <div class="board" ng-style="gameBoardCtrl.boardWidth">
             <div
                     ng-repeat="cell in gameBoardCtrl.cells"
@@ -21,6 +21,9 @@
                  ng-click="gameBoardCtrl.selectShip($index)">
                 {{ship.name}}
             </div>
+        </div>
+        <div class="ready--start">
+            <button>Search for Free Player and start</button>
         </div>
     </div>
 </div>

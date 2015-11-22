@@ -19,9 +19,11 @@ module app.game{
         public boardWidth;
         public isHorizontal;
         public ships;
+        public isReady;
         public columns : number;
         public rows : number;
         public selectedShip;
+        public game;
         public toastr;
 
         constructor(dbConnectorService, gameDbFactory, toastr) {
@@ -32,9 +34,11 @@ module app.game{
             this.boardWidth = {};
             this.ships = [];
             this.selectedShip = false;
+            this.isReady = false;
             this.isHorizontal = true;
             this.toastr = toastr;
             this.columns = 0;
+            this.game = new GameExecutionController();
             this.rows = 0;
             this._getMap();
         }
@@ -156,6 +160,23 @@ module app.game{
 
         /**
          *
+         */
+        checkIfThereAreFreeShips = function() {
+            var i, l, allPlaced = true;
+            for(i = 0, l = this.ships.length; i < l; i++) {
+                if (!this.ships[i].placed) {
+                    allPlaced = false;
+                    break;
+                }
+            }
+            if (allPlaced) {
+                this.game.start(this.ships, this.cells);
+                this.isReady = true;
+            }
+        };
+
+        /**
+         *
          * @param cell
          * @param index
          */
@@ -178,6 +199,7 @@ module app.game{
                         return;
                     }
                 }
+                this.checkIfThereAreFreeShips();
                 this.ships[this.selectedShip] = tempShip;
             }
         };

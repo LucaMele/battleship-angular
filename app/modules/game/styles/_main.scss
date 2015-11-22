@@ -37,9 +37,7 @@ $water: #6282ff;
     }
   }
 }
-
 .ship{
-
   background-color: $shipBg;
   margin: 10px;
   display: block;
@@ -59,5 +57,14 @@ $water: #6282ff;
     background-color: lightgrey;
     font-style: italic;
     cursor: default;
+  }
+}
+.ready--start{
+  display: none;
+}
+.ready{
+  .ready--start{
+    margin: 5px;
+    display: block;
   }
 }
