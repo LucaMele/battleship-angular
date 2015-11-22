@@ -1,16 +1,20 @@
 <header class="header">
-    <div class="row">
-        <div class="large-12 columns">
-            <div class="nav-bar right">
-                <ul class="button-group">
-                    <li ng-show="layoutCtrl.isToShowAs(['admin', 'user'])"><a href="#home" class="button" ui-sref-active="active">Home</a></li>
-                    <li ng-show="layoutCtrl.isToShowAs(['admin', 'user'])"><a ui-sref="game" ui-sref-opts="{reload: true}" class="button" ui-sref-active="active">Game</a></li>
-                    <li ng-show="layoutCtrl.isToShowAs(['admin'])"><a ui-sref="admin" class="button" ui-sref-active="active">Admin</a></li>
-                    <li ng-show="layoutCtrl.isToShowAs(['admin', 'user'])"><a ui-sref="login" class="button" ui-sref-active="active">Logout</a></li>
-                </ul>
-            </div>
-            <h1>Battleship <small>Awesome projekt from Gruppe 9</small></h1>
-            <hr/>
-        </div>
+    <nav class="top-bar" data-topbar role="navigation">
+        <ul class="title-area">
+            <li class="name">
+                <h1><a href="#">Battleship <small>Awesome projekt from Gruppe 9</small></a></h1>
+            </li>
+            <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+        </ul>
+        <section class="top-bar-section">
+            <ul class="right">
+                <li ng-show="layoutCtrl.isToShowAs(['admin', 'user'])"><a href="#home" class="button" ui-sref-active="active">Home</a></li>
+                <li ng-show="layoutCtrl.isToShowAs(['admin', 'user'])"><a ui-sref="game" ui-sref-opts="{reload: true}" class="button" ui-sref-active="active">Game</a></li>
+                <li ng-show="layoutCtrl.isToShowAs(['admin'])"><a ui-sref="admin" class="button" ui-sref-active="active">Admin</a></li>
+                <li ng-show="layoutCtrl.isToShowAs(['admin', 'user'])"><a ui-sref="login" class="button" ui-sref-active="active">Logout</a></li>
+            </ul>
+        </section>
     </div>
+        </nav>
+    <hr/>
 </header>

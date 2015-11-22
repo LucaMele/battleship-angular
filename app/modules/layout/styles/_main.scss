@@ -1,6 +1,3 @@
-.header {
-  padding-bottom: 20px;
-}
 .activebutton {
   background-color: #970b0e;
 }
@@ -9,4 +6,14 @@
 }
 .hidden{
   display:none;
+}
+.header{
+  padding-bottom: 20px;
+  h1{
+    font-size:18px;
+    font-weight: bold;
+  }
+  .top-bar{
+    background-color: #3E68CE;
+  }
 }

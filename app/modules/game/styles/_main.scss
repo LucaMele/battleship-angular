@@ -5,6 +5,7 @@
   transition: all $duration ease-in-out;
 }
 
+$shipBorder: #00d;
 $shipBg: #959595;
 $water: #6282ff;
 
@@ -15,6 +16,7 @@ h2{
 
 .board{
   float: left;
+  background-color:$water;
 }
 .ships{
   float: right;
@@ -32,6 +34,42 @@ h2{
 }
 .ship-cell{
   background-color: $shipBg;
+  &.horizontal.first{
+    border-top: 1px solid $shipBorder;
+    border-left: 1px solid $shipBorder;
+    border-bottom: 1px solid $shipBorder;
+    border-top-left-radius: 1.7em;
+    border-bottom-left-radius: 1.7em;
+  }
+  &.horizontal.middle{
+    border-top: 1px solid $shipBorder;
+    border-bottom: 1px solid $shipBorder;
+  }
+  &.horizontal.last{
+    border-top: 1px solid $shipBorder;
+    border-right: 1px solid $shipBorder;
+    border-bottom: 1px solid $shipBorder;
+    border-top-right-radius: 1em;
+    border-bottom-right-radius: 1em;
+  }
+  &.vertical.first{
+    border-top: 1px solid $shipBorder;
+    border-left: 1px solid $shipBorder;
+    border-right: 1px solid $shipBorder;
+    border-top-left-radius: 1.7em;
+    border-top-right-radius: 1.7em;
+  }
+  &.vertical.middle{
+    border-left: 1px solid $shipBorder;
+    border-right: 1px solid $shipBorder;
+  }
+  &.vertical.last{
+    border-left: 1px solid $shipBorder;
+    border-bottom: 1px solid $shipBorder;
+    border-right: 1px solid $shipBorder;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+  }
 }
 .buttons{
   width: 35%;
