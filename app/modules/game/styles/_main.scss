@@ -38,8 +38,8 @@ h2{
     border-top: 1px solid $shipBorder;
     border-left: 1px solid $shipBorder;
     border-bottom: 1px solid $shipBorder;
-    border-top-left-radius: 1.7em;
-    border-bottom-left-radius: 1.7em;
+    border-top-left-radius:  40px 15px;
+    border-bottom-left-radius:  40px 15px;
   }
   &.horizontal.middle{
     border-top: 1px solid $shipBorder;
@@ -49,15 +49,22 @@ h2{
     border-top: 1px solid $shipBorder;
     border-right: 1px solid $shipBorder;
     border-bottom: 1px solid $shipBorder;
-    border-top-right-radius: 1em;
-    border-bottom-right-radius: 1em;
+    border-top-right-radius:  10px 5px;
+    border-bottom-right-radius:  10px 5px;
+  }
+  &.horizontal.single{
+    border: 1px solid $shipBorder;
+    border-top-left-radius:  40px 15px;
+    border-bottom-left-radius:  40px 15px;
+    border-top-right-radius:  10px 5px;
+    border-bottom-right-radius:  10px 5px;
   }
   &.vertical.first{
     border-top: 1px solid $shipBorder;
     border-left: 1px solid $shipBorder;
     border-right: 1px solid $shipBorder;
-    border-top-left-radius: 1.7em;
-    border-top-right-radius: 1.7em;
+    border-top-left-radius: 15px 40px;
+    border-top-right-radius: 15px 40px;
   }
   &.vertical.middle{
     border-left: 1px solid $shipBorder;
@@ -67,12 +74,15 @@ h2{
     border-left: 1px solid $shipBorder;
     border-bottom: 1px solid $shipBorder;
     border-right: 1px solid $shipBorder;
-    border-bottom-left-radius: 1em;
-    border-bottom-right-radius: 1em;
+    border-bottom-left-radius:  10px 5px;
+    border-bottom-right-radius:  10px 5px;
   }
-  &.single{
+  &.vertical.single{
     border: 1px solid $shipBorder;
-    border-radius: 1em;
+    border-top-left-radius:  15px 40px;
+    border-bottom-left-radius:  10px 5px;
+    border-top-right-radius:  15px 40px;
+    border-bottom-right-radius:  10px 5px;
   }
 }
 .buttons{
