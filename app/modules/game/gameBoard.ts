@@ -99,21 +99,25 @@ module app.game{
             var i;
             for (i = 0; i < tempShip.size; i++) {
                 if (this.isHorizontal) {
+                    // check if is space on the right
                     if (!((index + i) % this.columns)) {
                         this.toastr.warning(ERROR_MEX2,' Warning');
                         return false;
                     }
+                    // check if there is a ship on the right
                     if (tmpCells[index + i].cellName !== 'water') {
                         this.toastr.warning(ERROR_MEX1,' Warning');
                         return false;
                     }
                 } else {
-                    if (tmpCells[index + i * this.columns] && tmpCells[index + i * this.columns].cellName !== 'water') {
-                        this.toastr.warning(ERROR_MEX1,' Warning');
-                        return false;
-                    }
+                    // check if there space under it
                     if (((index + i * this.columns) > tmpCells.length)) {
                         this.toastr.warning(ERROR_MEX2,' Warning');
+                        return false;
+                    }
+                    // check if there is a ship under it
+                    if (tmpCells[index + i * this.columns] && tmpCells[index + i * this.columns].cellName !== 'water') {
+                        this.toastr.warning(ERROR_MEX1,' Warning');
                         return false;
                     }
                 }
@@ -161,6 +165,13 @@ module app.game{
         /**
          *
          */
+        start = function() {
+            this.game.start(this.ships, this.cells);
+        };
+
+        /**
+         *
+         */
         checkIfThereAreFreeShips = function() {
             var i, l, allPlaced = true;
             for(i = 0, l = this.ships.length; i < l; i++) {
@@ -170,7 +181,6 @@ module app.game{
                 }
             }
             if (allPlaced) {
-                this.game.start(this.ships, this.cells);
                 this.isReady = true;
             }
         };

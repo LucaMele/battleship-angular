@@ -11,6 +11,7 @@ module app.game{
         start = function(ships: Array, cells : Array) {
             this.ships = ships;
             this.cells = cells;
+            console.log('game started');
         }
     }
 }
