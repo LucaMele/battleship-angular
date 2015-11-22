@@ -22,6 +22,7 @@ module app.game{
         public isReady;
         public columns : number;
         public rows : number;
+        public gameIsActive : boolean;
         public selectedShip;
         public game;
         public toastr;
@@ -36,6 +37,7 @@ module app.game{
             this.selectedShip = false;
             this.isReady = false;
             this.isHorizontal = true;
+            this.gameIsActive = false;
             this.toastr = toastr;
             this.columns = 0;
             this.game = new game.manager.GameExecutionController(dbConnectorService, gameDbFactory, userService);
@@ -51,21 +53,35 @@ module app.game{
             var boardCellsW = +data.w,
                 boardCellsH = +data.h,
                 cellW = +data.cell.w,
-                cellH = +data.cell.h;
+                newShip,
+                cellH = +data.cell.h,
+                cellsSet = false;
 
             var tmpCells = [], tmpShips = [];
             var i;
-            for (i = 0; i < (boardCellsH * boardCellsW); i++) {
-                tmpCells.push(new cells.Water(cellW, cellH, i));
+
+            if (data.cells) {
+                cellsSet = true;
+                tmpCells = data.cells;
+            } else {
+                for (i = 0; i < (boardCellsH * boardCellsW); i++) {
+                    tmpCells.push(new cells.Water(cellW, cellH, i));
+                }
             }
             var i, l;
             for (i = 0, l = data.ships.length; i < l; i++) {
-                tmpShips.push(new ships.Ship(data.ships[i].size, {
+                newShip = new ships.Ship(data.ships[i].size, {
                     'line-height': cellH + 'px',
                     'border-radius': (cellH / 3)+ 'px',
                     height: cellH,
                     width: cellW * data.ships[i].size
-                }, data.ships[i].name));
+                }, data.ships[i].name);
+                if (cellsSet) {
+                    newShip.set('placed', true);
+                    newShip.set('active', false);
+                    this.gameIsActive = true;
+                }
+                tmpShips.push(newShip);
             }
             this.columns = boardCellsW;
             this.rows = boardCellsH;
@@ -166,7 +182,9 @@ module app.game{
          *
          */
         start = function() {
-            this.game.start(this.ships, this.cells);
+            if (!this.gameIsActive) {
+                this.game.start(this.ships, this.cells);
+            }
         };
 
         /**

@@ -10,6 +10,7 @@ var express = require('express');
 var app = express();
 
 function modulesManager() {
+
     var self = this;
 
     /**
@@ -32,7 +33,7 @@ function modulesManager() {
                     var i, l;
                     for (i = 0, l = roles.length; i < l; i++) {
                         if (accessLevels.indexOf(roles[i]) > -1) {
-                            callback();
+                            callback(doc.username);
                             return;
                         }
                     }
@@ -60,8 +61,8 @@ function modulesManager() {
                     module[method](req, res);
                 }
             } else if (config.accessLevels) {
-                checkAuth(req.headers.authorization, config.accessLevels, req, res, function(){
-                        module[method](req, res);
+                checkAuth(req.headers.authorization, config.accessLevels, req, res, function(username){
+                        module[method](req, res, username);
                     }
                 );
             }

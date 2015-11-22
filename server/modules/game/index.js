@@ -36,14 +36,14 @@ function GameModule(db, assert){
      */
     this.post = function(req, res) {
         var game = req.body;
-        var cursor = db.collection('games').find({status: 'IDLE', username: { $ne: game.username }}).limit(1);
+        var cursor = db.collection('games').find({status: 'IDLE', host: { $ne: game.username }}).limit(1);
         cursor.count(function(err, count) {
             assert.equal(null, err);
             if (count === 0) {
                 db.collection('games').insertOne( {
-                    username: game.username,
+                    host: game.username,
                     status: 'IDLE',
-                    map: game.cells
+                    map_host: game.cells
                 }, function() {
                     res.format({
                         'application/json': function(){
@@ -53,7 +53,22 @@ function GameModule(db, assert){
                 });
             } else {
                 cursor.forEach(function(doc){
-                    console.log(doc)
+                    db.collection('games').updateOne({ _id: doc._id },
+                        { $set:
+                            {
+                                map_join: game.cells,
+                                status: 'READY',
+                                join: game.username
+                            }
+                        }, function(err) {
+                            assert.equal(null, err);
+                            res.format({
+                                'application/json': function(){
+                                    res.send({status: 'READY', idGame: doc._id, join: game.username, host: doc.host});
+                                }
+                            });
+                        }
+                    );
                 });
             }
         });
@@ -65,11 +80,32 @@ function GameModule(db, assert){
      *
      * @param req
      * @param res
+     * @param username
      */
-    this.get = function(req, res) {
-        res.format({
-            'application/json': function(){
-                res.send(gameMap);
+    this.get = function(req, res, username) {
+        var cursor = db.collection('games').find({$or: [ { join: username }, { host: username } ]}).limit(1);
+        cursor.count(function(err, count) {
+            assert.equal(null, err);
+            if (count === 0) {
+                res.format({
+                    'application/json': function(){
+                        res.send(gameMap);
+                    }
+                });
+            } else {
+                cursor.forEach(function(doc){
+                    if (doc.join === username) {
+                        gameMap.cells = doc.map_join;
+                    } else {
+                        gameMap.cells = doc.map_host;
+                    }
+                    gameMap.gameId = doc._id;
+                    res.format({
+                        'application/json': function(){
+                            res.send(gameMap);
+                        }
+                    });
+                });
             }
         });
     };
