@@ -126,7 +126,7 @@ module app.game{
          * @private
          */
         private _putOnMap = function(tempShip, attr, tmpCells, index) {
-            var i;
+            var i, pos;
             for (i = 0; i < tempShip.size; i++) {
                 if (this.isHorizontal) {
                     // check if is space on the right
@@ -155,10 +155,12 @@ module app.game{
             tempShip.set('placed', true);
             tempShip.set('active', false);
             for (i = 0; i < tempShip.size; i++) {
+                pos = i === 0 ? 'first' : 'middle';
+                pos = i === tempShip.size-1 ? 'last' : pos;
                 if (this.isHorizontal) {
-                    tmpCells[index + i] = new cells.Ship(attr.width, attr.height, attr.index);
+                    tmpCells[index + i] = new cells.Ship(attr.width, attr.height, attr.index, pos, this.isHorizontal);
                 } else {
-                    tmpCells[index + i * this.columns] = new cells.Ship(attr.width, attr.height, attr.index);
+                    tmpCells[index + i * this.columns] = new cells.Ship(attr.width, attr.height, attr.index, pos, this.isHorizontal);
                 }
             }
             return tempShip;
