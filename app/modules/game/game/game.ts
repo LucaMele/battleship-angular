@@ -70,6 +70,10 @@ module app.game.manager{
                     this.$timeout.cancel(this.timer);
                 }
 
+                /**
+                 *
+                 * @type {app.game.turns.TurnsHandler}
+                 */
                 this.turnsHandler = new game.turns.TurnsHandler(
                     this.$timeout, this.board, this.gameDbFactory, this.dbConnectorService, data
                 );
