@@ -95,7 +95,6 @@ module app.game{
                     this.game.checkIdle(data);
                 }
             } else {
-                console.log('deded');
                 for (i = 0; i < (boardCellsH * boardCellsW); i++) {
                     tmpCells.push(new cells.Water(cellW, cellH, i));
                 }
@@ -119,7 +118,6 @@ module app.game{
                 width: boardCellsW * cellW
             };
             this.ships = tmpShips;
-            console.log(tmpCells[2]);
             this.cells = tmpCells;
         };
 

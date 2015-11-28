@@ -169,6 +169,7 @@ function GameModule(db, assert){
                         map.cellsOpponent = clenaupMapsFromShips(doc.map_join);
                     }
                     map.idGame = doc._id;
+                    map.turn = doc.turn;
                     res.format({
                         'application/json': function(){
                             res.send(map);

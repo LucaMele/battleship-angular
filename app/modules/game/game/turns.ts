@@ -32,7 +32,6 @@ module app.game.turns{
          */
         setupFirstTurn = function() {
             var self = this;
-
             this.dbConnectorService.connect(this.gameDbFactory.setTurn(this.data.idGame), {}, function(data) {
                 self.board.status_messages = 'Is turn of ' + data.isTurn;
                 self.handleMaps.call(self, data);
@@ -49,26 +48,36 @@ module app.game.turns{
                 self.cells = maps.cells;
                 self.cellsOpponent = maps.cellsOpponent;
                 self.board.gameStarted = true;
-                self.handleTurn.call(self, data);
+                self.handleTurn.call(self, maps);
             });
         };
 
         /**
          *
-         * @param data
+         * @param maps
          */
-        handleTurn = function(data){
-            if (this.username === data.isTurn) {
-                this.board.status_messages = 'Is your turn. Select a empty water cell to launch a bomb';
-                this.board.cells = this.cellsOpponent;
+        handleTurn = function(maps){
+            var self = this;
+            if (this.username === maps.turn) {
+                self.board.status_messages = 'Is your turn. Select a empty water cell to launch a bomb';
+                self.board.cells = self.cellsOpponent;
+                self.board.idleTurn = false;
             } else {
+                this.board.cells = this.cells;
                 this.board.idleTurn = true;
                 this.checkIfMoved();
             }
         };
 
-        checkIfMoved = function() {
 
+        /**
+         *
+         */
+        checkIfMoved = function() {
+            var self = this;
+            setTimeout(function() {
+                self.handleMaps();
+            }, 1500);
         }
     }
 }
