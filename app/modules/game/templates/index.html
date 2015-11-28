@@ -10,21 +10,24 @@
                     ng-style="cell.cellStyle" >
             </div>
         </div>
-        <div class="buttons">
-            <button ng-click="gameBoardCtrl.changeOrientation('horizontal')" ng-class="gameBoardCtrl.isHorizontal ? 'active': ''">Horizontal</button>
-            <button ng-click="gameBoardCtrl.changeOrientation('vertical')" ng-class="!gameBoardCtrl.isHorizontal ? 'active': ''">Vertical</button>
-        </div>
-        <div class="ships" ng-repeat="ship in gameBoardCtrl.ships">
-            <div class="ship"
-                 ng-class="ship.active ? 'active': '' || ship.placed ? 'placed': ''"
-                 ng-style="ship.style"
-                 ng-click="gameBoardCtrl.selectShip($index)">
-                {{ship.name}}
+        <div class="game-panel">
+            <div class="buttons">
+                <button ng-click="gameBoardCtrl.changeOrientation('horizontal')" ng-class="gameBoardCtrl.isHorizontal ? 'active': ''">Horizontal</button>
+                <button ng-click="gameBoardCtrl.changeOrientation('vertical')" ng-class="!gameBoardCtrl.isHorizontal ? 'active': ''">Vertical</button>
             </div>
-        </div>
+            <br class="clear">
+            <div class="ships" ng-repeat="ship in gameBoardCtrl.ships">
+                <div class="ship"
+                     ng-class="ship.active ? 'active': '' || ship.placed ? 'placed': ''"
+                     ng-style="ship.style"
+                     ng-click="gameBoardCtrl.selectShip($index)">
+                    {{ship.name}}
+                </div>
+            </div>
 
-        <div class="ready--start">
-            <button ng-click="gameBoardCtrl.start()">Search for Free Player and start</button>
+            <div class="ready--start">
+                <button ng-click="gameBoardCtrl.start()">Search for Free Player and start</button>
+            </div>
         </div>
     </div>
     <p class="status">

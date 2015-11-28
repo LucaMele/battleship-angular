@@ -13,13 +13,15 @@ h2{
   font-size: 2rem;
   margin: 10px;
 }
-
+.clear{
+  clear:both;
+}
 .board{
   float: left;
   background-color:$water;
 }
 .ships{
-  float: right;
+  float: left;
 }
 .board-cell{
   float: left;
@@ -87,8 +89,9 @@ h2{
 }
 .buttons{
   width: 35%;
-  float: right;
+  //float: right;
   button{
+    float: left;
     &.active{
       background-color: #970b0e;
     }
@@ -140,4 +143,12 @@ h2{
   right:0;
   color:#4d4d4d;
   font-size:12px;
+}
+.game-panel{
+  padding:5px 0 0 10px;
+  float: left;
+  width: 35%;
+}
+@media #{$small-only} {
+  .game-panel{ width: 100%; }
 }

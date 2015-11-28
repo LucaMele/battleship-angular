@@ -32,7 +32,34 @@ $headBg: #3E68CE;
   & a{
     background-color: $headBg;
   }
+  .align{
+    float:right;
+  }
 }
-.top-bar-section ul li{
+.top-bar-section ul li, .top-bar.expanded .title-area{
   background-color:$headBg;
 }
+@media #{$small-only} {
+  .top-bar .button, .top-bar a.button { font-size: 18px; }
+  .top-bar-section { width:60%; float:right; }
+  .header{
+    .align{
+      .button{
+        text-align: left;
+      }
+    }
+  }
+}
+/*
+@media only screen and (max-width: 40em){
+  .top-bar .button, .top-bar a.button { font-size: 18px; }
+  .top-bar-section { width:60%; float:right; }
+  .header{
+    .align{
+      .button{
+        text-align: left;
+      }
+    }
+  }
+}
+*/
