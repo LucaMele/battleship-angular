@@ -60,7 +60,7 @@ module app.game.manager{
         handleStatus = function(data) {
             this.board.gameIsActive = true;
             this.board.isReady = false;
-            this.board.compeeter = data.compeeter;
+            this.board.opponent = data.opponent;
             this.board.status = data.status;
             if (data.status === 'IDLE') {
                 this.continuesCheck();

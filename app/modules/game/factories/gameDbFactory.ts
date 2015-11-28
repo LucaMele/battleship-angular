@@ -32,6 +32,17 @@ module app.GameDbFactory
 
         /**
          *
+         * @returns {any}
+         */
+        public getMaps = function( idGame ){
+            return {
+                $resource: this.$resource('/maps/' + idGame),
+                method: 'get'
+            }
+        };
+
+        /**
+         *
          * @param id
          * @returns {{$resource: any, method: string}}
          */

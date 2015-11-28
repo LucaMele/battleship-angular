@@ -30,7 +30,7 @@ module app.game{
         public gameIsActive : boolean;
         public selectedShip;
         public game;
-        public compeeter;
+        public opponent;
         public status;
         public toastr;
 
@@ -54,7 +54,7 @@ module app.game{
             this.status_messages = 'Game not started yet';
             this.isReady = false;
             this.isHorizontal = true;
-            this.compeeter = '';
+            this.opponent = '';
             this.gameIsActive = false;
             this.status = 'NEW';
             this.toastr = toastr;
@@ -83,7 +83,7 @@ module app.game{
                 tmpCells = data.cells;
                 this.status = data.status;
                 if (data.status === 'READY') {
-                    this.compeeter = data.compeeter;
+                    this.opponent = data.opponent;
                     this.game.checkIdle(data);
                 }
                 if (data.status === 'IDLE') {
@@ -213,7 +213,7 @@ module app.game{
             switch (status) {
                 case 'NEW': return STATUS_TEXT1;
                 case 'IDLE': return STATUS_TEXT2;
-                case 'READY': return STATUS_TEXT3 + this.compeeter;
+                case 'READY': return STATUS_TEXT3 + this.opponent;
                 default: return 'status error';
             }
         };

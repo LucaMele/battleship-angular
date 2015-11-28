@@ -73,7 +73,7 @@ function GameModule(db, assert){
                                         idGame: doc._id,
                                         join: game.username,
                                         host: doc.host,
-                                        compeeter: game.username === doc.host ? doc.join : doc.host
+                                        opponent: game.username === doc.host ? doc.join : doc.host
                                     });
                                 }
                             });
@@ -111,8 +111,46 @@ function GameModule(db, assert){
                         map.cells = doc.map_host;
                     }
                     map.idGame = doc._id;
-                    map.compeeter = username === doc.host ? doc.join : doc.host;
+                    map.opponent = username === doc.host ? doc.join : doc.host;
                     map.status = doc.status;
+                    res.format({
+                        'application/json': function(){
+                            res.send(map);
+                        }
+                    });
+                });
+            }
+        });
+    };
+
+    /**
+     *
+     * @param req
+     * @param res
+     * @param username
+     */
+    this.getMaps = function(req, res, username) {
+        var oId = new mongo.ObjectID(req.params.id);
+        var cursor = db.collection('games').find({_id: oId}).limit(1);
+        cursor.count(function(err, count) {
+            assert.equal(null, err);
+            if (count === 0) {
+                res.status(418).send({ error: 'game_not_started' });
+            } else {
+                cursor.forEach(function(doc){
+                    var map = {};
+                    if (typeof doc.map_join === 'undefined' || typeof doc.map_host === 'undefined') {
+                        res.status(418).send({ error: 'game_not_started' });
+                        return;
+                    }
+                    if (doc.join === username) {
+                        map.cells = doc.map_join;
+                        map.cellsOpponent = doc.map_host;
+                    } else if(doc.host === username) {
+                        map.cells = doc.map_host;
+                        map.cellsOpponent = doc.map_join;
+                    }
+                    map.idGame = doc._id;
                     res.format({
                         'application/json': function(){
                             res.send(map);
@@ -145,7 +183,7 @@ function GameModule(db, assert){
                 idGame: doc._id,
                 join: doc.join,
                 host: doc.host,
-                compeeter: username === doc.host ? doc.join : doc.host
+                opponent: username === doc.host ? doc.join : doc.host
             });
         };
 

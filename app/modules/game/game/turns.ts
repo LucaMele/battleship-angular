@@ -16,9 +16,7 @@ module app.game.turns{
             this.data = data;
             this.dbConnectorService = dbConnectorService;
             this.board = board;
-
             this.gameDbFactory = gameDbFactory;
-
             this.setupFirstTurn();
         }
 
@@ -29,10 +27,18 @@ module app.game.turns{
             var self = this;
 
             this.dbConnectorService.connect(this.gameDbFactory.setTurn(this.data.idGame), {}, function(data) {
-                console.log(self.board.status_messages)
                 self.board.status_messages = 'Is turn of ' + data.isTurn;
+                self.handleMaps(data);
+            });
+        };
 
-                console.log(self.board.status_messages)
+        /**
+         *
+         * @param data
+         */
+        handleMaps = function(data) {
+            this.dbConnectorService.connect(this.gameDbFactory.getMaps(this.data.idGame), {}, function(data) {
+
             });
         };
     }
