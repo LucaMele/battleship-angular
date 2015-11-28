@@ -28,6 +28,8 @@ module app.game{
         public columns : number;
         public rows : number;
         public gameIsActive : boolean;
+        public idleTurn : boolean;
+        public gameStarted : boolean;
         public selectedShip;
         public game;
         public opponent;
@@ -43,7 +45,8 @@ module app.game{
          * @param userService
          * @param $timeout
          */
-        constructor($scope, dbConnectorService, gameDbFactory, toastr, userService, $timeout) {
+        constructor($scope: angular.IScope,
+                    dbConnectorService, gameDbFactory, toastr, userService, $timeout: angular.ITimeoutService) {
             this.componentName = 'gameBoardController';
             this.dbConnectorService = dbConnectorService;
             this.gameDbFactory = gameDbFactory;
@@ -56,6 +59,8 @@ module app.game{
             this.isHorizontal = true;
             this.opponent = '';
             this.gameIsActive = false;
+            this.idleTurn = false;
+            this.gameStarted = false;
             this.status = 'NEW';
             this.toastr = toastr;
             this.columns = 0;
@@ -248,7 +253,11 @@ module app.game{
          * @param cell
          * @param index
          */
-        public putShipOnCell = function(cell, index) {
+        public onCellClick = function(cell, index) {
+            if (this.gameStarted) {
+                this.game.handleCellClick(cell, index);
+                return;
+            }
             if (this.selectedShip !== false) {
                 var tmpCells = this.cells,
                     tempShip = this.ships[this.selectedShip];

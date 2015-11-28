@@ -8,6 +8,7 @@
 $shipBorder: #00d;
 $shipBg: #959595;
 $water: #6282ff;
+$water-marked: $water;
 
 h2{
   font-size: 2rem;
@@ -32,6 +33,14 @@ h2{
   background-color: $water;
   &:hover{
     background-color: scale-color($water, $lightness: 30%);
+  }
+}
+.water-marked-cell{
+  background-color: $water-marked;
+  &:after{
+    content:"X";
+    text-align: center;
+    font-size: 2.5rem;
   }
 }
 .ship-cell{
@@ -145,6 +154,17 @@ h2{
   padding:5px 0 0 10px;
   float: left;
   width: 35%;
+}
+.idle{
+  .board-cell{
+    cursor: default;
+  }
+  .water-cell{
+    background-color: $water;
+    &:hover{
+      background-color: $water;
+    }
+  }
 }
 @media #{$small-only} {
   .game-panel{ width: 100%; }

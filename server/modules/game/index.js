@@ -30,6 +30,24 @@ function GameModule(db, assert){
         ]
     }());
 
+
+    /**
+     *
+     * @param map
+     * @returns {*}
+     */
+    var clenaupMapsFromShips = function(map) {
+        var i, l;
+        for (i = 0, l = map.length; i < l; i++){
+            if (map[i].cellName === 'ship') {
+                // same as frontend. keep attention when changing them
+                map[i].cellName = 'water';
+                map[i].cellClassName = 'water-cell';
+            }
+        }
+        return map;
+    };
+
     /**
      *
      * @param req
@@ -145,10 +163,10 @@ function GameModule(db, assert){
                     }
                     if (doc.join === username) {
                         map.cells = doc.map_join;
-                        map.cellsOpponent = doc.map_host;
+                        map.cellsOpponent = clenaupMapsFromShips(doc.map_host);
                     } else if(doc.host === username) {
                         map.cells = doc.map_host;
-                        map.cellsOpponent = doc.map_join;
+                        map.cellsOpponent = clenaupMapsFromShips(doc.map_join);
                     }
                     map.idGame = doc._id;
                     res.format({

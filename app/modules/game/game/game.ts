@@ -8,16 +8,23 @@ module app.game.manager{
         private gameDbFactory;
         private userService;
         private $timeout;
+        private freeze;
         private board;
         private timer;
 
-        constructor($scope, board, dbConnectorService, gameDbFactory, userService, $timeout) {
+        constructor($scope: angular.IScope,
+                    board: game.GameBoardController,
+                    dbConnectorService,
+                    gameDbFactory,
+                    userService,
+                    $timeout: angular.ITimeoutService) {
             var self = this;
             this.dbConnectorService = dbConnectorService;
             this.userService = userService;
             this.$timeout = $timeout;
             this.gameDbFactory = gameDbFactory;
             this.board = board;
+            this.freeze = false;
             if (this.timer) {
                 $timeout.cancel(this.timer);
             }
@@ -75,8 +82,26 @@ module app.game.manager{
                  * @type {app.game.turns.TurnsHandler}
                  */
                 this.turnsHandler = new game.turns.TurnsHandler(
-                    this.$timeout, this.board, this.gameDbFactory, this.dbConnectorService, data
+                    this.$timeout,
+                    this.board,
+                    this.gameDbFactory,
+                    this.dbConnectorService,
+                    data,
+                    this.userService.getIdentity().username
                 );
+            }
+        };
+
+        /**
+         *
+         * @param cell
+         * @param index
+         */
+        handleCellClick = function(cell, index) {
+            if(!this.freeze) {
+                this.board.status_messages = 'checking..';
+                this.board.cells[index] = new cells.WaterMarked(cell.width, cell.height, cell.index);
+                this.freeze = true;
             }
         };
 
