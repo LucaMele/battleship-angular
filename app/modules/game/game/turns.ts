@@ -33,7 +33,7 @@ module app.game.turns{
         setupFirstTurn = function() {
             var self = this;
             this.dbConnectorService.connect(this.gameDbFactory.setTurn(this.data.idGame), {}, function(data) {
-                self.board.status_messages = 'Is turn of ' + data.isTurn;
+                self.board.status_messages = 'Is turn of ' + data.isTurn
                 self.handleMaps.call(self, data);
             });
         };

@@ -55,11 +55,17 @@ gulp.task('sass', function () {
 		.pipe(gulp.dest('./public/dist'));
 });
 
-gulp.task('default', ['bower', 'unify-scripts', 'sass', 'templates'], function() {
+gulp.task('copy-icons', function () {
+	gulp.src('./bower_components/foundation-icon-fonts/foundation-icons.ttf')
+		.pipe(gulp.dest('./public/dist'));
+});
+
+
+gulp.task('default', ['bower', 'unify-scripts', 'sass', 'copy-icons', 'templates'], function() {
 	gulp.start('clean');
 });
 
-gulp.task('dev', ['bower', 'unify-scripts', 'sass', 'templates'], function() {
+gulp.task('dev', ['bower', 'unify-scripts', 'sass', 'copy-icons', 'templates'], function() {
 	gulp.start('clean');
 	gulp.watch('./app/**/*.ts', ['unify-scripts']);
 	gulp.watch('./app/modules/**/*.html', ['compile', 'unify-scripts']);

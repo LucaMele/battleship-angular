@@ -14,18 +14,18 @@
     "gulp-bower": "0.0.10",
     "gulp-clean": "^0.3.1",
     "gulp-concat": "^2.6.0",
-    "node-sass": "^0.9.2",
     "gulp-sass": "^2.0.4",
     "gulp-typescript": "^2.9.2",
     "gulp-typescript-angular": "^0.1.0",
-    "mongodb": "~2.0"
+    "mongodb": "~2.0",
+    "node-sass": "^0.9.2"
   },
   "description": "Group 9 CAS_FEE final project with angular.js",
   "devDependencies": {},
   "scripts": {
     "postinstall": "bower cache clean && bower install && gulp"
   },
-  "engines" : { 
+  "engines": {
     "npm": "3.3.9",
     "node": "0.12.6"
   }

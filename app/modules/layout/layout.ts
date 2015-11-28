@@ -16,6 +16,7 @@ module app.layout{
         public isAdmin;
         public isUser;
         public isGuest;
+        public username;
 
         constructor($scope, $rootScope, userService) {
             var self = this;
@@ -23,11 +24,13 @@ module app.layout{
             this.isAdmin = !! ~ userService.getIdentity().roles.indexOf("admin");
             this.isUser = !! ~ userService.getIdentity().roles.indexOf("user");
             this.isGuest = !! ~ userService.getIdentity().roles.indexOf("guest");
+            this.username = userService.getIdentity().username;
             $scope.$on('$stateChangeSuccess', function() {
                 var roles = userService.getIdentity().roles;
                 self.isAdmin = !! ~ roles.indexOf("admin");
                 self.isUser = !! ~ roles.indexOf("user");
                 self.isGuest = !! ~ roles.indexOf("guest");
+                self.username = userService.getIdentity().username;
             });
         }
 
