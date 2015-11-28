@@ -10,6 +10,13 @@ $headBg: #3E68CE;
   display:none;
 }
 .header{
+  .menu{
+    background: $headBg;
+  }
+  .menu nav{
+    max-width: 850px;
+    margin: 0 auto;
+  }
   padding-bottom: 20px;
   h1{
     font-size:18px;
@@ -54,16 +61,3 @@ $headBg: #3E68CE;
   color: white;
   padding: 0 7px;
 }
-/*
-@media only screen and (max-width: 40em){
-  .top-bar .button, .top-bar a.button { font-size: 18px; }
-  .top-bar-section { width:60%; float:right; }
-  .header{
-    .align{
-      .button{
-        text-align: left;
-      }
-    }
-  }
-}
-*/
