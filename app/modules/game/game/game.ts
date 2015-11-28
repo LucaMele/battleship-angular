@@ -98,10 +98,17 @@ module app.game.manager{
          * @param index
          */
         handleCellClick = function(cell, index) {
+            var self = this;
             if(!this.freeze) {
                 this.board.status_messages = 'checking..';
-                this.board.cells[index] = new cells.WaterMarked(cell.width, cell.height, cell.index);
                 this.freeze = true;
+                this.dbConnectorService.connect(this.gameDbFactory.saveMark(), {id: this.idGame, cell: this.board.cells[index], index: index}, function(data) {
+                    if (data.cellName === 'ship-marked') {
+                        self.board.cells[index] = new cells.ShipMarked(cell.width, cell.height, cell.index);
+                    } else {
+                        self.board.cells[index] = new cells.WaterMarked(cell.width, cell.height, cell.index);
+                    }
+                });
             }
         };
 

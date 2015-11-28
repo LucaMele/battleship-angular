@@ -9,6 +9,7 @@ $shipBorder: #00d;
 $shipBg: #959595;
 $water: #6282ff;
 $water-marked: $water;
+$ship-marked: $shipBg;
 
 h2{
   font-size: 2rem;
@@ -37,6 +38,14 @@ h2{
 }
 .water-marked-cell{
   background-color: $water-marked;
+  &:after{
+    content:"X";
+    text-align: center;
+    font-size: 2.5rem;
+  }
+}
+.ship-marked-cell{
+  background-color: $ship-marked;
   &:after{
     content:"X";
     text-align: center;

@@ -31,6 +31,9 @@ router.get("/maps/:id", function(req, res) {
 router.post("/game/ready", function(req, res) {
     modules.exec('game', 'post', req, res);
 });
+router.post("/map/mark", function(req, res) {
+    modules.exec('game', 'setMark', req, res);
+});
 router.get("/game/:id", function(req, res) {
     modules.exec('game', 'getGame', req, res);
 });

@@ -79,5 +79,17 @@ module app.GameDbFactory
                 method: 'put'
             }
         };
+
+        /**
+         *
+         * @param id
+         * @returns {{$resource: any, method: string}}
+         */
+        public saveMark = function(){
+            return {
+                $resource: this.$resource('/map/mark'),
+                method: 'post'
+            }
+        };
     }
 }

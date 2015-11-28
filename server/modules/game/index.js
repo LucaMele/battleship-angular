@@ -251,6 +251,92 @@ function GameModule(db, assert){
             });
         });
     };
+
+    /**
+     *
+     * @param req
+     * @param res
+     * @param username
+     */
+    this.setMark = function(req, res, username) {
+        var oId = new mongo.ObjectID(req.body.id);
+        var marker = req.body;
+        var cursor = db.collection('games').find({_id: oId, turn: username}).limit(1);
+        cursor.count(function(err, count) {
+            assert.equal(null, err);
+            if (count === 0) {
+                res.status(418).send({ error: 'invalid_set_marker' });
+            } else {
+                cursor.forEach(function(doc){
+                    var mapToUpdate;
+                    if (!marker || !marker.index || !marker.cell) {
+                        res.status(418).send({ error: 'invalid_set_marker' });
+                        return;
+                    }
+
+                    /**
+                     *
+                     * @param mapToUpdate
+                     * @param cell
+                     * @param index
+                     * @returns {*}
+                     */
+                    var checkCell = function(mapToUpdate, cell, index) {
+                        // todo -> check integrity of cell
+
+                        if (mapToUpdate[index].cellName === 'ship') {
+                            // same as frontend. Keep attention
+                            cell.cellName = 'ship-marked';
+                            mapToUpdate[index] = cell;
+                        } else {
+                            // same as frontend. Keep attention
+                            cell.cellName = 'water-marked';
+                            mapToUpdate[index] = cell;
+                        }
+                        return mapToUpdate;
+                    };
+
+                    /**
+                     *
+                     * @param turn
+                     * @param mapToUpdate
+                     * @param cellName
+                     * @param index
+                     */
+                    var updateMap = function(turn, mapToUpdate, cellName, index) {
+                        db.collection('games').updateOne({ _id: doc._id },
+                            { $set:
+                            {
+                                turn: turn,
+                                map_join: mapToUpdate
+                            }
+                            }, function() {
+                                assert.equal(null, err);
+                                res.format({
+                                    'application/json': function(){
+                                        res.send({
+                                            cellName: cellName,
+                                            index: index
+                                        });
+                                    }
+                                });
+                            });
+                    };
+
+                    // handle maps
+                    if (username === doc.host) {
+                        mapToUpdate = doc.map_join;
+                        mapToUpdate = checkCell(mapToUpdate, marker.cell, marker.index);
+                        updateMap(doc.join, mapToUpdate, mapToUpdate[marker.index].cellName, marker.index)
+                    } else {
+                        mapToUpdate = doc.map_host;
+                        mapToUpdate = checkCell(mapToUpdate, marker.cell, marker.index);
+                        updateMap(doc.host, mapToUpdate, mapToUpdate[marker.index].cellName, marker.index)
+                    }
+                });
+            }
+        });
+    }
 }
 
 module.exports = GameModule;
