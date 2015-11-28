@@ -103,8 +103,8 @@ module app.game.manager{
                 this.board.status_messages = 'checking..';
                 this.freeze = true;
                 this.dbConnectorService.connect(this.gameDbFactory.saveMark(), {id: this.idGame, cell: this.board.cells[index], index: index}, function(data) {
-                    if (data.cellName === 'ship-marked') {
-                        self.board.cells[index] = new cells.ShipMarked(cell.width, cell.height, cell.index);
+                    if (data.cell.cellName === 'ship-marked') {
+                        self.board.cells[index] = new cells.ShipMarked(cell.width, cell.height, cell.index, data.cell.pos, data.cell.isHorizontal, data.cell.size);
                     } else {
                         self.board.cells[index] = new cells.WaterMarked(cell.width, cell.height, cell.index);
                     }

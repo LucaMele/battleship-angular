@@ -245,7 +245,7 @@ function GameModule(db, assert){
                         idGame: doc._id,
                         join: doc.join,
                         host: doc.host,
-                        compeeter: username === doc.host ? doc.join : doc.host
+                        opponent: username === doc.host ? doc.join : doc.host
                     });
                 }
             });
@@ -269,7 +269,7 @@ function GameModule(db, assert){
             } else {
                 cursor.forEach(function(doc){
                     var mapToUpdate;
-                    if (!marker || !marker.index || !marker.cell) {
+                    if (!marker || typeof marker.index === 'undefined' || !marker.cell) {
                         res.status(418).send({ error: 'invalid_set_marker' });
                         return;
                     }
@@ -287,10 +287,14 @@ function GameModule(db, assert){
                         if (mapToUpdate[index].cellName === 'ship') {
                             // same as frontend. Keep attention
                             cell.cellName = 'ship-marked';
-                            mapToUpdate[index] = cell;
+                            // same as frontend, keep attention
+                            cell.cellClassName = 'ship-marked-cell' +
+                                (mapToUpdate[index].isHorizontal ? ' horizontal ' : ' vertical ') + (mapToUpdate[index].size > 1 ? (mapToUpdate[index].pos) : ' single');
+                            mapToUpdate[index] = extend(mapToUpdate[index], cell);
                         } else {
                             // same as frontend. Keep attention
                             cell.cellName = 'water-marked';
+                            cell.cellClassName = 'water-marked-cell';
                             mapToUpdate[index] = cell;
                         }
                         return mapToUpdate;
@@ -302,20 +306,19 @@ function GameModule(db, assert){
                      * @param mapToUpdate
                      * @param cellName
                      * @param index
+                     * @param whichMap
                      */
-                    var updateMap = function(turn, mapToUpdate, cellName, index) {
+                    var updateMap = function(turn, mapToUpdate, cellName, index, whichMap) {
+                        var setObj = {};
+                        setObj[whichMap] = mapToUpdate;
+                        setObj.turn = turn;
                         db.collection('games').updateOne({ _id: doc._id },
-                            { $set:
-                            {
-                                turn: turn,
-                                map_join: mapToUpdate
-                            }
-                            }, function() {
+                            { $set: setObj }, function() {
                                 assert.equal(null, err);
                                 res.format({
                                     'application/json': function(){
                                         res.send({
-                                            cellName: cellName,
+                                            cell: mapToUpdate[index],
                                             index: index
                                         });
                                     }
@@ -327,11 +330,11 @@ function GameModule(db, assert){
                     if (username === doc.host) {
                         mapToUpdate = doc.map_join;
                         mapToUpdate = checkCell(mapToUpdate, marker.cell, marker.index);
-                        updateMap(doc.join, mapToUpdate, mapToUpdate[marker.index].cellName, marker.index)
+                        updateMap(doc.join, mapToUpdate, mapToUpdate[marker.index].cellName, marker.index, 'map_join');
                     } else {
                         mapToUpdate = doc.map_host;
                         mapToUpdate = checkCell(mapToUpdate, marker.cell, marker.index);
-                        updateMap(doc.host, mapToUpdate, mapToUpdate[marker.index].cellName, marker.index)
+                        updateMap(doc.host, mapToUpdate, mapToUpdate[marker.index].cellName, marker.index, 'map_host');
                     }
                 });
             }

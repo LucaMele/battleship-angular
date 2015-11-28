@@ -95,6 +95,7 @@ module app.game{
                     this.game.checkIdle(data);
                 }
             } else {
+                console.log('deded');
                 for (i = 0; i < (boardCellsH * boardCellsW); i++) {
                     tmpCells.push(new cells.Water(cellW, cellH, i));
                 }
@@ -118,6 +119,7 @@ module app.game{
                 width: boardCellsW * cellW
             };
             this.ships = tmpShips;
+            console.log(tmpCells[2]);
             this.cells = tmpCells;
         };
 
@@ -254,6 +256,9 @@ module app.game{
          * @param index
          */
         public onCellClick = function(cell, index) {
+            if (this.idleTurn) {
+                return;
+            }
             if (this.gameStarted) {
                 this.game.handleCellClick(cell, index);
                 return;

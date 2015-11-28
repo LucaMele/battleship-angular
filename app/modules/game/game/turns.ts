@@ -63,7 +63,12 @@ module app.game.turns{
                 this.board.cells = this.cellsOpponent;
             } else {
                 this.board.idleTurn = true;
+                this.checkIfMoved();
             }
+        };
+
+        checkIfMoved = function() {
+
         }
     }
 }
