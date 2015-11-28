@@ -88,10 +88,9 @@ h2{
   }
 }
 .buttons{
-  width: 35%;
-  //float: right;
   button{
     float: left;
+    margin-right:5px;
     &.active{
       background-color: #970b0e;
     }
@@ -138,11 +137,9 @@ h2{
   }
 }
 .status{
-  position:absolute;
-  top:0;
-  right:0;
-  color:#4d4d4d;
-  font-size:12px;
+  color:green;
+  font-size:13px;
+  padding-bottom: 5px;
 }
 .game-panel{
   padding:5px 0 0 10px;
@@ -151,4 +148,7 @@ h2{
 }
 @media #{$small-only} {
   .game-panel{ width: 100%; }
+}
+@media #{$medium-only} {
+  .game-panel{ width: 600px; }
 }
