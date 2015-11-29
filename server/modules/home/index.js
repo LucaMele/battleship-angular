@@ -4,16 +4,22 @@
  */
 function HomeModule(db, assert){
 
-    var homeMenu = [
-        { 'admin': 'User administration' },
-        { 'logout': 'Logout' }
-    ];
-
     this.get = function(req, res) {
-        res.format({
-            'application/json': function(){
-                res.send({ homeMenu: homeMenu });
+        var cursor = db.collection('stats').find();
+        cursor.toArray(function(err, doc){
+            var usersList = [];
+            var i, l;
+            for (i = 0, l = doc.length; i < l; i++) {
+                usersList.push({
+                    winner: doc[i].winner,
+                    count: doc[i].count
+                });
             }
+            res.format({
+                'application/json': function(){
+                    res.send({ stats: usersList });
+                }
+            });
         });
     };
 }

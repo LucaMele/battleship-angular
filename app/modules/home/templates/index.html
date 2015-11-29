@@ -1,4 +1,9 @@
 <div class="home">
+    <div class="stats" ng-controller="homeController as homeCtrl">
+        <ul ng-repeat="stat in homeCtrl.stats">
+            <li>{{stat.winner}} has won {{stat.count}}</li>
+        </ul>
+    </div>
     <h1>Battlehsip history</h1>
     <div class="text">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Battleship_game_board.svg/500px-Battleship_game_board.svg.png" width="300">

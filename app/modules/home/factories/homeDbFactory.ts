@@ -23,7 +23,7 @@ module app.homeDbFactory
          *
          * @returns {any}
          */
-        public getHome = function( ){
+        public getStats = function( ){
             return {
                 $resource: this.$resource('/home'),
                 method: 'get'

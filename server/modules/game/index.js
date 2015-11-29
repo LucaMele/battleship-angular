@@ -77,10 +77,10 @@ function GameModule(db, assert){
                 }, function() {});
             } else {
                 cursor.forEach(function(doc){
-                    db.collection('games').updateOne({ winner: winner },
+                    db.collection('stats').updateOne({ winner: winner },
                         { $set:
                         {
-                            count: +count + 1
+                            count: +doc.count + 1
                         }
                         }, function(err) {}
                     );
@@ -226,11 +226,14 @@ function GameModule(db, assert){
                     map.idGame = doc._id;
                     map.turn = doc.turn;
                     if (!obj.totShips || winner) {
-                        updateStats(map.isWinner);
+                        if (!doc.isUpdated) {
+                            updateStats(map.isWinner);
+                        }
                         db.collection('games').updateOne({ _id: doc._id },
                             { $set:
                             {
-                                isWinner: map.isWinner
+                                isWinner: map.isWinner,
+                                isUpdated: true
                             }
                             }, function(err) {
 
