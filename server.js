@@ -11,4 +11,4 @@ app.use(bodyParser.json());
 app.use("/", require('./server/routes/ajax.js'));
 
 
-http.createServer(app).listen(3000);
+http.createServer(app).listen(80);
