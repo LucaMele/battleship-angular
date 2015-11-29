@@ -18,7 +18,7 @@
     "gulp-typescript": "^2.9.2",
     "gulp-typescript-angular": "^0.1.0",
     "mongodb": "~2.0",
-    "node-sass": "^0.9.2"
+    "node-sass": "^3.4.2"
   },
   "description": "Group 9 CAS_FEE final project with angular.js",
   "devDependencies": {},
