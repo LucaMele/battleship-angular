@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "author": "Luca Mele",
   "license": "MIT",
-  "main": "server.js",
+  "main": "index.js",
   "homepage": "https://github.com/LucaMele/battleship-angular",
   "dependencies": {
     "body-parser": "^1.12.4",
