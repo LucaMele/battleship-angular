@@ -38,7 +38,6 @@ module app.admin{
                     if(self.errorFactory.getError(resp.data.error)){
                         self.toastr.warning(self.errorFactory.getError(resp.data.error),' Warning');
                     } else {
-                        console.log('edededede')
                         // if no error, procede
                         self.data = {
                             name: data.username,

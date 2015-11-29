@@ -110,9 +110,14 @@ module app.game.manager{
                         self.board.status_messages = 'Oh well.. maybe next time. Wait until ' + self.board.opponent + ' has made his move';
                         self.board.cells[index] = new cells.WaterMarked(cell.width, cell.height, cell.index);
                     }
-                    self.freeze = false;
-                    self.turnsHandler.handleMaps();
-                    self.turnsHandler.checkIfMoved();
+                    if (self.timer) {
+                        self.$timeout.cancel(self.timer);
+                    }
+                    self.timer = self.$timeout(function(){
+                        self.freeze = false;
+                        self.turnsHandler.handleMaps();
+                        self.turnsHandler.checkIfMoved();
+                    }, 1500);
                 });
             }
         };

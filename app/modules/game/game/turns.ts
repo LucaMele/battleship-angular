@@ -12,6 +12,7 @@ module app.game.turns{
         private gameDbFactory;
         private cells;
         private username;
+        private timer;
         private cellsOpponent;
 
 
@@ -58,14 +59,29 @@ module app.game.turns{
          */
         handleTurn = function(maps){
             var self = this;
+            if (maps.isWinner !== '') {
+                self.board.cells = self.cells;
+                self.board.status_messages = 'We have a WINNER!!! Congrats to ' + maps.isWinner;
+                self.board.toastr.success('We have a WINNER!!! Congrats to ' + maps.isWinner,' Congratulations');
+                self.board.idleTurn = true;
+                return;
+            }
             if (this.username === maps.turn) {
-                self.board.status_messages = 'Is your turn. Select a empty water cell to launch a bomb';
-                self.board.cells = self.cellsOpponent;
-                self.board.idleTurn = false;
+                if (self.timer) {
+                    self.$timeout.cancel(self.timer);
+                }
+                self.board.idleTurn = true;
+                self.board.status_messages = 'Have a look at your map to see what happened';
+                self.timer = self.$timeout(function() {
+                    self.board.status_messages = 'Is your turn. Select a empty water cell to launch a bomb';
+                    self.board.cells = self.cellsOpponent;
+                    self.board.idleTurn = false;
+                }, 3000);
+                self.board.cells = self.cells;
             } else {
-                this.board.cells = this.cells;
-                this.board.idleTurn = true;
-                this.checkIfMoved();
+                self.board.cells = self.cells;
+                self.board.idleTurn = true;
+                self.checkIfMoved();
             }
         };
 
@@ -75,7 +91,10 @@ module app.game.turns{
          */
         checkIfMoved = function() {
             var self = this;
-            setTimeout(function() {
+            if (self.timer) {
+                self.$timeout.cancel(self.timer);
+            }
+            self.timer = self.$timeout(function() {
                 self.handleMaps();
             }, 1500);
         }

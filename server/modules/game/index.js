@@ -6,8 +6,8 @@ var mongo = require('mongodb');
 function GameModule(db, assert){
 
     var gameMap = {
-        w: 15,
-        h: 15,
+        w: 12,
+        h: 12,
         cell: {
             w: 40,
             h: 40
@@ -17,8 +17,6 @@ function GameModule(db, assert){
 
     var init = (function() {
         gameMap.ships = [
-            { name: 'AQ', size: 1 },
-            { name: 'Kill', size: 1 },
             { name: 'Mai', size: 1 },
             { name: 'Taylor', size: 2 },
             { name: 'Striker', size: 2 },
@@ -34,18 +32,34 @@ function GameModule(db, assert){
     /**
      *
      * @param map
-     * @returns {*}
+     * @returns {{map: *, totShips: number}}
      */
     var clenaupMapsFromShips = function(map) {
-        var i, l;
+        var i, l, totShips = 0;
         for (i = 0, l = map.length; i < l; i++){
             if (map[i].cellName === 'ship') {
                 // same as frontend. keep attention when changing them
                 map[i].cellName = 'water';
                 map[i].cellClassName = 'water-cell';
+                totShips ++;
             }
         }
-        return map;
+        return {map: map, totShips: totShips};
+    };
+
+    /**
+     *
+     * @param map
+     * @returns {boolean}
+     */
+    var checkMapForWinner = function (map) {
+        var i, l, totShips = 0;
+        for (i = 0, l = map.length; i < l; i++){
+            if (map[i].cellName === 'ship') {
+                return false;
+            }
+        }
+        return true;
     };
 
     /**
@@ -156,25 +170,57 @@ function GameModule(db, assert){
                 res.status(418).send({ error: 'game_not_started' });
             } else {
                 cursor.forEach(function(doc){
-                    var map = {};
+                    var map = {}, obj, winner;
                     if (typeof doc.map_join === 'undefined' || typeof doc.map_host === 'undefined') {
                         res.status(418).send({ error: 'game_not_started' });
                         return;
                     }
                     if (doc.join === username) {
                         map.cells = doc.map_join;
-                        map.cellsOpponent = clenaupMapsFromShips(doc.map_host);
+                        obj = clenaupMapsFromShips(doc.map_host);
+                        map.cellsOpponent = obj.map;
+                        if (obj.totShips > 0) {
+                            winner = checkMapForWinner(doc.map_join);
+                            map.isWinner = doc.host;
+                        } else {
+                            map.isWinner = username;
+                        }
                     } else if(doc.host === username) {
                         map.cells = doc.map_host;
-                        map.cellsOpponent = clenaupMapsFromShips(doc.map_join);
+                        obj = clenaupMapsFromShips(doc.map_join);
+                        map.cellsOpponent = obj.map;
+                        if (obj.totShips > 0) {
+                            winner = checkMapForWinner(doc.map_host);
+                            map.isWinner = doc.join;
+                        } else {
+                            map.isWinner = username;
+                        }
                     }
                     map.idGame = doc._id;
                     map.turn = doc.turn;
-                    res.format({
-                        'application/json': function(){
-                            res.send(map);
-                        }
-                    });
+                    if (!obj.totShips || winner) {
+                        db.collection('games').updateOne({ _id: doc._id },
+                            { $set:
+                            {
+                                isWinner: map.isWinner
+                            }
+                            }, function(err) {
+
+                                res.format({
+                                    'application/json': function(){
+                                        res.send(map);
+                                    }
+                                });
+                            }
+                        );
+                    } else {
+                        map.isWinner = '';
+                        res.format({
+                            'application/json': function(){
+                                res.send(map);
+                            }
+                        });
+                    }
                 });
             }
         });
