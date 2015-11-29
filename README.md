@@ -20,7 +20,7 @@ and then start the application with:
 
 `gulp`
 
-So now you can start the server by executing the `index.js` as npm server (in webstorm just press play).
+So now you can start the server by executing the `server.js` as npm server (in webstorm just press play).
 
 Now you sould see the app under http://localhost:3000
 
