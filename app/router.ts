@@ -55,7 +55,7 @@ module app.appRouter
                 .state(home.identifier , {
                     url: '/home',
                     data: {
-                        roles: ['user', 'admin']
+                        roles: ['guest', 'user', 'admin']
                     },
                     views:{
                         "content@":{
