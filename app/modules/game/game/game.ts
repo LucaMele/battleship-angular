@@ -103,26 +103,28 @@ module app.game.manager{
          */
         public handleCellClick = function(cell, index) {
             var self = this;
-            if(!this.freeze) {
-                this.board.status_messages = 'checking..';
-                this.freeze = true;
-                this.dbConnectorService.connect(this.gameDbFactory.saveMark(), {id: this.idGame, cell: this.board.cells[index], index: index}, function(data) {
-                    if (data.cell.cellName === 'ship-marked') {
-                        self.board.status_messages = 'Nice shot! Now lets see what ' + self.board.opponent + ' will do. Please wait form him';
-                        self.board.cells[index] = new cells.ShipMarked(cell.width, cell.height, cell.index, data.cell.pos, data.cell.isHorizontal, data.cell.size);
-                    } else {
-                        self.board.status_messages = 'Oh well.. maybe next time. Wait until ' + self.board.opponent + ' has made his move';
-                        self.board.cells[index] = new cells.WaterMarked(cell.width, cell.height, cell.index);
-                    }
-                    if (self.timer) {
-                        self.$timeout.cancel(self.timer);
-                    }
-                    self.timer = self.$timeout(function(){
-                        self.freeze = false;
-                        self.turnsHandler.handleMaps();
-                        self.turnsHandler.checkIfMoved();
-                    }, 1500);
-                });
+            if (cell.cellName === 'water') {
+                if(!this.freeze) {
+                    this.board.status_messages = 'checking..';
+                    this.freeze = true;
+                    this.dbConnectorService.connect(this.gameDbFactory.saveMark(), {id: this.idGame, cell: this.board.cells[index], index: index}, function(data) {
+                        if (data.cell.cellName === 'ship-marked') {
+                            self.board.status_messages = 'Nice shot! Now lets see what ' + self.board.opponent + ' will do. Please wait form him';
+                            self.board.cells[index] = new cells.ShipMarked(cell.width, cell.height, cell.index, data.cell.pos, data.cell.isHorizontal, data.cell.size);
+                        } else {
+                            self.board.status_messages = 'Oh well.. maybe next time. Wait until ' + self.board.opponent + ' has made his move';
+                            self.board.cells[index] = new cells.WaterMarked(cell.width, cell.height, cell.index);
+                        }
+                        if (self.timer) {
+                            self.$timeout.cancel(self.timer);
+                        }
+                        self.timer = self.$timeout(function(){
+                            self.freeze = false;
+                            self.turnsHandler.handleMaps();
+                            self.turnsHandler.checkIfMoved();
+                        }, 1500);
+                    });
+                }
             }
         };
 

@@ -64,6 +64,33 @@ function GameModule(db, assert){
 
     /**
      *
+     * @param winner
+     */
+    var updateStats = function (winner) {
+        var cursor = db.collection('stats').find({winner: winner}).limit(1);
+        cursor.count(function(err, count) {
+            assert.equal(null, err);
+            if (count === 0) {
+                db.collection('stats').insertOne( {
+                    winner: winner,
+                    count: 1
+                }, function() {});
+            } else {
+                cursor.forEach(function(doc){
+                    db.collection('games').updateOne({ winner: winner },
+                        { $set:
+                        {
+                            count: +count + 1
+                        }
+                        }, function(err) {}
+                    );
+                });
+            }
+        });
+    };
+
+    /**
+     *
      * @param req
      * @param res
      */
@@ -199,6 +226,7 @@ function GameModule(db, assert){
                     map.idGame = doc._id;
                     map.turn = doc.turn;
                     if (!obj.totShips || winner) {
+                        updateStats(map.isWinner);
                         db.collection('games').updateOne({ _id: doc._id },
                             { $set:
                             {
@@ -338,7 +366,7 @@ function GameModule(db, assert){
                             cell.cellClassName = 'ship-marked-cell' +
                                 (mapToUpdate[index].isHorizontal ? ' horizontal ' : ' vertical ') + (mapToUpdate[index].size > 1 ? (mapToUpdate[index].pos) : ' single');
                             mapToUpdate[index] = extend(mapToUpdate[index], cell);
-                        } else {
+                        } else if(mapToUpdate[index].cellName === 'water'){
                             // same as frontend. Keep attention
                             cell.cellName = 'water-marked';
                             cell.cellClassName = 'water-marked-cell';
