@@ -4,9 +4,11 @@
 var config = {
     availableModules: ['login', 'home', 'usersList', 'user', 'game'],
     db: {
-        name: 'gZ3-m__battleship',
-        host: 'localhost',//'lucamele.cloudapp.net',
-        port: 27017
+        name: 'gz3-m__battleship', // gz3-m__battleship
+        host: 'ds054288.mongolab.com',//'lucamele.cloudapp.net',
+        user: 'test',
+        password: 'test',
+        port: 54288
     }
 };
 
