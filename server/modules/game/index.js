@@ -386,7 +386,28 @@ function GameModule(db, assert){
                 });
             }
         });
-    }
+    };
+
+    /**
+     *
+     * @param req
+     * @param res
+     * @param username
+     */
+    this.deleteGame = function(req, res, username) {
+        var oId = new mongo.ObjectID(req.params.id);
+        db.collection('games').removeOne( { _id: oId, $or: [ { host: username }, { join: username }] } , function(err, doc) {
+            if (err !== null) {
+                res.status(418).send({ error: 'no_permission_to_delete' });
+                return;
+            }
+            res.format({
+                'application/json': function(){
+                    res.send({ deleted: true });
+                }
+            });
+        });
+    };
 }
 
 module.exports = GameModule;

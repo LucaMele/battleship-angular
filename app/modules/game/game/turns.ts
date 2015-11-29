@@ -6,6 +6,7 @@ module app.game.turns{
     export class TurnsHandler{
 
         private $timeout;
+        private $state;
         private data;
         private board;
         private dbConnectorService;
@@ -18,8 +19,10 @@ module app.game.turns{
 
         constructor($timeout: angular.ITimeoutService,
                     board: app.game.GameBoardController,
+                    $state: angular.ui.IState,
                     gameDbFactory, dbConnectorService, data, username: string) {
             this.$timeout = $timeout;
+            this.$state = $state;
             this.data = data;
             this.dbConnectorService = dbConnectorService;
             this.board = board;
@@ -46,6 +49,11 @@ module app.game.turns{
         handleMaps = function(data) {
             var self = this;
             this.dbConnectorService.connect(this.gameDbFactory.getMaps(this.data.idGame), {}, function(maps) {
+                if (maps.status === 418) {
+                    self.$state.go(self.$state.current.name, self.$state.params, { reload: true });
+                    self.board.toastr.info('Game does not exist anymore. Please start a new one');
+                    return;
+                }
                 self.cells = maps.cells;
                 self.cellsOpponent = maps.cellsOpponent;
                 self.board.gameStarted = true;

@@ -17,6 +17,7 @@
             <div class="buttons">
                 <button ng-click="gameBoardCtrl.changeOrientation('horizontal')" ng-class="gameBoardCtrl.isHorizontal ? 'active': ''">Horizontal</button>
                 <button ng-click="gameBoardCtrl.changeOrientation('vertical')" ng-class="!gameBoardCtrl.isHorizontal ? 'active': ''">Vertical</button>
+                <button ng-click="gameBoardCtrl.deleteGame()">Delete Game</button>
             </div>
             <br class="clear">
             <div class="ships" ng-repeat="ship in gameBoardCtrl.ships">

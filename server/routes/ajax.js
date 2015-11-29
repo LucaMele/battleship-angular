@@ -37,6 +37,9 @@ router.post("/map/mark", function(req, res) {
 router.get("/game/:id", function(req, res) {
     modules.exec('game', 'getGame', req, res);
 });
+router.delete("/game/:id", function(req, res) {
+    modules.exec('game', 'deleteGame', req, res);
+});
 router.put("/game/:id", function(req, res) {
     modules.exec('game', 'updateGame', req, res);
 });

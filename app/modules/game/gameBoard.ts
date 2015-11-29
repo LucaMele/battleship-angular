@@ -14,7 +14,7 @@ module app.game{
         public componentName;
 
         static $inject = [
-            "$scope", "dbConnectorService", "gameDbFactory", "toastr", "userService", "$timeout"
+            "$scope", '$state', "dbConnectorService", "gameDbFactory", "toastr", "userService", "$timeout"
         ];
 
         private dbConnectorService;
@@ -45,7 +45,7 @@ module app.game{
          * @param userService
          * @param $timeout
          */
-        constructor($scope: angular.IScope,
+        constructor($scope: angular.IScope, $state: angular.ui.IState,
                     dbConnectorService, gameDbFactory, toastr, userService, $timeout: angular.ITimeoutService) {
             this.componentName = 'gameBoardController';
             this.dbConnectorService = dbConnectorService;
@@ -64,7 +64,7 @@ module app.game{
             this.status = 'NEW';
             this.toastr = toastr;
             this.columns = 0;
-            this.game = new game.manager.GameExecutionController($scope, this, dbConnectorService, gameDbFactory, userService, $timeout);
+            this.game = new game.manager.GameExecutionController($scope, $state, this, dbConnectorService, gameDbFactory, userService, $timeout);
             this.rows = 0;
             this._getMap();
         }
@@ -282,6 +282,14 @@ module app.game{
                 this.checkIfThereAreFreeShips();
                 this.ships[this.selectedShip] = tempShip;
             }
+        };
+
+
+        /**
+         *
+         */
+        public deleteGame = function() {
+            this.game.deleteGame();
         };
 
         /**

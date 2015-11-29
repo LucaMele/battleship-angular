@@ -55,6 +55,18 @@ module app.GameDbFactory
 
         /**
          *
+         * @param id
+         * @returns {{$resource: any, method: string}}
+         */
+        public deleteGame =function( id ){
+            return {
+                $resource: this.$resource('/game/' + id),
+                method: 'delete'
+            }
+        };
+
+        /**
+         *
          * @returns {any}
          */
         public saveReady = function( ){

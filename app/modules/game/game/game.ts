@@ -8,11 +8,13 @@ module app.game.manager{
         private gameDbFactory;
         private userService;
         private $timeout;
+        private $state;
         private freeze;
         private board;
         private timer;
 
         constructor($scope: angular.IScope,
+                    $state: angular.ui.IState,
                     board: game.GameBoardController,
                     dbConnectorService,
                     gameDbFactory,
@@ -20,6 +22,7 @@ module app.game.manager{
                     $timeout: angular.ITimeoutService) {
             var self = this;
             this.dbConnectorService = dbConnectorService;
+            this.$state = $state;
             this.userService = userService;
             this.$timeout = $timeout;
             this.gameDbFactory = gameDbFactory;
@@ -40,7 +43,7 @@ module app.game.manager{
          * @param ships
          * @param cells
          */
-        start = function(ships, cells) {
+        public start = function(ships, cells) {
             var self = this,
                 username = this.userService.getIdentity().username;
             this.ships = ships;
@@ -55,7 +58,7 @@ module app.game.manager{
          *
          * @param data
          */
-        checkIdle = function(data) {
+        public checkIdle = function(data) {
             this.idGame = data.idGame;
             this.handleStatus(data);
         };
@@ -64,7 +67,7 @@ module app.game.manager{
          *
          * @param data
          */
-        handleStatus = function(data) {
+        public handleStatus = function(data) {
             this.board.gameIsActive = true;
             this.board.isReady = false;
             this.board.opponent = data.opponent;
@@ -84,6 +87,7 @@ module app.game.manager{
                 this.turnsHandler = new game.turns.TurnsHandler(
                     this.$timeout,
                     this.board,
+                    this.$state,
                     this.gameDbFactory,
                     this.dbConnectorService,
                     data,
@@ -97,7 +101,7 @@ module app.game.manager{
          * @param cell
          * @param index
          */
-        handleCellClick = function(cell, index) {
+        public handleCellClick = function(cell, index) {
             var self = this;
             if(!this.freeze) {
                 this.board.status_messages = 'checking..';
@@ -122,11 +126,25 @@ module app.game.manager{
             }
         };
 
+        /**
+         *
+         */
+        public deleteGame = function() {
+            var self = this;
+            if (typeof this.idGame !== 'undefined') {
+                this.dbConnectorService.connect(this.gameDbFactory.deleteGame(this.idGame), {}, function(data) {
+                    self.$state.go(self.$state.current.name, self.$state.params, { reload: true });
+                });
+            } else {
+                this.board.toastr.warning('Game cannot be deleted while no game is tarted yet');
+            }
+
+        };
 
         /**
          *
          */
-        continuesCheck = function () {
+        public continuesCheck = function () {
             var self = this;
             if (self.timer) {
                 self.$timeout.cancel(self.timer);
