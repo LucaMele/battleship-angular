@@ -19,12 +19,12 @@ function GameModule(db, assert){
         gameMap.ships = [
             { name: 'Mai', size: 1 },
             { name: 'Taylor', size: 2 },
-            { name: 'Striker', size: 2 },
-            { name: 'Irma', size: 2 },
-            { name: 'Perkins', size: 2 },
-            { name: 'Knight', size: 3 },
-            { name: 'Metal', size: 3 },
-            { name: 'Great Destroyer', size: 4 }
+            { name: 'Striker', size: 3 },
+            { name: 'Irma', size: 3 },
+            { name: 'Perkins', size: 4 },
+            { name: 'Knight', size: 5 },
+            { name: 'Metal', size: 5 },
+            { name: 'Great Destroyer', size: 6 }
         ]
     }());
 
