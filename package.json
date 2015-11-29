@@ -24,7 +24,7 @@
   "description": "Group 9 CAS_FEE final project with angular.js",
   "devDependencies": {},
   "scripts": {
-    "publish": "bower cache clean && bower install && gulp && node server.js"
+    "publish": "bower cache clean && bower install && gulp"
   },
   "engines": {
     "npm": "3.3.9",
