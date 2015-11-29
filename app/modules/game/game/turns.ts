@@ -84,11 +84,13 @@ module app.game.turns{
                     self.board.status_messages = 'Is your turn. Select a empty water cell to launch a bomb';
                     self.board.cells = self.cellsOpponent;
                     self.board.idleTurn = false;
+                    self.board.boardStatus = 'board-active';
                 }, 3000);
                 self.board.cells = self.cells;
             } else {
                 self.board.cells = self.cells;
                 self.board.idleTurn = true;
+                self.board.boardStatus = 'board-passive';
                 self.checkIfMoved();
             }
         };
