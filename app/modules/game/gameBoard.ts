@@ -21,6 +21,7 @@ module app.game{
         private gameDbFactory;
         public cells;
         public boardWidth;
+        public boardHeight;
         public isHorizontal;
         public ships;
         public isReady;
@@ -52,6 +53,7 @@ module app.game{
             this.gameDbFactory = gameDbFactory;
             this.cells = [];
             this.boardWidth = {};
+            this.boardHeight = {};
             this.ships = [];
             this.selectedShip = false;
             this.status_messages = 'Game not started yet';
@@ -116,6 +118,9 @@ module app.game{
             this.rows = boardCellsH;
             this.boardWidth = {
                 width: boardCellsW * cellW
+            };
+            this.boardHeight = {
+                height: boardCellsH * cellH
             };
             this.ships = tmpShips;
             this.cells = tmpCells;

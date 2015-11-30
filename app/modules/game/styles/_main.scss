@@ -7,7 +7,9 @@
 
 $shipBorder: #00d;
 $shipBg: #959595;
+$shipBg-active: #6b6b6b;
 $water: #6282ff;
+$water-active: #0070ff;
 $water-marked: $water;
 $ship-marked: $shipBg;
 
@@ -200,4 +202,15 @@ h2{
 }
 @media #{$medium-only} {
   .game-panel{ width: 600px; }
+}
+.board-active{
+    .water-cell, .water-marked-cell{
+      background-color: $water-active;
+      &:hover{
+        background-color: scale_color($water-active, $lightness: 20%);
+      }
+    }
+    .ship-cell, .ship-marked-cell {
+      background-color: $shipBg-active;
+    }
 }

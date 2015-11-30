@@ -3,7 +3,7 @@
     <p class="status">
         {{gameBoardCtrl.status_messages}}
     </p>
-    <div ng-class="gameBoardCtrl.isReady ? 'ready': '' || gameBoardCtrl.boardStatus">
+    <div ng-class="gameBoardCtrl.isReady ? 'ready': '' || gameBoardCtrl.boardStatus" ng-style="gameBoardCtrl.boardHeight">
         <div class="board" ng-style="gameBoardCtrl.boardWidth">
             <div
                     ng-repeat="cell in gameBoardCtrl.cells"
