@@ -6,9 +6,7 @@ module app.factoryService
     @app.Factory
     class FactoryService
     {
-        static $inject = [
-
-        ];
+        static $inject = [];
 
         static $componentName = 'errorFactory';
 
@@ -18,14 +16,20 @@ module app.factoryService
             this.errorMap = {
                 error_code_1: 'user already on db',
                 error_code_2: 'validation failed',
-                error_code_3: 'something went werong'
+                error_code_3: 'something went wrong'
             };
             return this;
         }
 
-        getError = function(error_code) {
-
-            // @todo if undefined default error mex
+        /**
+         *
+         * @param error_code
+         * @returns {any}
+         */
+        public getError = function(error_code) {
+            if (!this.errorMap[error_code]) {
+                return this.errorMap.error_code_3;
+            }
             return this.errorMap[error_code];
         };
     }

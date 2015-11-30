@@ -15,6 +15,13 @@ module app.login{
         private authService;
         public toastr;
 
+        /**
+         *
+         * @param userService
+         * @param loginDbFactory
+         * @param authService
+         * @param toastr
+         */
         constructor(userService, loginDbFactory, authService, toastr) {
             this.userService = userService;
             this.componentName = 'login';

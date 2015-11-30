@@ -18,6 +18,12 @@ module app.layout{
         public isGuest;
         public username;
 
+        /**
+         *
+         * @param $scope
+         * @param $rootScope
+         * @param userService
+         */
         constructor($scope, $rootScope, userService) {
             var self = this;
             this.componentName = 'layoutController';
@@ -52,7 +58,6 @@ module app.layout{
             }
             return isVisible;
         };
-
     }
 
 
@@ -65,14 +70,17 @@ module app.layout{
         static $componentName = 'layout';
         public componentName;
         public $templateCache;
-
         public replace = true;
         public scope;
         public restrict;
-
         public controller;
         public controllerAs;
 
+        /**
+         *
+         * @param $templateCache
+         * @returns {app.layout.LayoutDirective}
+         */
         constructor($templateCache) {
             this.componentName = LayoutDirective.$componentName;
             this.$templateCache = $templateCache;
@@ -90,7 +98,7 @@ module app.layout{
          * @param attributes
          * @returns {any}
          */
-        template = function(jqlite, attributes) {
+        public template = function(jqlite, attributes) {
             return this.$templateCache.get(LayoutDirective.$componentName + '/templates/'+ attributes.type +'.html');
         };
     }

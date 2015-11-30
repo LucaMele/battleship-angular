@@ -16,7 +16,16 @@ module app.game.turns{
         private timer;
         private cellsOpponent;
 
-
+        /**
+         *
+         * @param $timeout
+         * @param board
+         * @param $state
+         * @param gameDbFactory
+         * @param dbConnectorService
+         * @param data
+         * @param username
+         */
         constructor($timeout: angular.ITimeoutService,
                     board: app.game.GameBoardController,
                     $state: angular.ui.IState,

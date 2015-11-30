@@ -8,6 +8,11 @@ module app.appRouter
             "$urlRouterProvider"
         ];
 
+        /**
+         *
+         * @param $stateProvider
+         * @param $urlRouterProvider
+         */
         constructor(
             $stateProvider,
             $urlRouterProvider: angular.ui.IUrlRouterProvider

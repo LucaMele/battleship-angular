@@ -13,6 +13,16 @@ module app.game.manager{
         private board;
         private timer;
 
+        /**
+         *
+         * @param $scope
+         * @param $state
+         * @param board
+         * @param dbConnectorService
+         * @param gameDbFactory
+         * @param userService
+         * @param $timeout
+         */
         constructor($scope: angular.IScope,
                     $state: angular.ui.IState,
                     board: game.GameBoardController,

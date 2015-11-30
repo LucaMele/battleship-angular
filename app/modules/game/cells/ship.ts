@@ -5,6 +5,15 @@ module app.game.cells{
         private pos;
         private size;
 
+        /**
+         *
+         * @param width
+         * @param height
+         * @param index
+         * @param pos
+         * @param isHorizontal
+         * @param size
+         */
         constructor(width : number, height : number, index:number, pos:string, isHorizontal:boolean, size:number) {
             super(height, width, index);
             this.cellName = 'ship';

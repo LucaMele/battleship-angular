@@ -4,7 +4,6 @@
 /// <reference path="../../router.ts" />
 module app.usersList{
 
-
     export var identifier:string = 'usersList';
 
     class UsersListController implements appComponent{
@@ -19,6 +18,12 @@ module app.usersList{
         public data;
         public $scope;
 
+        /**
+         *
+         * @param dbConnectorService
+         * @param usersListDbFactory
+         * @param $scope
+         */
         constructor(dbConnectorService, usersListDbFactory, $scope) {
             this.componentName = 'usersListController';
             this.data = {};
@@ -90,6 +95,11 @@ module app.usersList{
         public controller;
         public controllerAs;
 
+        /**
+         *
+         * @param $templateCache
+         * @returns {app.usersList.UsersListDirective}
+         */
         constructor($templateCache: angular.ITemplateCacheService) {
             this.componentName = UsersListDirective.$componentName;
             this.$templateCache = $templateCache;
@@ -101,7 +111,7 @@ module app.usersList{
             return this;
         }
 
-        template = function(jqlite, attributes){
+        public template = function(jqlite, attributes){
             return this.$templateCache.get('users/templates/index.html');
         }
     }

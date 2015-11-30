@@ -14,6 +14,11 @@ module app.homeDbFactory
 
         private $resource;
 
+        /**
+         *
+         * @param $resource
+         * @returns {app.homeDbFactory.HomeDbFactory}
+         */
         constructor($resource){
             this.$resource = $resource;
             return this;

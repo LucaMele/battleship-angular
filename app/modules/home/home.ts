@@ -15,6 +15,11 @@ module app.home{
         private homeDbFactory;
         public stats;
 
+        /**
+         *
+         * @param dbConnectorService
+         * @param homeDbFactory
+         */
         constructor(dbConnectorService, homeDbFactory) {
             this.componentName = 'home';
             this.stats = [];
@@ -23,7 +28,10 @@ module app.home{
             this.getStats();
         }
 
-        getStats = function() {
+        /**
+         *
+         */
+        public getStats = function() {
             var self = this;
             this.dbConnectorService.connect(this.homeDbFactory.getStats(), {}, function(data) {
                 self.stats = data.stats;

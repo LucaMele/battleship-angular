@@ -42,7 +42,9 @@ module app.dbConnectorService
             this.$http.defaults.headers.common = header;
         };
 
-
+        /**
+         *
+         */
         private success = function() {
 
         };

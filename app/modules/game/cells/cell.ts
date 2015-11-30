@@ -8,6 +8,12 @@ module app.game.cells{
         public cellStyle;
         public cellClassName;
 
+        /**
+         *
+         * @param width
+         * @param height
+         * @param index
+         */
         constructor(width: number, height: number, index: number) {
             this.width = width;
             this.index = index;
@@ -24,7 +30,7 @@ module app.game.cells{
          *
          * @returns {{width: any, index: (any|number|function(string): IDBIndex|function(): number|function((string|JQuery|Element)): number|app.game.cells.Cell.index), height: any, cellName: (any|string|string|string), cellStyle: (any|*|{width: number, height: number})}}
          */
-        getAttributes = function(){
+        public getAttributes = function(){
             return {
                 width: this.width,
                 index: this.index,
