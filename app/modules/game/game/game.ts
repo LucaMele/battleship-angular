@@ -132,7 +132,7 @@ module app.game.manager{
                             self.freeze = false;
                             self.turnsHandler.handleMaps();
                             self.turnsHandler.checkIfMoved();
-                        }, 1500);
+                        }, 1000);
                     });
                 }
             }
