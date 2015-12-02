@@ -45,3 +45,6 @@ db: {
     port: 27017
 }
 ```
+
+##Live demo
+For a live demo, please go on: http://battleship-angular.azurewebsites.net/ 
