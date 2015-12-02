@@ -94,7 +94,7 @@ module app.game.turns{
                     self.board.cells = self.cellsOpponent;
                     self.board.idleTurn = false;
                     self.board.boardStatus = 'board-active';
-                }, 3000);
+                }, 1600);
                 self.board.cells = self.cells;
             } else {
                 self.board.cells = self.cells;
