@@ -7,10 +7,10 @@
   "homepage": "https://github.com/LucaMele/battleship-angular",
   "dependencies": {
     "body-parser": "^1.12.4",
-    "bower": "^1.6.5",
+    "bower": "~1.6.9",
     "crypto": "0.0.3",
     "express": "^4.12.4",
-    "gulp": "^3.9.0",
+    "gulp": "~3.9.0",
     "gulp-angular-templatecache": "^1.7.0",
     "gulp-bower": "0.0.10",
     "gulp-clean": "^0.3.1",
