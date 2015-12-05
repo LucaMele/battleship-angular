@@ -1,9 +1,9 @@
 var gulp = require('gulp');
-var bower = require('gulp-bower');
 var typescript = require('gulp-typescript');
 var typescriptAngular = require('gulp-typescript-angular');
 var concat = require('gulp-concat');
 var sass = require('gulp-sass');
+var uglify = require('gulp-uglify');
 var Server = require('karma').Server;
 var clean = require('gulp-clean');
 var p = require('./package.json');
@@ -17,9 +17,10 @@ gulp.task('templates', function () {
 		.pipe(gulp.dest('public/tmp-scripts'));
 });
 
-gulp.task('bower', function() {
-	return bower()
-		.pipe(gulp.dest('public/lib/'))
+gulp.task('concat-bower', function() {
+	return gulp.src('bower_components/**/*.js')
+		.pipe(concat('vendors.js'))
+		.pipe(gulp.dest('./public/dist/'));
 });
 
 gulp.task('clean', function () {
@@ -45,6 +46,7 @@ gulp.task('compile', ['templates'], function () {
 gulp.task('unify-scripts', ['compile'], function() {
 	var bk = gulp.src('./public/tmp-scripts/**/*.js')
 		.pipe(concat(p.name + '_' + p.version + '.js'))
+		.pipe(uglify())
 		.pipe(gulp.dest('./public/dist'));
 	return bk;
 });
@@ -62,7 +64,7 @@ gulp.task('copy-icons', function () {
 });
 
 
-gulp.task('default', ['bower', 'unify-scripts', 'sass', 'copy-icons', 'templates'], function() {
+gulp.task('default', ['concat-bower', 'unify-scripts', 'sass', 'copy-icons', 'templates'], function() {
 	gulp.start('clean');
 });
 
@@ -73,7 +75,7 @@ gulp.task('test', ['dev'], function (done) {
 	}, done).start();
 });
 
-gulp.task('dev', ['bower', 'unify-scripts', 'sass', 'copy-icons', 'templates'], function() {
+gulp.task('dev', ['concat-bower', 'unify-scripts', 'sass', 'copy-icons', 'templates'], function() {
 	gulp.start('clean');
 	gulp.watch('./app/**/*.ts', ['unify-scripts']);
 	gulp.watch('./app/modules/**/*.html', ['compile', 'unify-scripts']);
