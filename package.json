@@ -34,7 +34,7 @@
     "karma-spec-reporter": "0.0.23"
   },
   "scripts": {
-    "publish": "bower cache clean && bower install && gulp",
+    "postinstall": "bower cache clean && bower install && gulp",
     "start": "node index.js"
   },
   "engines": {
