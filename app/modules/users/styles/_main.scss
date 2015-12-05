@@ -5,6 +5,14 @@ button, p{
   margin-bottom: 4px;
   margin-top: 4px;
 }
-.row{
+.users{
+  padding: 15px 0;
+}
+.users:not(:last-child){
   border-bottom: 1px solid #ccc;
+}
+.row{
+  span{
+    font-size: 12px;
+  }
 }
