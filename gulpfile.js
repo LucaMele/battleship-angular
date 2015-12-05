@@ -20,6 +20,7 @@ gulp.task('templates', function () {
 gulp.task('concat-bower', function() {
 	return gulp.src('bower_components/**/*.js')
 		.pipe(concat('vendors.js'))
+		.pipe(uglify())
 		.pipe(gulp.dest('./public/dist/'));
 });
 
