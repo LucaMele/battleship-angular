@@ -1,9 +1,18 @@
 <div class="home">
     <h1>Top players</h1>
     <div class="stats" ng-controller="homeController as homeCtrl">
-        <ul ng-repeat="stat in homeCtrl.stats">
-            <li>{{stat.winner}} has won {{stat.count}}</li>
-        </ul>
+        <table>
+            <thead>
+                <th>Username</th>
+                <th>Victories</th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="stat in homeCtrl.stats">
+                <td>{{stat.winner}}</td>
+                <td>{{stat.count}}</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
     <h1>Battlehsip history</h1>
     <div class="text">
