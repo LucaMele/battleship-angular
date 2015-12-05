@@ -8,6 +8,7 @@
 h1{
   font-size:18px;
   font-weight: bold;
+  padding-bottom: 15px;
 }
 .text{
   padding:20px 0;
@@ -24,4 +25,12 @@ h1{
   table{
     width: 40%
   }
+}
+.topusers{
+  width: 30%;
+  float: right;
+}
+.content{
+  width: 70%;
+  float: left;
 }
