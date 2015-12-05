@@ -62,11 +62,11 @@ gulp.task('copy-icons', function () {
 });
 
 
-gulp.task('default', ['bower', 'unify-scripts', 'sass', 'copy-icons', 'templates', 'test'], function() {
+gulp.task('default', ['bower', 'unify-scripts', 'sass', 'copy-icons', 'templates'], function() {
 	gulp.start('clean');
 });
 
-gulp.task('test', function (done) {
+gulp.task('test', ['dev'], function (done) {
 	new Server({
 		configFile: __dirname + '/tests/karma.conf.js',
 		singleRun: true
