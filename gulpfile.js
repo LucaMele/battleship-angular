@@ -4,6 +4,7 @@ var typescript = require('gulp-typescript');
 var typescriptAngular = require('gulp-typescript-angular');
 var concat = require('gulp-concat');
 var sass = require('gulp-sass');
+var Server = require('karma').Server;
 var clean = require('gulp-clean');
 var p = require('./package.json');
 var templateCache = require('gulp-angular-templatecache');
@@ -61,8 +62,15 @@ gulp.task('copy-icons', function () {
 });
 
 
-gulp.task('default', ['bower', 'unify-scripts', 'sass', 'copy-icons', 'templates'], function() {
+gulp.task('default', ['bower', 'unify-scripts', 'sass', 'copy-icons', 'templates', 'test'], function() {
 	gulp.start('clean');
+});
+
+gulp.task('test', function (done) {
+	new Server({
+		configFile: __dirname + '/tests/karma.conf.js',
+		singleRun: true
+	}, done).start();
 });
 
 gulp.task('dev', ['bower', 'unify-scripts', 'sass', 'copy-icons', 'templates'], function() {

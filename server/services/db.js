@@ -10,9 +10,9 @@ var db = new Db(config.db.name, new Server(config.db.host, config.db.port));
 db.open(function(err, db) {
     assert.equal(null, err);
 
-    db.authenticate(config.db.user, config.db.password, function(err, res) {
+   /* db.authenticate(config.db.user, config.db.password, function(err, res) {
         // callback
-    });
+    });*/
 });
 // Establish connection to db
 module.exports = {db: db, MongoClient: MongoClient};
