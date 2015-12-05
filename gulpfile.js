@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var typescript = require('gulp-typescript');
 var typescriptAngular = require('gulp-typescript-angular');
 var concat = require('gulp-concat');
+var order = require("gulp-order");
 var sass = require('gulp-sass');
 var uglify = require('gulp-uglify');
 var Server = require('karma').Server;
@@ -18,7 +19,20 @@ gulp.task('templates', function () {
 });
 
 gulp.task('concat-bower', function() {
-	return gulp.src('bower_components/**/*.js')
+	return gulp.src([
+		'bower_components/jquery/dist/jquery.js',
+		'bower_components/foundation/js/foundation.js',
+		'bower_components/foundation/js/foundation/foundation.topbar.js',
+		'bower_components/angular/angular.js',
+		'bower_components/angular-toastr/dist/angular-toastr.tpls.js',
+		'bower_components/angular-resource/angular-resource.js',
+		'bower_components/angular-ui-router/release/angular-ui-router.js'
+	])
+		.pipe(order([
+			"jquery.js",
+			"foundation.js",
+			"angular.js"
+		]))
 		.pipe(concat('vendors.js'))
 		.pipe(uglify())
 		.pipe(gulp.dest('./public/dist/'));
