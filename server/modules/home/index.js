@@ -6,6 +6,7 @@ function HomeModule(db, assert){
 
     this.get = function(req, res) {
         var cursor = db.collection('stats').find();
+        cursor.sort({ count: -1 });
         cursor.toArray(function(err, doc){
             var usersList = [];
             var i, l;
