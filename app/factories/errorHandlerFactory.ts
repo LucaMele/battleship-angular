@@ -28,7 +28,7 @@ module app.factoryService
          */
         public getError = function(error_code) {
             if (!this.errorMap[error_code]) {
-                return this.errorMap.error_code_3;
+                return false;
             }
             return this.errorMap[error_code];
         };
