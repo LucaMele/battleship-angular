@@ -9,11 +9,11 @@
         </ul>
         <section class="top-bar-section">
             <ul class="align">
-                <li ng-show="layoutCtrl.isToShowAs(['admin', 'user', 'guest'])"><a href="#home" class="button" ui-sref-active="active">Home</a></li>
+                <li ng-show="layoutCtrl.isToShowAs(['admin', 'user', 'guest'])"><a ui-sref="home" class="button" ui-sref-active="active">Home</a></li>
                 <li ng-show="layoutCtrl.isToShowAs(['admin', 'user'])"><a ui-sref="game" ui-sref-opts="{reload: true}" class="button" ui-sref-active="active">Game</a></li>
                 <li ng-show="layoutCtrl.isToShowAs(['admin'])"><a ui-sref="admin" class="button" ui-sref-active="active">Admin</a></li>
                 <li ng-show="layoutCtrl.isToShowAs(['admin', 'user', 'guest'])"><a ui-sref="login" class="button" ui-sref-active="active">{{ layoutCtrl.isGuest ? 'Login' : 'Logout' }}</a></li>
-                <li ng-show="layoutCtrl.isToShowAs(['admin', 'user'])" class="username"><i class="fi-torso"></i> {{ layoutCtrl.username }}</li>
+                <li ng-show="layoutCtrl.isToShowAs(['admin', 'user'])" class="username"><i class="fi-torso"></i> ({{ layoutCtrl.username }})</li>
             </ul>
         </section>
     </div>
