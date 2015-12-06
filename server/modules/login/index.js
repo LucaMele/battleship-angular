@@ -55,7 +55,8 @@ function LoginModule(db, assert){
                     username: 'admin',
                     password: user.password,
                     roles: ['admin']
-                }, function() {
+                }, function(err) {
+                    assert.equal(null, err);
                     executeLogin(cursor, req, res, user);
                 });
             } else {
