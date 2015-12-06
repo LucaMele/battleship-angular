@@ -8,6 +8,7 @@ var uglify = require('gulp-uglify');
 var Server = require('karma').Server;
 var clean = require('gulp-clean');
 var p = require('./package.json');
+var gulpCopy = require('gulp-copy');
 var templateCache = require('gulp-angular-templatecache');
 
 gulp.task('templates', function () {
@@ -16,6 +17,13 @@ gulp.task('templates', function () {
 			module: 'app'
 		}))
 		.pipe(gulp.dest('public/tmp-scripts'));
+});
+
+gulp.task('copy-files', function() {
+    return gulp.src([
+        'bower_components/angular-toastr/dist/angular-toastr.min.css'
+    ])
+        .pipe(gulpCopy('./public/', {}));
 });
 
 gulp.task('concat-bower', function() {
@@ -43,7 +51,7 @@ gulp.task('clean', function () {
 		.pipe(clean());
 });
 
-gulp.task('compile', ['templates'], function () {
+gulp.task('compile', ['templates', 'copy-files'], function () {
 	return gulp.src(
 		[
 			'./app/**/*.ts'

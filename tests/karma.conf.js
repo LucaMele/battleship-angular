@@ -12,7 +12,9 @@ module.exports = function(config) {
 
         // list of files / patterns to load in the browser
         files: [
-            {pattern: 'public/*.js', watched: false, included: false, served: true, nocache: false}
+            '../public/dist/vendors.js',
+            '../public/dist/battleship-angular_1.0.0.js',
+            'app/*.js'
         ],
 
         // list of files to exclude
