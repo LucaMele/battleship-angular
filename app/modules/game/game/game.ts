@@ -148,6 +148,7 @@ module app.game.manager{
                     self.$state.go(self.$state.current.name, self.$state.params, { reload: true });
                 });
             } else {
+                this.toastr.clear();
                 this.board.toastr.warning('Game cannot be deleted while no game is tarted yet');
             }
 

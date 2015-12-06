@@ -151,22 +151,26 @@ module app.game{
                 if (this.isHorizontal) {
                     // check if is space on the right
                     if (!((index + i) % this.columns) && i !== 0) {
+                        this.toastr.clear();
                         this.toastr.warning(ERROR_MEX2,' Warning');
                         return false;
                     }
                     // check if there is a ship on the right
                     if (tmpCells[index + i].cellName !== 'water') {
+                        this.toastr.clear();
                         this.toastr.warning(ERROR_MEX1,' Warning');
                         return false;
                     }
                 } else {
                     // check if there space under it
                     if (((index + i * this.columns) >= tmpCells.length)) {
+                        this.toastr.clear();
                         this.toastr.warning(ERROR_MEX2,' Warning');
                         return false;
                     }
                     // check if there is a ship under it
                     if (tmpCells[index + i * this.columns] && tmpCells[index + i * this.columns].cellName !== 'water') {
+                        this.toastr.clear();
                         this.toastr.warning(ERROR_MEX1,' Warning');
                         return false;
                     }
@@ -276,6 +280,7 @@ module app.game{
                     var attr = cell.getAttributes();
                     var i;
                     if (attr.cellName !== 'water') {
+                        this.toastr.clear();
                         this.toastr.warning(ERROR_MEX2,' Warning');
                         return;
                     }

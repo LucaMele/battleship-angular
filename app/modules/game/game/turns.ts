@@ -60,6 +60,7 @@ module app.game.turns{
             this.dbConnectorService.connect(this.gameDbFactory.getMaps(this.data.idGame), {}, function(maps) {
                 if (maps.status === 418) {
                     self.$state.go(self.$state.current.name, self.$state.params, { reload: true });
+                    self.toastr.clear();
                     self.board.toastr.info('Game does not exist anymore. Please start a new one');
                     return;
                 }
@@ -79,6 +80,7 @@ module app.game.turns{
             if (maps.isWinner !== '') {
                 self.board.cells = self.cells;
                 self.board.status_messages = 'We have a WINNER!!! Congrats to ' + maps.isWinner;
+                self.board.toastr.clear();
                 self.board.toastr.success('We have a WINNER!!! Congrats to ' + maps.isWinner,' Congratulations');
                 self.board.idleTurn = true;
                 return;

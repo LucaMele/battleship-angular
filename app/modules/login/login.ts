@@ -40,11 +40,13 @@ module app.login{
         public submit = function(data) {
             var self = this;
             if (!data.username || !data.password) {
+                self.toastr.clear();
                 self.toastr.error('Invalid login', 'Error');
                 return false;
             }
             return this.userService.authenticateUser(data, this.loginDbFactory.postLogin(), function(resp) {
                 if (resp && resp.error === 401) {
+                    self.toastr.clear();
                     self.toastr.error('Invalid login', 'Error');
                 } else {
                     self.authService.navigateTo('home');

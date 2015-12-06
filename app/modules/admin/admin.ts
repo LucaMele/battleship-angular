@@ -40,6 +40,7 @@ module app.admin{
             var self = this;
             // check if role has been selected
             if (!data.role) {
+                this.toastr.clear();
                 this.toastr.warning('Please select a role', 'Warning');
             }else {
                 // post new created user to
@@ -49,6 +50,7 @@ module app.admin{
                     }
 
                     if(self.errorFactory.getError(resp.data.error)){
+                        self.toastr.clear();
                         self.toastr.warning(self.errorFactory.getError(resp.data.error),' Warning');
                     } else {
                         // if no error, proceed
