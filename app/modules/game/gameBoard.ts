@@ -161,7 +161,7 @@ module app.game{
                     }
                 } else {
                     // check if there space under it
-                    if (((index + i * this.columns) > tmpCells.length)) {
+                    if (((index + i * this.columns) >= tmpCells.length)) {
                         this.toastr.warning(ERROR_MEX2,' Warning');
                         return false;
                     }
