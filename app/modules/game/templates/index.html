@@ -1,23 +1,19 @@
-<div class="row">
-    <div class="large-6 columns" role="content" ng-class="gameBoardCtrl.idleTurn ? 'idle': ''">
-        <h2>{{gameBoardCtrl.getStatusText(gameBoardCtrl.status)}}</h2>
-        <p class="status">
-            {{gameBoardCtrl.status_messages}}
-        </p>
-        <div ng-class="gameBoardCtrl.isReady ? 'ready': '' || gameBoardCtrl.boardStatus" ng-style="gameBoardCtrl.boardHeight">
-            <div class="board" ng-style="gameBoardCtrl.boardWidth">
-                <div
-                        ng-repeat="cell in gameBoardCtrl.cells"
-                        class="board-cell"
-                        ng-click="gameBoardCtrl.onCellClick(cell, $index)"
-                        ng-class="cell.cellClassName"
-                        ng-style="cell.cellStyle" >
-                </div>
+<div class="game" ng-class="gameBoardCtrl.idleTurn ? 'idle': ''">
+    <h2>{{gameBoardCtrl.getStatusText(gameBoardCtrl.status)}}</h2>
+    <p class="status">
+        {{gameBoardCtrl.status_messages}}
+    </p>
+    <div ng-class="gameBoardCtrl.isReady ? 'ready': '' || gameBoardCtrl.boardStatus" ng-style="gameBoardCtrl.boardHeight">
+        <div class="board" ng-style="gameBoardCtrl.boardWidth">
+            <div
+                    ng-repeat="cell in gameBoardCtrl.cells"
+                    class="board-cell"
+                    ng-click="gameBoardCtrl.onCellClick(cell, $index)"
+                    ng-class="cell.cellClassName"
+                    ng-style="cell.cellStyle" >
             </div>
         </div>
-    </div>
-    <div class="large-6 columns game-panel">
-        <div>
+        <div class="game-panel">
             <div class="buttons">
                 <button ng-click="gameBoardCtrl.changeOrientation('horizontal')" ng-class="gameBoardCtrl.isHorizontal ? 'active': ''">Horizontal</button>
                 <button ng-click="gameBoardCtrl.changeOrientation('vertical')" ng-class="!gameBoardCtrl.isHorizontal ? 'active': ''">Vertical</button>
@@ -36,7 +32,7 @@
             <div class="ready--start">
                 <button ng-click="gameBoardCtrl.start()">Search for Free Player and start</button>
             </div>
-            </div>
+        </div>
     </div>
 </div>
 
