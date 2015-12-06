@@ -1,35 +1,37 @@
 <div class="home">
-    <div class="topusers">
-    <h1>Top players</h1>
-    <div class="stats" ng-controller="homeController as homeCtrl">
-        <table>
-            <thead>
-                <th>Username</th>
-                <th>Victories</th>
-            </thead>
-            <tbody>
-            <tr ng-repeat="stat in homeCtrl.stats">
-                <td>{{stat.winner}}</td>
-                <td>{{stat.count}}</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    </div>
-    <div class="content">
-    <h1>Battlehsip history</h1>
-    <div class="text">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Battleship_game_board.svg/500px-Battleship_game_board.svg.png" width="300">
-        <p>Baltleship is an immensely popular board game and it is being played in all parts of the world with great enthusiam. There are two participants in the game and and it is extremely popular among all age groups.<br><br>
-        The game had its start in the year 1900. It was way back Clifford Von Wickle started with the game.©<br><br>
-        The game started on the warring principles of World War I. when the game began when it was popularly known as the Paper and Pencil game. This implies that if you are well aware about the strategies of the game then you can even play it on paper with the help of a pen or pencil.
-        It is true that Battleship Game started on pen and paper but now it is bitter known to the world as a popular board game. The first one was published in the year 1943. The game is completely based on naval strategy. The first battleship board game came into being in the year 1967. The game has other editions too and they are in most cases published by other companies. The Tactical Combat came into being in the year 2008 and this is considered to be the latest in the genre of battleship games.
-        With years several additions and alterations have been made to the game. The ship looks different now and the shape of the board has changed. There have been more innovative concepts like adding small islands within the game. The whole game is really quite interesting and once you start playing you feel like gaming more. You are also provided with battleship puzzles and other video gaming options.<br>
-        You even have the provision of playing with electronic battleship.<br><br>
-        This is really a fantastic one and as you play you can really feel the growing zeal for the game. You have to play this game on the computer and that too with an opponent.<br>
-        Thus, now you can make an idea regarding the effectiveness with which the game was played. The ways by which the game has been stylized in so many different ways itself proves that nothing can match to the excellence of this gaming strategy.The electronic Battleship happened in the year 1977 and after that there was no looking back. This was after ten years of the publication of the classic battleship. However, the Star Wars version of the Battleship game received a huge roar because the characters in the game were all so interesting. The popularity of the game has been fetched to an extent that now even big films are being made on the subject. Universal Studios took the initiative and the film started by making a collection of several Battleship toys from the market.</p>
-        <br><p>And now we present to you a version of battlefield made in angular.</p>
-    </div>
+    <div class="row">
+        <div class="large-8 columns" role="content">
+            <h1>Battlehsip history</h1>
+            <div class="text">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Battleship_game_board.svg/500px-Battleship_game_board.svg.png" width="300">
+                <p>Baltleship is an immensely popular board game and it is being played in all parts of the world with great enthusiam. There are two participants in the game and and it is extremely popular among all age groups.<br><br>
+                The game had its start in the year 1900. It was way back Clifford Von Wickle started with the game.©<br><br>
+                The game started on the warring principles of World War I. when the game began when it was popularly known as the Paper and Pencil game. This implies that if you are well aware about the strategies of the game then you can even play it on paper with the help of a pen or pencil.
+                It is true that Battleship Game started on pen and paper but now it is bitter known to the world as a popular board game. The first one was published in the year 1943. The game is completely based on naval strategy. The first battleship board game came into being in the year 1967. The game has other editions too and they are in most cases published by other companies. The Tactical Combat came into being in the year 2008 and this is considered to be the latest in the genre of battleship games.
+                With years several additions and alterations have been made to the game. The ship looks different now and the shape of the board has changed. There have been more innovative concepts like adding small islands within the game. The whole game is really quite interesting and once you start playing you feel like gaming more. You are also provided with battleship puzzles and other video gaming options.<br>
+                You even have the provision of playing with electronic battleship.<br><br>
+                This is really a fantastic one and as you play you can really feel the growing zeal for the game. You have to play this game on the computer and that too with an opponent.<br>
+                Thus, now you can make an idea regarding the effectiveness with which the game was played. The ways by which the game has been stylized in so many different ways itself proves that nothing can match to the excellence of this gaming strategy.The electronic Battleship happened in the year 1977 and after that there was no looking back. This was after ten years of the publication of the classic battleship. However, the Star Wars version of the Battleship game received a huge roar because the characters in the game were all so interesting. The popularity of the game has been fetched to an extent that now even big films are being made on the subject. Universal Studios took the initiative and the film started by making a collection of several Battleship toys from the market.</p>
+                <br><p>And now we present to you a version of battlefield made in angular.</p>
+            </div>
+            </div>
+        <div class="large-4 columns" role="content">
+            <h1>Top players</h1>
+            <div class="stats" ng-controller="homeController as homeCtrl">
+                <table>
+                    <thead>
+                    <th>Username</th>
+                    <th>Victories</th>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="stat in homeCtrl.stats">
+                        <td>{{stat.winner}}</td>
+                        <td>{{stat.count}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 
