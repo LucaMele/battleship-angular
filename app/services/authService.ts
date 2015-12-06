@@ -35,7 +35,7 @@ module app.authService
             var neededRoles = toState.data.roles,
                 userRoles = user.roles ? user.roles : [],
                 i, l, ii, ll;
-            if (!neededRoles || !neededRoles.length) {
+            if (!neededRoles || !neededRoles.length || neededRoles[0] === 'guest') {
                 return true;
             }
             for (i = 0, l = neededRoles.length; i < l; i++) {
