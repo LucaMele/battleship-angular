@@ -7,6 +7,10 @@ button, p{
 }
 .users{
   padding: 3px 0;
+  .button.small{
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
 }
 .users:not(:last-child){
   border-bottom: 1px solid #ccc;
