@@ -14,6 +14,11 @@ module app.GameDbFactory
 
         private $resource;
 
+        /**
+         *
+         * @param $resource
+         * @returns {app.GameDbFactory.GameDbFactory}
+         */
         constructor($resource){
             this.$resource = $resource;
             return this;

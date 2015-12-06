@@ -17,6 +17,14 @@ module app.authService
         private $location;
         private userService;
 
+        /**
+         *
+         * @param $rootScope
+         * @param $state
+         * @param $location
+         * @param userService
+         * @returns {app.authService.AuthService}
+         */
         constructor($rootScope, $state, $location, userService){
             this.$rootScope = $rootScope;
             this.$state = $state;

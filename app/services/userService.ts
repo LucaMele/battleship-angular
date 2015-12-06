@@ -15,6 +15,11 @@ module app.userService
         private dbConnectorService;
         private identity: Object;
 
+        /**
+         *
+         * @param dbConnectorService
+         * @returns {app.userService.UserService}
+         */
         constructor(dbConnectorService){
             this.dbConnectorService= dbConnectorService;
             return this;

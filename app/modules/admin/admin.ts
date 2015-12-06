@@ -16,6 +16,13 @@ module app.admin{
         public data;
         public toastr;
 
+        /**
+         *
+         * @param adminDbFactory
+         * @param dbConnectorService
+         * @param toastr
+         * @param errorFactory
+         */
         constructor(adminDbFactory, dbConnectorService, toastr, errorFactory) {
             this.adminDbFactory = adminDbFactory;
             this.dbConnectorService = dbConnectorService;
