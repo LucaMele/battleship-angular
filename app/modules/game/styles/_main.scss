@@ -183,8 +183,6 @@ h2{
 }
 .game-panel{
   padding:5px 0 0 10px;
-  float: left;
-  width: 35%;
 }
 .idle{
   .board-cell{
@@ -197,12 +195,8 @@ h2{
     }
   }
 }
-@media #{$small-only} {
-  .game-panel{ width: 100%; }
-}
-@media #{$medium-only} {
-  .game-panel{ width: 600px; }
-}
+.game-panel > div { max-width: 600px; }
+
 .board-active{
     .water-cell, .water-marked-cell{
       background-color: $water-active;
