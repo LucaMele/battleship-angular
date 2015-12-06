@@ -9,8 +9,10 @@ module app.login{
             "userService", "loginDbFactory", "authService", "toastr"
         ];
 
+        static $componentName = 'LoginController';
+
         public componentName;
-        private userService;
+        public userService;
         private loginDbFactory;
         private authService;
         public toastr;
@@ -24,7 +26,7 @@ module app.login{
          */
         constructor(userService, loginDbFactory, authService, toastr) {
             this.userService = userService;
-            this.componentName = 'login';
+            this.componentName = 'loginController';
             this.loginDbFactory = loginDbFactory;
             this.authService = authService;
             this.toastr = toastr;
@@ -37,7 +39,11 @@ module app.login{
          */
         public submit = function(data) {
             var self = this;
-            this.userService.authenticateUser(data, this.loginDbFactory.postLogin(), function(resp) {
+            if (!data.username || !data.password) {
+                self.toastr.error('Invalid login', 'Error');
+                return false;
+            }
+            return this.userService.authenticateUser(data, this.loginDbFactory.postLogin(), function(resp) {
                 if (resp && resp.error === 401) {
                     self.toastr.error('Invalid login', 'Error');
                 } else {

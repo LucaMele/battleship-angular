@@ -14,6 +14,7 @@ module.exports = function(config) {
         files: [
             '../public/dist/vendors.js',
             '../public/dist/battleship-angular_1.0.0.js',
+            '../node_modules/angular-mocks/angular-mocks.js',
             'app/*.js'
         ],
 

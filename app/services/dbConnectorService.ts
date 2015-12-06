@@ -99,8 +99,9 @@ module app.dbConnectorService
             var error = function(resp){ self.error(arguments); callback(resp); };
             var success = function(){ self.error(arguments) };
             if (typeof $resource.save === 'function' && typeof data === 'object') {
-                $resource.save(data, success, error).$promise.then(callback);
-                return true;
+                var promise = $resource.save(data, success, error).$promise;
+                promise.then(callback);
+                return promise;
             }
             console.error('Invalid arguments passed at the method save in the DB donnector');
             return false;

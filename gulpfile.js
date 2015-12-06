@@ -42,7 +42,7 @@ gulp.task('concat-bower', function() {
 			"angular.js"
 		]))
 		.pipe(concat('vendors.js'))
-		.pipe(uglify())
+		//.pipe(uglify())
 		.pipe(gulp.dest('./public/dist/'));
 });
 
@@ -69,7 +69,7 @@ gulp.task('compile', ['templates', 'copy-files'], function () {
 gulp.task('unify-scripts', ['compile'], function() {
 	var bk = gulp.src('./public/tmp-scripts/**/*.js')
 		.pipe(concat(p.name + '_' + p.version + '.js'))
-		.pipe(uglify())
+	//	.pipe(uglify())
 		.pipe(gulp.dest('./public/dist'));
 	return bk;
 });
@@ -93,7 +93,7 @@ gulp.task('default', ['concat-bower', 'unify-scripts', 'sass', 'copy-icons', 'te
 	gulp.start('clean');
 });
 
-gulp.task('test', ['dev'], function (done) {
+gulp.task('test', ['default'], function (done) {
 	new Server({
 		configFile: __dirname + '/tests/karma.conf.js',
 		singleRun: true
