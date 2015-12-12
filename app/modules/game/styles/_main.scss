@@ -24,6 +24,7 @@ h2{
 .board{
   float: left;
   background-color:$water;
+  @include transitionAll(0.5s);
 }
 .ships{
   float: left;
@@ -33,7 +34,7 @@ h2{
   cursor: pointer;
 }
 .water-cell{
-  background-color: $water;
+  background-color: transparent;
   &:hover{
     background-color: scale-color($water, $lightness: 30%);
   }
@@ -59,7 +60,7 @@ h2{
 }
 .water-marked-cell{
   @include waterCellMarked;
-  background-color: $water-marked;
+  background-color: transparent;
   text-align: center;
   &:after{
     content: "\f217";
@@ -207,7 +208,7 @@ h2{
     cursor: default;
   }
   .water-cell{
-    background-color: $water;
+    background-color: transparent;
     &:hover{
       background-color: $water;
     }
@@ -220,13 +221,16 @@ h2{
   .game-panel{ width: 600px; }
 }
 .board-active{
-    .water-cell, .water-marked-cell{
-      background-color: $water-active;
-      &:hover{
-        background-color: scale_color($water-active, $lightness: 20%);
-      }
+  .board{
+    background-color: $water-active;;
+  }
+  .water-cell, .water-marked-cell{
+    background-color: transparent;
+    &:hover{
+      background-color: scale_color($water-active, $lightness: 20%);
     }
-    .ship-cell, .ship-marked-cell {
-      background-color: $shipBg-active;
-    }
+  }
+  .ship-cell, .ship-marked-cell {
+    background-color: $shipBg-active;
+  }
 }
