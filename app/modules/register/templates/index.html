@@ -1,6 +1,6 @@
 <div class="login">
-    <h2 class="title">Login</h2>
-    <form ng-submit="loginCtrl.submit(data)" ng-controller="LoginController as loginCtrl">
+    <h2 class="title">Register new User</h2>
+    <form ng-submit="registerCtrl.submit(data)" ng-controller="RegisterController as registerCtrl">
         <div class="row">
             <div class="medium-6 columns"><label for="username">Username:</label></div>
             <div class="medium-6 columns"><input ng-model="data.username" minlength="3" id="username" placeholder="username" required /></div>
@@ -11,8 +11,7 @@
             <div class="medium-6 columns"><input ng-model="data.password" minlength="3" id="password" type="password" placeholder="password" required /></div>
         </div>
         <div class="row">
-            <div class="medium-2 columns"><button class="round" type="submit">Login</button></div>
-            <div class="medium-10 columns register"><a ui-sref="register">Register</a></div>
+            <div class="medium-10 columns"><button class="round" type="submit">Register</button></div>
         </div>
     </form>
 </div>

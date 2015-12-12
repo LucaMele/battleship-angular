@@ -15,6 +15,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   .login{
     @import "../../app/modules/login/styles/main";
   }
+  .register{
+     @import "../../app/modules/register/styles/main";
+   }
   .user-box{
     @import "../../app/modules/users/styles/main";
   }

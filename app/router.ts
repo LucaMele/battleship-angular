@@ -43,6 +43,18 @@ module app.appRouter
                         }
                     }
                 })
+                .state(register.identifier , {
+                    url: '/register',
+                    data: {
+                        roles: []
+                    },
+                    views:{
+                        "content@":{
+                            templateUrl: register.identifier + '/templates/index.html',
+                            controller: register.RegisterController
+                        }
+                    }
+                })
                 .state(game.identifier , {
                     url: '/game',
                     parent: 'home',

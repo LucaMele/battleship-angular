@@ -10,6 +10,9 @@ var modules = new ModulesManager();
 router.post("/login", function(req, res) {
     modules.exec('login', 'post', req, res);
 });
+router.post("/register", function(req, res) {
+    modules.exec('register', 'post', req, res);
+});
 router.get("/home", function(req, res) {
     modules.exec('home', 'get', req, res);
 });
