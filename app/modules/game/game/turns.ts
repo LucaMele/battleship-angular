@@ -7,6 +7,7 @@ module app.game.turns{
 
         private $timeout;
         private $state;
+        private $scope;
         private data;
         private board;
         private dbConnectorService;
@@ -21,6 +22,7 @@ module app.game.turns{
          * @param $timeout
          * @param board
          * @param $state
+         * @param $scope
          * @param gameDbFactory
          * @param dbConnectorService
          * @param data
@@ -29,14 +31,25 @@ module app.game.turns{
         constructor($timeout: angular.ITimeoutService,
                     board: app.game.GameBoardController,
                     $state: angular.ui.IState,
+                    $scope: angular.IScope,
                     gameDbFactory, dbConnectorService, data, username: string) {
+            var self = this;
             this.$timeout = $timeout;
             this.$state = $state;
             this.data = data;
             this.dbConnectorService = dbConnectorService;
             this.board = board;
+            this.$scope = $scope;
             this.username = username;
             this.gameDbFactory = gameDbFactory;
+            if (this.timer) {
+                $timeout.cancel(this.timer);
+            }
+            $scope.$on("$destroy", function() {
+                if (self.timer) {
+                    $timeout.cancel(self.timer);
+                }
+            });
             this.setupFirstTurn();
         }
 
@@ -58,6 +71,9 @@ module app.game.turns{
         handleMaps = function(data) {
             var self = this;
             this.dbConnectorService.connect(this.gameDbFactory.getMaps(this.data.idGame), {}, function(maps) {
+                if (self.$scope.$$destroyed) {
+                    return;
+                }
                 if (maps.status === 418) {
                     self.$state.go(self.$state.current.name, self.$state.params, { reload: true });
                     self.toastr.clear();

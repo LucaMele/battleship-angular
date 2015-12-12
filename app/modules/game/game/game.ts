@@ -9,6 +9,7 @@ module app.game.manager{
         private userService;
         private $timeout;
         private $state;
+        private $scope;
         private freeze;
         private board;
         private timer;
@@ -33,6 +34,7 @@ module app.game.manager{
             var self = this;
             this.dbConnectorService = dbConnectorService;
             this.$state = $state;
+            this.$scope = $scope;
             this.userService = userService;
             this.$timeout = $timeout;
             this.gameDbFactory = gameDbFactory;
@@ -98,6 +100,7 @@ module app.game.manager{
                     this.$timeout,
                     this.board,
                     this.$state,
+                    this.$scope,
                     this.gameDbFactory,
                     this.dbConnectorService,
                     data,
