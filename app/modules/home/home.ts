@@ -7,24 +7,37 @@ module app.home{
         public componentName;
 
         static $inject = [
-            "dbConnectorService", "homeDbFactory"
+            'dbConnectorService', 'homeDbFactory', 'userService'
         ];
         static $componentName = 'homeController';
 
         private dbConnectorService;
         private homeDbFactory;
         public stats;
+        public welcome;
+        public username;
+        public isGuest;
 
         /**
          *
          * @param dbConnectorService
          * @param homeDbFactory
          */
-        constructor(dbConnectorService, homeDbFactory) {
+        constructor(dbConnectorService, homeDbFactory, userService) {
             this.componentName = 'home';
             this.stats = [];
             this.dbConnectorService = dbConnectorService;
             this.homeDbFactory = homeDbFactory;
+            if (userService.getIdentity().username) {
+                this.isGuest = false;
+                this.username = userService.getIdentity().username;
+                this.welcome = 'Welcome ' + this.username;
+            } else {
+                this.isGuest = true;
+                this.username = '';
+                this.welcome = 'Welcome dear guest, please register in order to be able to play'
+            }
+
             this.getStats();
         }
 

@@ -349,6 +349,9 @@ module app.game{
          */
         public resetLastShip = function(index) {
             var i, l;
+            if (this.idleTurn || this.gameStarted) {
+                return;
+            }
             if(this.lastHoveredCells.length) {
                 for (i = 0, l = this.lastHoveredCells.length; i < l; i++) {
                     this.lastHoveredCells[i].cellClassName = this.lastHoveredCells[i].cellOrig;
