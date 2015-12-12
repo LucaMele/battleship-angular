@@ -45,7 +45,7 @@ module app.userService
             var self = this;
             return this.dbConnectorService.save($resource.$resource, data, function(resp) {
                 if (!resp.auth || resp.status === 401) {
-                    callback.call(self, { error: 401 });
+                    callback.call(self, { error: 401 }, resp);
                     return;
                 }
                 self.identity = angular.extend(data, {auth: resp.auth, roles: resp.roles});

@@ -6,7 +6,7 @@ module app.register{
     export class RegisterController implements appComponent{
 
         static $inject = [
-            "userService", "registerDbFactory", "authService", "toastr"
+            "userService", "registerDbFactory", "authService", "toastr", 'errorFactory'
         ];
 
         static $componentName = 'RegisterController';
@@ -14,6 +14,7 @@ module app.register{
         public componentName;
         public userService;
         private registerDbFactory;
+        private errorFactory;
         private authService;
         public toastr;
 
@@ -24,8 +25,9 @@ module app.register{
          * @param authService
          * @param toastr
          */
-        constructor(userService, registerDbFactory, authService, toastr) {
+        constructor(userService, registerDbFactory, authService, toastr, errorFactory) {
             this.userService = userService;
+            this.errorFactory = errorFactory;
             this.componentName = 'registerController';
             this.registerDbFactory = registerDbFactory;
             this.authService = authService;
@@ -39,19 +41,21 @@ module app.register{
          */
         public submit = function(data) {
             var self = this;
-            console.log(data);
             if (!data.username || !data.password) {
                 self.toastr.clear();
                 self.toastr.error('Invalid register', 'Error');
                 return false;
             }
-            return this.userService.authenticateUser(data, this.registerDbFactory.postRegister(), function(resp) {
-                if (resp && resp.error === 401) {
+            return this.userService.authenticateUser(data, this.registerDbFactory.postRegister(), function(status, resp) {
+                if(resp && resp.data && self.errorFactory.getError(resp.data.error)){
                     self.toastr.clear();
-                    self.toastr.error('Invalid register', 'Error');
+                    self.toastr.warning(self.errorFactory.getError(resp.data.error),' Warning');
                 } else {
+                    // if no error, proceed
+
                     self.authService.navigateTo('home');
                 }
+
             });
         };
     }

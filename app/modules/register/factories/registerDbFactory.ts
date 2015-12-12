@@ -4,7 +4,7 @@
 module app.registerDbFactory
 {
     @app.Factory
-    class registerDbFactory
+    class RegisterDbFactory
     {
         static $componentName = 'registerDbFactory';
 
