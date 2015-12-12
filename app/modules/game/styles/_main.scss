@@ -33,10 +33,17 @@ h2{
   cursor: pointer;
 }
 .water-cell{
-  @include transitionAll(0.1s);
   background-color: $water;
   &:hover{
     background-color: scale-color($water, $lightness: 30%);
+  }
+  &.--hover{
+    background-color: scale-color($water, $lightness: 30%);
+  }
+  &.--no-free{
+    background-color: #ffc7ca;
+    opacity: 0.7;
+    cursor: not-allowed;
   }
 }
 @mixin waterCellMarked {
@@ -178,7 +185,7 @@ h2{
   margin-bottom: 10px;
   display: inline-block;
   padding: 5px;
-  transition: all 1s;
+  @include transitionAll(1s);
   &.--idle{
     background-color: #e5e5e5;
     color: #626c00;

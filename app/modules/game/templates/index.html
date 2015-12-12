@@ -9,6 +9,8 @@
             <div
                     ng-repeat="cell in gameBoardCtrl.cells"
                     class="board-cell"
+                    ng-mouseenter="gameBoardCtrl.checkShipPlacement($index)"
+                    ng-mouseleave="gameBoardCtrl.resetLastShip($index)"
                     ng-click="gameBoardCtrl.onCellClick(cell, $index)"
                     ng-class="cell.cellClassName"
                     ng-style="cell.cellStyle" >

@@ -34,6 +34,7 @@ module app.game{
         public selectedShip;
         public game;
         public opponent;
+        public lastHoveredCells;
         public status;
         public toastr;
 
@@ -55,6 +56,7 @@ module app.game{
             this.boardWidth = {};
             this.boardHeight = {};
             this.ships = [];
+            this.lastHoveredCells = [];
             this.selectedShip = false;
             this.status_messages = 'Loading data.. Please wait.';
             this.isReady = false;
@@ -101,7 +103,7 @@ module app.game{
                 for (i = 0; i < (boardCellsH * boardCellsW); i++) {
                     tmpCells.push(new cells.Water(cellW, cellH, i));
                 }
-                this.status_messages = 'Game not started yet.\nSelect a orientation (vertical or horizontal and then click on a ship to select it and on a free water cell to place it)';
+                this.status_messages = 'Game not started yet.\nSelect a orientation, either vertical or horizontal and then click on a ship to select it and on a free water cell to place it';
             }
             var i, l;
             for (i = 0, l = data.ships.length; i < l; i++) {
@@ -225,7 +227,7 @@ module app.game{
          * @param status
          * @returns {any}
          */
-        getStatusText = function(status) {
+        public getStatusText = function(status) {
             switch (status) {
                 case 'NEW': return STATUS_TEXT1;
                 case 'IDLE': return STATUS_TEXT2;
@@ -237,7 +239,7 @@ module app.game{
         /**
          *
          */
-        start = function() {
+        public start = function() {
             if (!this.gameIsActive) {
                 this.game.start(this.ships, this.cells);
             }
@@ -246,7 +248,7 @@ module app.game{
         /**
          *
          */
-        checkIfThereAreFreeShips = function() {
+        public checkIfThereAreFreeShips = function() {
             var i, l, allPlaced = true;
             for(i = 0, l = this.ships.length; i < l; i++) {
                 if (!this.ships[i].placed) {
@@ -293,6 +295,68 @@ module app.game{
                 }
                 this.checkIfThereAreFreeShips();
                 this.ships[this.selectedShip] = tempShip;
+            }
+        };
+
+        /**
+         *
+         * @param index
+         */
+        public checkShipPlacement = function(index) {
+            var tempCell, i, l,
+                tempShip = this.ships[this.selectedShip];
+            if (this.idleTurn || this.gameStarted) {
+                return;
+            }
+            if (this.selectedShip !== false) {
+                for (i = 0, l = tempShip.size; i < l; i++) {
+                    tempCell = null;
+                    if (this.isHorizontal) {
+                        if (this.cells[index + i] && (((index + i) % this.columns) || i === 0) && this.cells[index + i].cellName === 'water') {
+                            tempCell = this.cells[index + i];
+                        }
+                    } else {
+                        // check if there space under it
+                        if (((index + i * this.columns) < this.cells.length)) {
+                            tempCell = this.cells[index + i * this.columns];
+                        }
+                        // check if there is a ship under it
+                        if (!this.cells[index + i] || this.cells[index + i * this.columns] && this.cells[index + i * this.columns].cellName !== 'water') {
+                            tempCell = null;
+                        }
+                    }
+                    if (tempCell && tempCell !== null) {
+                        this.lastHoveredCells.push(tempCell);
+                    }
+                }
+                if (this.lastHoveredCells.length === tempShip.size) {
+                    for (i = 0, l = this.lastHoveredCells.length; i < l; i++) {
+                        tempCell = this.lastHoveredCells[i];
+                        tempCell.cellOrig = tempCell.cellClassName;
+                        tempCell.cellClassName = tempCell.cellOrig + ' --hover';
+                    }
+                } else {
+                    tempCell = this.cells[index];
+                    tempCell.cellOrig = tempCell.cellClassName;
+                    tempCell.cellClassName =  tempCell.cellClassName + ' --no-free';
+                    this.lastHoveredCells = [];
+                }
+            }
+        };
+
+        /**
+         *
+         */
+        public resetLastShip = function(index) {
+            var i, l;
+            if(this.lastHoveredCells.length) {
+                for (i = 0, l = this.lastHoveredCells.length; i < l; i++) {
+                    this.lastHoveredCells[i].cellClassName = this.lastHoveredCells[i].cellOrig;
+                }
+                this.lastHoveredCells = [];
+            }
+            if (this.cells[index].cellOrig) {
+                this.cells[index].cellClassName = this.cells[index].cellOrig;
             }
         };
 
