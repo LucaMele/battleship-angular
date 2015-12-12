@@ -1,6 +1,7 @@
 <div class="game" ng-class="gameBoardCtrl.idleTurn ? 'idle': ''">
     <h2>{{gameBoardCtrl.getStatusText(gameBoardCtrl.status)}}</h2>
-    <p class="status">
+    <p class="status"
+       ng-class="gameBoardCtrl.status === 'IDLE' ? '--idle' : gameBoardCtrl.status === 'READY' ? '--ready' : ''">
         {{gameBoardCtrl.status_messages}}
     </p>
     <div ng-class="gameBoardCtrl.isReady ? 'ready': '' || gameBoardCtrl.boardStatus" ng-style="gameBoardCtrl.boardHeight">

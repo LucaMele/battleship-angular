@@ -63,6 +63,7 @@ module app.game.manager{
             this.dbConnectorService.connect(this.gameDbFactory.saveReady(), {username: username, cells: this.cells}, function(data) {
                 self.idGame = data.idGame;
                 self.handleStatus(data);
+                self.board.status_messages = "You have started a new game. Please wait for a random player to join..";
             });
         };
 

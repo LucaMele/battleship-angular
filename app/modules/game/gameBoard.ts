@@ -56,7 +56,7 @@ module app.game{
             this.boardHeight = {};
             this.ships = [];
             this.selectedShip = false;
-            this.status_messages = 'Game not started yet';
+            this.status_messages = 'Loading data.. Please wait.';
             this.isReady = false;
             this.isHorizontal = true;
             this.opponent = '';
@@ -94,12 +94,14 @@ module app.game{
                     this.game.checkIdle(data);
                 }
                 if (data.status === 'IDLE') {
+                    this.status_messages = "You have started a new game. Please wait for a random player to join..";
                     this.game.checkIdle(data);
                 }
             } else {
                 for (i = 0; i < (boardCellsH * boardCellsW); i++) {
                     tmpCells.push(new cells.Water(cellW, cellH, i));
                 }
+                this.status_messages = 'Game not started yet.\nSelect a orientation (vertical or horizontal and then click on a ship to select it and on a free water cell to place it)';
             }
             var i, l;
             for (i = 0, l = data.ships.length; i < l; i++) {

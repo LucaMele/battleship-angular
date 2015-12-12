@@ -16,6 +16,7 @@ $ship-marked: $shipBg;
 h2{
   font-size: 2rem;
   margin: 10px;
+  margin-left: 5px;
 }
 .clear{
   clear:both;
@@ -38,7 +39,7 @@ h2{
     background-color: scale-color($water, $lightness: 30%);
   }
 }
-.water-marked-cell{
+@mixin waterCellMarked {
   font-family: "foundation-icons";
   font-style: normal;
   font-weight: normal;
@@ -48,6 +49,9 @@ h2{
   -webkit-font-smoothing: antialiased;
   display: inline-block;
   text-decoration: inherit;
+}
+.water-marked-cell{
+  @include waterCellMarked;
   background-color: $water-marked;
   text-align: center;
   &:after{
@@ -56,15 +60,7 @@ h2{
   }
 }
 .ship-marked-cell{
-  font-family: "foundation-icons";
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  display: inline-block;
-  text-decoration: inherit;
+  @include waterCellMarked;
   background-color: $ship-marked;
   text-align: center;
   &:after{
@@ -176,10 +172,23 @@ h2{
   }
 }
 .status{
-  color:green;
-  font-size:17px;
-  padding-left: 5px;
-  padding-bottom: 5px;
+  background-color: #004444;
+  color: white;
+  font-size:18px;
+  margin-bottom: 10px;
+  display: inline-block;
+  padding: 5px;
+  transition: all 1s;
+  &.--idle{
+    background-color: #e5e5e5;
+    color: #626c00;
+    font-size:16px;
+  }
+  &.--ready{
+    background-color: #DDEDD5;
+    color:green;
+    font-size:20px;
+  }
 }
 .game-panel{
   padding:5px 0 0 10px;
