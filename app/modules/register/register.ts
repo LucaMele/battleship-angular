@@ -24,6 +24,7 @@ module app.register{
          * @param registerDbFactory
          * @param authService
          * @param toastr
+         * @param errorFactory
          */
         constructor(userService, registerDbFactory, authService, toastr, errorFactory) {
             this.userService = userService;

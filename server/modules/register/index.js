@@ -22,6 +22,11 @@ function RegisterModule(db, assert){
         user.username.length < 3);
     };
 
+    /**
+     *
+     * @param req
+     * @param res
+     */
     this.post = function(req, res) {
         var user = req.body;
         if(!validation(user)) {
