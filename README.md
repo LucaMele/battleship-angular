@@ -71,6 +71,6 @@ For a live demo, please go on: http://battleship-angular.azurewebsites.net/
 
 In order to execute unit tests, please make sure you can run karma on your machine (http://karma-runner.github.io/0.13/index.html)
 
-Run unit tests:
+Run tests with the command:
 
 `gulp test`
