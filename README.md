@@ -1,5 +1,14 @@
-# battleship-angular
-Group 9 CAS_FEE final project with angular.js
+# Battleship-Angular
+Group 9 CAS_FEE final project with angular.js. Single Page Application with:
+
+- typescript
+- angularJs 1.4.*
+- gulp 
+- Zurb Foundation
+- Karma
+- Jasmine
+- mongoDb
+- node Server with express
 
 
 ## Get Started
