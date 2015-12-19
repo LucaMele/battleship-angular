@@ -6,23 +6,27 @@ Group 9 CAS_FEE final project with angular.js
 
 First install all npm dependencies:
 
-download and install mongoDb on your system  https://www.mongodb.org/downloads and instructions are at https://docs.mongodb.org/manual/
+If you want to use your own local db, download and install mongoDb on your system  https://www.mongodb.org/downloads and instructions are at https://docs.mongodb.org/manual/
 
-`npm install`  
+Then setup all the dependencies:
 
-`npm install -g gulp`
+`npm install -g gulp        // install gulp globally. It is not mandatory because it is also declared as a npm dependency`
 
-`npm install -g bower`
+`npm install -g bower       // install bower globally. It is not mandatory because it is also declared as a npm dependency`
 
-`bower install`
+`npm install                // for all npm dependencies`
 
-and then start the application with:
+`npm install` will also execute `bower install`, in order to load all the GUI frameworks. The application will then be ready with the default task of `gulp`.
+   
+You can also trigger the task runner in the following ways:
 
-`gulp`
+`gulp               // default task builds the app ready to run`
+`gulp dev           // builds the app ready and add watchers for .ts, .scss and .html files`
+`gulp test          // builds the app and execute the Unit Test`
 
-So now you can start the server by executing the `index.js` as npm server (in webstorm just press play).
+So now you can start the server by executing the `index.js` as npm server (in WebStorm, just press play, otherwise just press `node index.js` in your command line).
 
-Now you sould see the app under http://localhost:3000
+Now you should see the app under http://localhost:1337. You can specify the port by using the following command: `PORT=3000 node index.js`
 
 Keep aware that python (https://www.python.org) is required on your system before running npm install!
 
