@@ -1,109 +1,121 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en-us">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Battleship-angular : CAS_FEE final project with angular">
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Battleship-angular</title>
+    <meta charset="UTF-8">
+    <title>Battleship-angular by LucaMele</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
-
   <body>
+    <section class="page-header">
+      <h1 class="project-name">Battleship-angular</h1>
+      <h2 class="project-tagline">CAS_FEE final project with angular</h2>
+      <a href="https://github.com/LucaMele/battleship-angular" class="btn">View on GitHub</a>
+      <a href="https://github.com/LucaMele/battleship-angular/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/LucaMele/battleship-angular/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/LucaMele/battleship-angular">View on GitHub</a>
+    <section class="main-content">
+      <h1>
+<a id="battleship-angular" class="anchor" href="#battleship-angular" aria-hidden="true"><span class="octicon octicon-link"></span></a>Battleship-Angular</h1>
 
-          <h1 id="project_title">Battleship-angular</h1>
-          <h2 id="project_tagline">CAS_FEE final project with angular</h2>
+<p>Group 9 CAS_FEE final project with angular.js. Single Page Application with:</p>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/LucaMele/battleship-angular/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/LucaMele/battleship-angular/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>
-<a id="battleship-angular" class="anchor" href="#battleship-angular" aria-hidden="true"><span class="octicon octicon-link"></span></a>battleship-angular</h1>
-
-<p>Group 9 CAS_FEE final project with angular.js</p>
+<ul>
+<li>TypeScript <a href="http://www.typescriptlang.org/">http://www.typescriptlang.org/</a>
+</li>
+<li>AngularJS 1.4.* <a href="https://angularjs.org/">https://angularjs.org/</a>
+</li>
+<li>gulp <a href="http://gulpjs.com/">http://gulpjs.com/</a>
+</li>
+<li>Zurb Foundation <a href="http://foundation.zurb.com/">http://foundation.zurb.com/</a>
+</li>
+<li>Karma <a href="http://karma-runner.github.io/0.13/index.html">http://karma-runner.github.io/0.13/index.html</a>
+</li>
+<li>Jasmine <a href="http://jasmine.github.io/">http://jasmine.github.io/</a>
+</li>
+<li>mongoDb <a href="https://www.mongodb.org/">https://www.mongodb.org/</a>
+</li>
+<li>Node Server with Express <a href="http://expressjs.com/en/index.html">http://expressjs.com/en/index.html</a>
+</li>
+</ul>
 
 <h2>
-<a id="get-started" class="anchor" href="#get-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get Started</h2>
+<a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting started</h2>
 
 <p>First install all npm dependencies:</p>
 
-<p>download and install mongoDb on your system  <a href="https://www.mongodb.org/downloads">https://www.mongodb.org/downloads</a> and instructions are at <a href="https://docs.mongodb.org/manual/">https://docs.mongodb.org/manual/</a></p>
+<p>If you want to use your own local db, download and install mongoDb on your system  <a href="https://www.mongodb.org/downloads">https://www.mongodb.org/downloads</a>. Instructions are at <a href="https://docs.mongodb.org/manual/">https://docs.mongodb.org/manual/</a></p>
 
-<p><code>npm install</code>  </p>
+<p>Setup of dependencies:</p>
 
-<p><code>npm install -g gulp</code></p>
+<p><code>npm install -g gulp        // install gulp globally. This is not mandatory because it is also declared as a npm dependency</code></p>
 
-<p><code>npm install -g bower</code></p>
+<p><code>npm install -g bower       // install bower globally. It is not mandatory because it is also declared as a npm dependency</code></p>
 
-<p><code>bower install</code></p>
+<p><code>npm install                // for all npm dependencies</code></p>
 
-<p>and then start the application with:</p>
+<p><code>npm install</code> will also execute <code>bower install</code>, which will load all the GUI frameworks. The application will then be ready with the default task of <code>gulp</code>.</p>
 
-<p><code>gulp</code></p>
+<p>You can trigger the task runner in the following ways:</p>
 
-<p>So now you can start the server by executing the <code>index.js</code> as npm server (in webstorm just press play).</p>
+<p><code>gulp               // default task builds the app ready to run</code></p>
 
-<p>Now you sould see the app under http://localhost:3000</p>
+<p><code>gulp dev           // builds the app ready and adds watchers for .ts, .scss and .html files</code></p>
+
+<p><code>gulp test          // builds the app and executes the Tests</code></p>
+
+<p>Now you can start the server by executing the <code>index.js</code> as npm server (press play in WebStorm or press <code>node index.js</code> in your command line).</p>
+
+<p>You should see the app under http://localhost:1337. You can specify the port by using the following command: <code>PORT=3000 node index.js</code></p>
 
 <p>Keep aware that python (<a href="https://www.python.org">https://www.python.org</a>) is required on your system before running npm install!</p>
 
 <h2>
-<a id="first-access-temp-admin" class="anchor" href="#first-access-temp-admin" aria-hidden="true"><span class="octicon octicon-link"></span></a>First access, temp admin</h2>
+<a id="first-access-temp-admin-on-local-db" class="anchor" href="#first-access-temp-admin-on-local-db" aria-hidden="true"><span class="octicon octicon-link"></span></a>First access, temp admin on local db</h2>
 
-<p>If there are no user yet in the db, first user is allowed to access with the user <code>admin</code> and password <code>admin</code>. </p>
+<p>If you are running your db locally and there are no other users in the collections, a first user is allowed to access with the user <code>admin</code> and password <code>admin</code>. </p>
 
-<p>As soon as a new created users exists, admin:admin will never be allowed again in the system. So please be
+<p>As soon as a newly created user exists, admin:admin will not be able to be used again to access the system. So please be
 careful when creating the first user. Give him admin rights, otherwise the administration section is not accessible!</p>
 
-<p>Database configuartion is found under server/config.js</p>
+<p>Database configuration can be found under server/config.js</p>
 
 <p>default database setting is: </p>
 
 <div class="highlight highlight-source-js"><pre>db<span class="pl-k">:</span> {
-    name<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>gZ3-m__battleship<span class="pl-pds">'</span></span>,    
-    host<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>localhost<span class="pl-pds">'</span></span>,    
-    port<span class="pl-k">:</span> <span class="pl-c1">27017</span>
+    name<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>name_of_db<span class="pl-pds">'</span></span>,             <span class="pl-c">// name of the db. </span>
+    host<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>localhost<span class="pl-pds">'</span></span>,              <span class="pl-c">// your host</span>
+    user<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>test<span class="pl-pds">'</span></span>,                   <span class="pl-c">// OPTIONAL username</span>
+    password<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>test<span class="pl-pds">'</span></span>,               <span class="pl-c">// OPTIONAL password</span>
+    port<span class="pl-k">:</span> <span class="pl-c1">54288</span>                     <span class="pl-c">// port to your db</span>
 }</pre></div>
 
 <h2>
 <a id="live-demo" class="anchor" href="#live-demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Live demo</h2>
 
-<p>For a live demo, please go on: <a href="http://battleship-angular.azurewebsites.net/">http://battleship-angular.azurewebsites.net/</a> </p>
+<p>For a live demo, please go to: <a href="http://battleship-angular.azurewebsites.net/">http://battleship-angular.azurewebsites.net/</a> </p>
 
 <h2>
 <a id="unit-tests" class="anchor" href="#unit-tests" aria-hidden="true"><span class="octicon octicon-link"></span></a>Unit tests</h2>
 
 <p>In order to execute unit tests, please make sure you can run karma on your machine (<a href="http://karma-runner.github.io/0.13/index.html">http://karma-runner.github.io/0.13/index.html</a>)</p>
 
-<p>Run unit tests:</p>
+<p>Run tests with the command:</p>
 
 <p><code>gulp test</code></p>
-      </section>
-    </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Battleship-angular maintained by <a href="https://github.com/LucaMele">LucaMele</a></p>
-        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/LucaMele/battleship-angular">Battleship-angular</a> is maintained by <a href="https://github.com/LucaMele">LucaMele</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
-    </div>
 
-    
+    </section>
 
+  
   </body>
 </html>
