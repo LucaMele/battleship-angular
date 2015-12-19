@@ -2,11 +2,13 @@
     <table>
         <thead>
         <th>Username</th>
-        <th>Action</th>
+        <th>Rol</th>
+        <th colspan="2"></th>
         </thead>
         <tbody>
             <tr class="users" ng-repeat="(key, obj) in usrListCtrl.data  | orderBy:'name' " class="row" ng-class="obj.isNew ? 'is-new': ''">
-                <td><p><i class="fi-{{(obj.roles.join(', ') == 'admin' ? 'torso-business' : 'torso')}}"></i> {{obj.name}} <span>(<span>{{obj.roles.join(', ')}}</span>)</span></p></td>
+                <td><i class="fi-{{(obj.roles.join(', ') == 'admin' ? 'torso-business' : 'torso')}}"></i> {{obj.name}}</td>
+                <td>{{obj.roles.join(', ')}}</td>
                 <td><button ng-click="usrListCtrl.deleteUser(obj.id)" class="small red button round">Delete</button></td>
             </tr>
         </tbody>
