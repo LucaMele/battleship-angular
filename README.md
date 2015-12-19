@@ -49,7 +49,7 @@ If you are running your db locally and there are no other users in the collectio
 As soon as a newly created user exists, admin:admin will not be able to be used again to access the system. So please be
 careful when creating the first user. Give him admin rights, otherwise the administration section is not accessible!
 
-Database configuration is found under server/config.js
+Database configuration can be found under server/config.js
 
 default database setting is: 
 
@@ -64,7 +64,7 @@ db: {
 ```
 
 ##Live demo
-For a live demo, please go on: http://battleship-angular.azurewebsites.net/ 
+For a live demo, please go to: http://battleship-angular.azurewebsites.net/ 
 
 
 ##Unit tests
