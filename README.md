@@ -42,22 +42,24 @@ Now you should see the app under http://localhost:1337. You can specify the port
 Keep aware that python (https://www.python.org) is required on your system before running npm install!
 
 
-## First access, temp admin
+## First access, temp admin on local db
 
-If there are no user yet in the db, first user is allowed to access with the user `admin` and password `admin`. 
+If you want to run your db locally and there are no user yet in the collections, a first user is allowed to access with the user `admin` and password `admin`. 
 
-As soon as a new created users exists, admin:admin will never be allowed again in the system. So please be
+As soon as a new created users exists, admin:admin will never be allowed again to access in the system. So please be
 careful when creating the first user. Give him admin rights, otherwise the administration section is not accessible!
 
-Database configuartion is found under server/config.js
+Database configuration is found under server/config.js
 
 default database setting is: 
 
 ```javascript
 db: {
-    name: 'gZ3-m__battleship',    
-    host: 'localhost',    
-    port: 27017
+    name: 'name_of_db',             // name of the db. 
+    host: 'localhost',              // your host
+    user: 'test',                   // OPTIONAL username
+    password: 'test',               // OPTIONAL password
+    port: 54288                     // port to your db
 }
 ```
 
