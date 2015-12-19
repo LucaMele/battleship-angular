@@ -21,7 +21,9 @@ Then setup all the dependencies:
 You can also trigger the task runner in the following ways:
 
 `gulp               // default task builds the app ready to run`
+
 `gulp dev           // builds the app ready and add watchers for .ts, .scss and .html files`
+
 `gulp test          // builds the app and execute the Unit Test`
 
 So now you can start the server by executing the `index.js` as npm server (in WebStorm, just press play, otherwise just press `node index.js` in your command line).
