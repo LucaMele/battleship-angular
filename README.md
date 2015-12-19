@@ -1,14 +1,14 @@
 # Battleship-Angular
 Group 9 CAS_FEE final project with angular.js. Single Page Application with:
 
-- typescript
-- angularJs 1.4.*
-- gulp 
-- Zurb Foundation
-- Karma
-- Jasmine
-- mongoDb
-- node Server with express
+- TypeScript http://www.typescriptlang.org/
+- AngularJS 1.4.* https://angularjs.org/
+- gulp http://gulpjs.com/
+- Zurb Foundation http://foundation.zurb.com/
+- Karma http://karma-runner.github.io/0.13/index.html
+- Jasmine http://jasmine.github.io/
+- mongoDb https://www.mongodb.org/
+- Node Server with Express http://expressjs.com/en/index.html
 
 
 ## Get Started
