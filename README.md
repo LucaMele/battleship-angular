@@ -44,7 +44,7 @@ Keep aware that python (https://www.python.org) is required on your system befor
 
 ## First access, temp admin on local db
 
-If you want to run your db locally and there are no user yet in the collections, a first user is allowed to access with the user `admin` and password `admin`. 
+If you are running your db locally, even if there are no other users in the collections, a first user is allowed to access with the user `admin` and password `admin`. 
 
 As soon as a new created users exists, admin:admin will never be allowed again to access in the system. So please be
 careful when creating the first user. Give him admin rights, otherwise the administration section is not accessible!
