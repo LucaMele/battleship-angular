@@ -82,10 +82,10 @@ gulp.task('sass', function () {
 });
 
 gulp.task('copy-icons', function () {
-	gulp.src('./bower_components/foundation-icon-fonts/foundation-icons.ttf')
-		.pipe(gulp.dest('./public/dist'));
-	gulp.src('./bower_components/foundation-icon-fonts/foundation-icons.woff')
-		.pipe(gulp.dest('./public/dist'));
+	return gulp.src([
+		'./bower_components/foundation-icon-fonts/foundation-icons.ttf',
+		'./bower_components/foundation-icon-fonts/foundation-icons.woff'
+	]).pipe(gulp.dest('./public/dist'));
 });
 
 
